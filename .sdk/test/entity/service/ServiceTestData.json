@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "service": {
+      "SERVICE00": {
+        "category": "s46",
+        "description": "s47",
+        "id": "SERVICE00",
+        "max": "s49",
+        "min": "s4a",
+        "name": "s4b",
+        "price": 76
+      },
+      "SERVICE01": {
+        "category": "s8c",
+        "description": "s8d",
+        "id": "SERVICE01",
+        "max": "s8f",
+        "min": "s90",
+        "name": "s91",
+        "price": 146
+      },
+      "SERVICE02": {
+        "category": "sd2",
+        "description": "sd3",
+        "id": "SERVICE02",
+        "max": "sd5",
+        "min": "sd6",
+        "name": "sd7",
+        "price": 216
+      }
+    }
+  },
+  "new": {
+    "service": {
+      "service_ref01": {
+        "category": "s118",
+        "description": "s119",
+        "max": "s11b",
+        "min": "s11c",
+        "name": "s11d",
+        "price": 286
+      }
+    }
+  }
+}

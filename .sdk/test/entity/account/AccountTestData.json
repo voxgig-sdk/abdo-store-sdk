@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "account": {
+      "ACCOUNT00": {
+        "balance": 30,
+        "currency": "s1f",
+        "status": "s20"
+      },
+      "ACCOUNT01": {
+        "balance": 60,
+        "currency": "s3d",
+        "status": "s3e"
+      },
+      "ACCOUNT02": {
+        "balance": 90,
+        "currency": "s5b",
+        "status": "s5c"
+      }
+    }
+  },
+  "new": {
+    "account": {
+      "account_ref01": {
+        "balance": 120,
+        "currency": "s79",
+        "status": "s7a"
+      }
+    }
+  }
+}

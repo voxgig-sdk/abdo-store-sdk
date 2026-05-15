@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://abdoastore.store/"
+      }
+      description: "Abdo Store API offers a range of social media marketing services, providing users with access to tools for enhancing their online presence. It supports services like account management, balance loading, and order placement, all aimed at improving social media engagement. The API is designed for ease of use with robust customer support available 24/7."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://abdoastore.store"
+        }
+      ]
+      title: "Abdo Store API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

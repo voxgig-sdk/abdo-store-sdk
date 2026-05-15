@@ -1,0 +1,112 @@
+# Entity: order
+
+main: kit: entity: order: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "charge"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "comment"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "link"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "order"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "order_id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "quantity"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "service_id"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "order"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/order"
+          parts: [
+            "api"
+            "order"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "order_id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/api/order/{order_id}"
+          parts: [
+            "api"
+            "order"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              order_id: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

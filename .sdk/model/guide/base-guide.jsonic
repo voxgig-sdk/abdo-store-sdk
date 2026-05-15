@@ -1,0 +1,31 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 4
+  metrics: count: method: 4
+
+  entity: account: {
+    path: "/api/balance": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: order: {
+    path: "/api/order": {
+      op: create: method: *POST
+    }
+    path: "/api/order/{order_id}": {
+      rename: param: "order_id": *"id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.order`")|top
+    }
+  }
+
+  entity: service: {
+    path: "/api/services": {
+      op: list: method: *GET
+    }
+  }
+
+}
