@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/abdo-store-sdk"
-	"github.com/voxgig-sdk/abdo-store-sdk/core"
+	sdk "github.com/voxgig-sdk/abdo-store-sdk/go"
+	"github.com/voxgig-sdk/abdo-store-sdk/go/core"
 )
 
 func TestOrderDirect(t *testing.T) {

@@ -9,7 +9,8 @@
         "order_id": "ORDER01",
         "quantity": "s55",
         "service_id": "SERVICE01",
-        "status": "s57"
+        "status": "s57",
+        "id": "ORDER00"
       },
       "ORDER01": {
         "charge": 160,
@@ -19,7 +20,8 @@
         "order_id": "ORDER01",
         "quantity": "sa5",
         "service_id": "SERVICE01",
-        "status": "sa7"
+        "status": "sa7",
+        "id": "ORDER01"
       },
       "ORDER02": {
         "charge": 240,
@@ -29,7 +31,8 @@
         "order_id": "ORDER01",
         "quantity": "sf5",
         "service_id": "SERVICE01",
-        "status": "sf7"
+        "status": "sf7",
+        "id": "ORDER02"
       }
     }
   },

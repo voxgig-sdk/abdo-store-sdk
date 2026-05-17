@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/abdo-store-sdk/core"
+	"github.com/voxgig-sdk/abdo-store-sdk/go/core"
 )
 
 type LogFeature struct {

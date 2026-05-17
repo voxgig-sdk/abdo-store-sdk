@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/abdo-store-sdk"
+	sdk "github.com/voxgig-sdk/abdo-store-sdk/go"
 )
 
 func TestCustomUtility(t *testing.T) {

@@ -3,7 +3,7 @@ package core
 import (
 	"fmt"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/abdo-store-sdk/go/utility/struct"
 )
 
 type AbdoStoreSDK struct {

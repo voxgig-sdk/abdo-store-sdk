@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/abdo-store-sdk/core"
+	"github.com/voxgig-sdk/abdo-store-sdk/go/core"
 )
 
 type BaseFeature struct {

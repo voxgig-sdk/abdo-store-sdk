@@ -4,17 +4,20 @@
       "ACCOUNT00": {
         "balance": 30,
         "currency": "s1f",
-        "status": "s20"
+        "status": "s20",
+        "id": "ACCOUNT00"
       },
       "ACCOUNT01": {
         "balance": 60,
         "currency": "s3d",
-        "status": "s3e"
+        "status": "s3e",
+        "id": "ACCOUNT01"
       },
       "ACCOUNT02": {
         "balance": 90,
         "currency": "s5b",
-        "status": "s5c"
+        "status": "s5c",
+        "id": "ACCOUNT02"
       }
     }
   },

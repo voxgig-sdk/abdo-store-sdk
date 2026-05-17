@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/abdo-store-sdk"
-	"github.com/voxgig-sdk/abdo-store-sdk/core"
+	sdk "github.com/voxgig-sdk/abdo-store-sdk/go"
+	"github.com/voxgig-sdk/abdo-store-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/abdo-store-sdk/go/utility/struct"
 )
 
 func TestServiceEntity(t *testing.T) {

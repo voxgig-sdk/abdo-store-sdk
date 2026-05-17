@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/abdo-store-sdk/core"
+	"github.com/voxgig-sdk/abdo-store-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/abdo-store-sdk/go/utility/struct"
 )
 
 type AccountEntity struct {
