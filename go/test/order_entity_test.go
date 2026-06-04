@@ -120,7 +120,6 @@ func orderBasicSetup(extra map[string]any) *entityTestSetup {
 		"ABDOSTORE_TEST_ORDER_ENTID": idmap,
 		"ABDOSTORE_TEST_LIVE":      "FALSE",
 		"ABDOSTORE_TEST_EXPLAIN":   "FALSE",
-		"ABDOSTORE_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["ABDOSTORE_TEST_ORDER_ENTID"])
@@ -131,7 +130,6 @@ func orderBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["ABDOSTORE_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["ABDOSTORE_APIKEY"],
 			},
 			extra,
 		})

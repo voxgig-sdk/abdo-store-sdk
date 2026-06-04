@@ -117,7 +117,6 @@ func accountBasicSetup(extra map[string]any) *entityTestSetup {
 		"ABDOSTORE_TEST_ACCOUNT_ENTID": idmap,
 		"ABDOSTORE_TEST_LIVE":      "FALSE",
 		"ABDOSTORE_TEST_EXPLAIN":   "FALSE",
-		"ABDOSTORE_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["ABDOSTORE_TEST_ACCOUNT_ENTID"])
@@ -128,7 +127,6 @@ func accountBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["ABDOSTORE_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["ABDOSTORE_APIKEY"],
 			},
 			extra,
 		})

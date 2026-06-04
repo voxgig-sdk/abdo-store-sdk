@@ -117,14 +117,12 @@ func orderDirectSetup(mockres any) *orderDirectSetupResult {
 	env := envOverride(map[string]any{
 		"ABDOSTORE_TEST_ORDER_ENTID": map[string]any{},
 		"ABDOSTORE_TEST_LIVE":    "FALSE",
-		"ABDOSTORE_APIKEY":       "NONE",
 	})
 
 	live := env["ABDOSTORE_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["ABDOSTORE_APIKEY"],
 		}
 		client := sdk.NewAbdoStoreSDK(mergedOpts)
 

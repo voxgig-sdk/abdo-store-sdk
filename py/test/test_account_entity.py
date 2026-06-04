@@ -91,7 +91,6 @@ def _account_basic_setup(extra):
         "ABDOSTORE_TEST_ACCOUNT_ENTID": idmap,
         "ABDOSTORE_TEST_LIVE": "FALSE",
         "ABDOSTORE_TEST_EXPLAIN": "FALSE",
-        "ABDOSTORE_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +101,6 @@ def _account_basic_setup(extra):
     if env.get("ABDOSTORE_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("ABDOSTORE_APIKEY"),
             },
             extra or {},
         ])

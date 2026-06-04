@@ -28,16 +28,13 @@ package main
 
 import (
     "fmt"
-    "os"
 
     sdk "github.com/voxgig-sdk/abdo-store-sdk/go"
     "github.com/voxgig-sdk/abdo-store-sdk/go/core"
 )
 
 func main() {
-    client := sdk.NewAbdoStoreSDK(map[string]any{
-        "apikey": os.Getenv("ABDO-STORE_APIKEY"),
-    })
+    client := sdk.NewAbdoStoreSDK(map[string]any{})
 ```
 
 ### 3. Load a account
@@ -140,7 +137,6 @@ Create a `.env.local` file at the project root:
 
 ```
 ABDO-STORE_TEST_LIVE=TRUE
-ABDO-STORE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -162,7 +158,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `"apikey"` | `string` | API key for authentication. |
 | `"base"` | `string` | Base URL of the API server. |
 | `"prefix"` | `string` | URL path prefix prepended to all requests. |
 | `"suffix"` | `string` | URL path suffix appended to all requests. |

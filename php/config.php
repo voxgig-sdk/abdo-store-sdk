@@ -20,9 +20,6 @@ class AbdoStoreConfig
             ],
             "options" => [
                 "base" => "https://abdoastore.store",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

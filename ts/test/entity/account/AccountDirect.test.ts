@@ -74,14 +74,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'ABDOSTORE_TEST_ACCOUNT_ENTID': {},
     'ABDOSTORE_TEST_LIVE': 'FALSE',
-    'ABDOSTORE_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.ABDOSTORE_TEST_LIVE
 
   if (live) {
     const client = new AbdoStoreSDK({
-      apikey: env.ABDOSTORE_APIKEY,
     })
 
     let idmap: any = env['ABDOSTORE_TEST_ACCOUNT_ENTID']

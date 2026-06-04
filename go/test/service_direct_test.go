@@ -93,14 +93,12 @@ func serviceDirectSetup(mockres any) *serviceDirectSetupResult {
 	env := envOverride(map[string]any{
 		"ABDOSTORE_TEST_SERVICE_ENTID": map[string]any{},
 		"ABDOSTORE_TEST_LIVE":    "FALSE",
-		"ABDOSTORE_APIKEY":       "NONE",
 	})
 
 	live := env["ABDOSTORE_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["ABDOSTORE_APIKEY"],
 		}
 		client := sdk.NewAbdoStoreSDK(mergedOpts)
 

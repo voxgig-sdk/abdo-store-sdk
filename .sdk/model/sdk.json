@@ -16,7 +16,19 @@
           }
         ],
         "title": "Abdo Store API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Social media marketing tools for account management, balance top-ups, and order placement",
+        "homepage": "https://abdoastore.store",
+        "docs_url": "https://freepublicapis.com/abdo-store-api",
+        "license_short": "No licence specified by the provider.",
+        "license_md": "- No explicit licence is published by the API provider.\n- Treat all data and endpoints as the property of Abdo Store; consult the provider before redistributing responses.\n- The community catalogue page on freepublicapis.com currently lists this API as non-functional, so availability is not guaranteed.",
+        "about_md": "Abdo Store API exposes a small set of operations for a social media marketing (SMM) panel run at [abdoastore.store](https://abdoastore.store). It is aimed at resellers and end users who want to manage an account, top up a balance, and place orders against the panel's catalogue of services.\n\nWhat you typically interact with:\n\n- Account operations — sign-in / profile state for the panel user.\n- Balance operations — loading or checking the funds used to pay for orders.\n- Service catalogue — the list of social media engagement services the panel offers.\n- Order operations — submitting and tracking orders against those services.\n\nThe provider advertises 24/7 customer support. No authentication scheme, rate limits, or endpoint contracts are published in a machine-readable form, and the freepublicapis.com catalogue currently reports the upstream as unreachable, so callers should be prepared for downtime and verify behaviour against the live panel before integrating.",
+        "entity_desc": {
+          "account": "Represents the panel user's account — profile, credentials, and session state used to authorise other calls.",
+          "order": "Represents an order placed against the panel for a given social media service, including its status and lifecycle.",
+          "service": "Represents an item in the SMM service catalogue (the social media engagement products the panel sells) that orders are placed against."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -24,7 +36,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "account": {

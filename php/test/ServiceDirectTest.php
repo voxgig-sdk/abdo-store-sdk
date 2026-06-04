@@ -68,14 +68,12 @@ function service_direct_setup($mockres)
     $env = Runner::env_override([
         "ABDOSTORE_TEST_SERVICE_ENTID" => [],
         "ABDOSTORE_TEST_LIVE" => "FALSE",
-        "ABDOSTORE_APIKEY" => "NONE",
     ]);
 
     $live = $env["ABDOSTORE_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["ABDOSTORE_APIKEY"],
         ];
         $client = new AbdoStoreSDK($merged_opts);
         return [

@@ -114,7 +114,6 @@ function basicSetup(extra?: any) {
     'ABDO_STORE_TEST_ORDER_ENTID': idmap,
     'ABDO_STORE_TEST_LIVE': 'FALSE',
     'ABDO_STORE_TEST_EXPLAIN': 'FALSE',
-    'ABDO_STORE_APIKEY': 'NONE',
   })
 
   idmap = env['ABDO_STORE_TEST_ORDER_ENTID']
@@ -124,7 +123,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new AbdoStoreSDK(merge([
       {
-        apikey: env.ABDO_STORE_APIKEY,
       },
       extra
     ]))
