@@ -59,12 +59,14 @@ def _account_direct_setup(mockres):
     env = runner.env_override({
         "ABDOSTORE_TEST_ACCOUNT_ENTID": {},
         "ABDOSTORE_TEST_LIVE": "FALSE",
+        "ABDOSTORE_APIKEY": "NONE",
     })
 
     live = env.get("ABDOSTORE_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("ABDOSTORE_APIKEY"),
         }
         client = AbdoStoreSDK(merged_opts)
         return {

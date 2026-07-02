@@ -85,6 +85,7 @@ function account_basic_setup($extra)
         "ABDOSTORE_TEST_ACCOUNT_ENTID" => $idmap,
         "ABDOSTORE_TEST_LIVE" => "FALSE",
         "ABDOSTORE_TEST_EXPLAIN" => "FALSE",
+        "ABDOSTORE_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -96,6 +97,7 @@ function account_basic_setup($extra)
     if ($env["ABDOSTORE_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["ABDOSTORE_APIKEY"],
             ],
             $extra ?? [],
         ]);

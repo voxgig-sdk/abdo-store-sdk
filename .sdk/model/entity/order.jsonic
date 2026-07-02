@@ -100,7 +100,7 @@ main: kit: entity: order: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.order`"
           }
         }
       ]

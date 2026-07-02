@@ -1,21 +1,8 @@
 # AbdoStore SDK
 
-Social media marketing tools for account management, balance top-ups, and order placement
+Abdo Store API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Abdo Store API
-
-Abdo Store API exposes a small set of operations for a social media marketing (SMM) panel run at [abdoastore.store](https://abdoastore.store). It is aimed at resellers and end users who want to manage an account, top up a balance, and place orders against the panel's catalogue of services.
-
-What you typically interact with:
-
-- Account operations — sign-in / profile state for the panel user.
-- Balance operations — loading or checking the funds used to pay for orders.
-- Service catalogue — the list of social media engagement services the panel offers.
-- Order operations — submitting and tracking orders against those services.
-
-The provider advertises 24/7 customer support. No authentication scheme, rate limits, or endpoint contracts are published in a machine-readable form, and the freepublicapis.com catalogue currently reports the upstream as unreachable, so callers should be prepared for downtime and verify behaviour against the live panel before integrating.
 
 ## Try it
 
@@ -49,27 +36,31 @@ gem install abdo-store-sdk
 luarocks install abdo-store-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { AbdoStoreSDK } from 'abdo-store'
 
-const client = new AbdoStoreSDK({})
+const client = new AbdoStoreSDK({
+  apikey: process.env.ABDO-STORE_APIKEY,
+})
 
+// Load account data
+const account = await client.Account().load({})
+console.log(account.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -99,9 +90,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Account** | Represents the panel user's account — profile, credentials, and session state used to authorise other calls. | `/api/balance` |
-| **Order** | Represents an order placed against the panel for a given social media service, including its status and lifecycle. | `/api/order` |
-| **Service** | Represents an item in the SMM service catalogue (the social media engagement products the panel sells) that orders are placed against. | `/api/services` |
+| **Account** |  | `/api/balance` |
+| **Order** |  | `/api/order` |
+| **Service** |  | `/api/services` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -111,15 +102,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from abdostore_sdk import AbdoStoreSDK
 
-client = AbdoStoreSDK({})
+client = AbdoStoreSDK({
+    "apikey": os.environ.get("ABDO-STORE_APIKEY"),
+})
 
 
 # Load a specific account
-account, err = client.Account(None).load(
-    {"id": "example_id"}, None
-)
+account, err = client.Account().load({"id": "example_id"})
+print(account)
 ```
 
 ### PHP
@@ -128,13 +121,14 @@ account, err = client.Account(None).load(
 <?php
 require_once 'abdostore_sdk.php';
 
-$client = new AbdoStoreSDK([]);
+$client = new AbdoStoreSDK([
+    "apikey" => getenv("ABDO-STORE_APIKEY"),
+]);
 
 
 // Load a specific account
-[$account, $err] = $client->Account(null)->load(
-    ["id" => "example_id"], null
-);
+[$account, $err] = $client->Account()->load(["id" => "example_id"]);
+print_r($account);
 ```
 
 ### Golang
@@ -142,8 +136,13 @@ $client = new AbdoStoreSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/abdo-store-sdk/go"
 
-client := sdk.NewAbdoStoreSDK(map[string]any{})
+client := sdk.NewAbdoStoreSDK(map[string]any{
+    "apikey": os.Getenv("ABDO-STORE_APIKEY"),
+})
 
+// Load account data
+account, err := client.Account(nil).Load(map[string]any{}, nil)
+fmt.Println(account)
 ```
 
 ### Ruby
@@ -151,13 +150,14 @@ client := sdk.NewAbdoStoreSDK(map[string]any{})
 ```ruby
 require_relative "AbdoStore_sdk"
 
-client = AbdoStoreSDK.new({})
+client = AbdoStoreSDK.new({
+  "apikey" => ENV["ABDO-STORE_APIKEY"],
+})
 
 
 # Load a specific account
-account, err = client.Account(nil).load(
-  { "id" => "example_id" }, nil
-)
+account, err = client.Account().load({ "id" => "example_id" })
+puts account
 ```
 
 ### Lua
@@ -165,13 +165,14 @@ account, err = client.Account(nil).load(
 ```lua
 local sdk = require("abdo-store_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("ABDO-STORE_APIKEY"),
+})
 
 
 -- Load a specific account
-local account, err = client:Account(nil):load(
-  { id = "example_id" }, nil
-)
+local account, err = client:Account():load({ id = "example_id" })
+print(account)
 ```
 
 ## Unit testing in offline mode
@@ -190,25 +191,21 @@ const result = await client.Account().load({ id: 'test01' })
 ### Python
 
 ```python
-client = AbdoStoreSDK.test(None, None)
-result, err = client.Account(None).load(
-    {"id": "test01"}, None
-)
+client = AbdoStoreSDK.test()
+result, err = client.Account().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = AbdoStoreSDK::test(null, null);
-[$result, $err] = $client->Account(null)->load(
-    ["id" => "test01"], null
-);
+$client = AbdoStoreSDK::test();
+[$result, $err] = $client->Account()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Account(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -217,19 +214,15 @@ result, err := client.Account(nil).Load(
 ### Ruby
 
 ```ruby
-client = AbdoStoreSDK.test(nil, nil)
-result, err = client.Account(nil).load(
-  { "id" => "test01" }, nil
-)
+client = AbdoStoreSDK.test
+result, err = client.Account().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Account(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Account():load({ id = "test01" })
 ```
 
 ## How it works
@@ -333,15 +326,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Abdo Store API
-
-- Upstream: [https://abdoastore.store](https://abdoastore.store)
-- API docs: [https://freepublicapis.com/abdo-store-api](https://freepublicapis.com/abdo-store-api)
-
-- No explicit licence is published by the API provider.
-- Treat all data and endpoints as the property of Abdo Store; consult the provider before redistributing responses.
-- The community catalogue page on freepublicapis.com currently lists this API as non-functional, so availability is not guaranteed.
 
 ---
 
