@@ -10,13 +10,13 @@ The Ruby SDK for the AbdoStore API — an entity-oriented client using idiomatic
 
 ## Install
 ```bash
-gem install abdo-store-sdk
+gem install voxgig-sdk-abdo-store
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "abdo-store-sdk"
+gem "voxgig-sdk-abdo-store"
 ```
 
 Then run:

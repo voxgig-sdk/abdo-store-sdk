@@ -10,7 +10,7 @@ The TypeScript SDK for the AbdoStore API — a type-safe, entity-oriented client
 
 ## Install
 ```bash
-npm install abdo-store
+npm install @voxgig-sdk/abdo-store
 ```
 ## Tutorial: your first API call
 

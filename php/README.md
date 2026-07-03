@@ -10,7 +10,7 @@ The PHP SDK for the AbdoStore API — an entity-oriented client using PHP conven
 
 ## Install
 ```bash
-composer require voxgig/abdo-store-sdk
+composer require voxgig-sdk/abdo-store
 ```
 
 

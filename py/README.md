@@ -10,7 +10,7 @@ The Python SDK for the AbdoStore API — an entity-oriented client following Pyt
 
 ## Install
 ```bash
-pip install abdo-store-sdk
+pip install voxgig-sdk-abdo-store
 ```
 
 Or install from source:
