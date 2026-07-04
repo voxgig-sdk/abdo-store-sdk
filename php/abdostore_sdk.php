@@ -233,10 +233,10 @@ class AbdoStoreSDK
 
     private $_account = null;
 
-    // Idiomatic facade: $client->account()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Account() (PHP method
-    // names are case-insensitive).
-    public function account($data = null)
+    // Canonical facade: $client->Account()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->account()
+    // resolves here too.
+    public function Account($data = null)
     {
         require_once __DIR__ . '/entity/account_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class AbdoStoreSDK
 
     private $_order = null;
 
-    // Idiomatic facade: $client->order()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Order() (PHP method
-    // names are case-insensitive).
-    public function order($data = null)
+    // Canonical facade: $client->Order()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->order()
+    // resolves here too.
+    public function Order($data = null)
     {
         require_once __DIR__ . '/entity/order_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class AbdoStoreSDK
 
     private $_service = null;
 
-    // Idiomatic facade: $client->service()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Service() (PHP method
-    // names are case-insensitive).
-    public function service($data = null)
+    // Canonical facade: $client->Service()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->service()
+    // resolves here too.
+    public function Service($data = null)
     {
         require_once __DIR__ . '/entity/service_entity.php';
         if ($data === null) {

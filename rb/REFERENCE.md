@@ -95,7 +95,7 @@ same parameters as `direct()`. Raises on error.
 ## AccountEntity
 
 ```ruby
-account = client.account
+account = client.Account
 ```
 
 ### Fields
@@ -113,7 +113,7 @@ account = client.account
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.account.load({ "id" => "account_id" })
+result = client.Account.load({ "id" => "account_id" })
 ```
 
 ### Common Methods
@@ -149,7 +149,7 @@ Return the entity name.
 ## OrderEntity
 
 ```ruby
-order = client.order
+order = client.Order
 ```
 
 ### Fields
@@ -172,7 +172,7 @@ order = client.order
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.order.create({
+result = client.Order.create({
   "link" => # `$STRING`,
   "quantity" => # `$INTEGER`,
   "service_id" => # `$INTEGER`,
@@ -184,7 +184,7 @@ result = client.order.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.order.load({ "id" => "order_id" })
+result = client.Order.load({ "id" => "order_id" })
 ```
 
 ### Common Methods
@@ -220,7 +220,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```ruby
-service = client.service
+service = client.Service
 ```
 
 ### Fields
@@ -242,7 +242,7 @@ service = client.service
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.service.list(nil)
+results = client.Service.list(nil)
 ```
 
 ### Common Methods

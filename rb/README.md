@@ -34,8 +34,9 @@ client = AbdoStoreSDK.new({
 
 ```ruby
 begin
-  result = client.account.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Account record (raises on error).
+  account = client.Account.load({ "id" => "example_id" })
+  puts account
 rescue => err
   warn "load failed: #{err}"
 end
@@ -82,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = AbdoStoreSDK.test
+client = AbdoStoreSDK.test({
+  "entity" => { "account" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.account.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+account = client.Account.load({ "id" => "test01" })
+puts account
 ```
 
 ### Use a custom fetch function
@@ -166,8 +171,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Account` | `(data) -> AccountEntity` | Create a Account entity instance. |
-| `Order` | `(data) -> OrderEntity` | Create a Order entity instance. |
+| `Account` | `(data) -> AccountEntity` | Create an Account entity instance. |
+| `Order` | `(data) -> OrderEntity` | Create an Order entity instance. |
 | `Service` | `(data) -> ServiceEntity` | Create a Service entity instance. |
 
 ### Entity interface
@@ -259,7 +264,7 @@ API path: `/api/services`
 
 ### Account
 
-Create an instance: `const account = client.account`
+Create an instance: `account = client.Account`
 
 #### Operations
 
@@ -277,14 +282,15 @@ Create an instance: `const account = client.account`
 
 #### Example: Load
 
-```ts
-const account = await client.account.load({ id: 'account_id' })
+```ruby
+# load returns the bare Account record (raises on error).
+account = client.Account.load({ "id" => "account_id" })
 ```
 
 
 ### Order
 
-Create an instance: `const order = client.order`
+Create an instance: `order = client.Order`
 
 #### Operations
 
@@ -308,24 +314,25 @@ Create an instance: `const order = client.order`
 
 #### Example: Load
 
-```ts
-const order = await client.order.load({ id: 'order_id' })
+```ruby
+# load returns the bare Order record (raises on error).
+order = client.Order.load({ "id" => "order_id" })
 ```
 
 #### Example: Create
 
-```ts
-const order = await client.order.create({
-  link: /* `$STRING` */,
-  quantity: /* `$INTEGER` */,
-  service_id: /* `$INTEGER` */,
+```ruby
+order = client.Order.create({
+  "link" => nil, # `$STRING`
+  "quantity" => nil, # `$INTEGER`
+  "service_id" => nil, # `$INTEGER`
 })
 ```
 
 
 ### Service
 
-Create an instance: `const service = client.service`
+Create an instance: `service = client.Service`
 
 #### Operations
 
@@ -347,8 +354,9 @@ Create an instance: `const service = client.service`
 
 #### Example: List
 
-```ts
-const services = await client.service.list()
+```ruby
+# list returns an Array of Service records (raises on error).
+services = client.Service.list
 ```
 
 
@@ -423,7 +431,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-account = client.account
+account = client.Account
 account.load({ "id" => "example_id" })
 
 # account.data_get now returns the loaded account data

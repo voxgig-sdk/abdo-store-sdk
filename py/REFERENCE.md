@@ -89,7 +89,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AccountEntity
 
 ```python
-account = client.account
+account = client.Account()
 ```
 
 ### Fields
@@ -107,7 +107,7 @@ account = client.account
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.account.load({"id": "account_id"})
+result = client.Account().load({"id": "account_id"})
 ```
 
 ### Common Methods
@@ -142,7 +142,7 @@ Return the entity name.
 ## OrderEntity
 
 ```python
-order = client.order
+order = client.Order()
 ```
 
 ### Fields
@@ -165,10 +165,10 @@ order = client.order
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.order.create({
-    "link": # `$STRING`,
-    "quantity": # `$INTEGER`,
-    "service_id": # `$INTEGER`,
+result = client.Order().create({
+    "link": ...,  # `$STRING`
+    "quantity": ...,  # `$INTEGER`
+    "service_id": ...,  # `$INTEGER`
 })
 ```
 
@@ -177,7 +177,7 @@ result = client.order.create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.order.load({"id": "order_id"})
+result = client.Order().load({"id": "order_id"})
 ```
 
 ### Common Methods
@@ -212,7 +212,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```python
-service = client.service
+service = client.Service()
 ```
 
 ### Fields
@@ -234,7 +234,9 @@ service = client.service
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.service.list({})
+results = client.Service().list({})
+for service in results:
+    print(service)
 ```
 
 ### Common Methods

@@ -35,9 +35,10 @@ $client = new AbdoStoreSDK([
 
 ```php
 try {
-    $result = $client->account()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Account record (throws on error).
+    $account = $client->Account()->load(["id" => "example_id"]);
+    print_r($account);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -83,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = AbdoStoreSDK::test();
+$client = AbdoStoreSDK::test([
+    "entity" => ["account" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->account()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$account = $client->Account()->load(["id" => "test01"]);
+print_r($account);
 ```
 
 ### Use a custom fetch function
@@ -170,8 +175,8 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `Account` | `($data): AccountEntity` | Create a Account entity instance. |
-| `Order` | `($data): OrderEntity` | Create a Order entity instance. |
+| `Account` | `($data): AccountEntity` | Create an Account entity instance. |
+| `Order` | `($data): OrderEntity` | Create an Order entity instance. |
 | `Service` | `($data): ServiceEntity` | Create a Service entity instance. |
 
 ### Entity interface
@@ -264,7 +269,7 @@ API path: `/api/services`
 
 ### Account
 
-Create an instance: `const account = client.account`
+Create an instance: `$account = $client->Account();`
 
 #### Operations
 
@@ -282,14 +287,15 @@ Create an instance: `const account = client.account`
 
 #### Example: Load
 
-```ts
-const account = await client.account.load({ id: 'account_id' })
+```php
+// load() returns the bare Account record (throws on error).
+$account = $client->Account()->load(["id" => "account_id"]);
 ```
 
 
 ### Order
 
-Create an instance: `const order = client.order`
+Create an instance: `$order = $client->Order();`
 
 #### Operations
 
@@ -313,24 +319,25 @@ Create an instance: `const order = client.order`
 
 #### Example: Load
 
-```ts
-const order = await client.order.load({ id: 'order_id' })
+```php
+// load() returns the bare Order record (throws on error).
+$order = $client->Order()->load(["id" => "order_id"]);
 ```
 
 #### Example: Create
 
-```ts
-const order = await client.order.create({
-  link: /* `$STRING` */,
-  quantity: /* `$INTEGER` */,
-  service_id: /* `$INTEGER` */,
-})
+```php
+$order = $client->Order()->create([
+    "link" => null, // `$STRING`
+    "quantity" => null, // `$INTEGER`
+    "service_id" => null, // `$INTEGER`
+]);
 ```
 
 
 ### Service
 
-Create an instance: `const service = client.service`
+Create an instance: `$service = $client->Service();`
 
 #### Operations
 
@@ -352,8 +359,9 @@ Create an instance: `const service = client.service`
 
 #### Example: List
 
-```ts
-const services = await client.service.list()
+```php
+// list() returns an array of Service records (throws on error).
+$services = $client->Service()->list();
 ```
 
 
@@ -428,7 +436,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$account = $client->account();
+$account = $client->Account();
 $account->load(["id" => "example_id"]);
 
 // $account->dataGet() now returns the loaded account data

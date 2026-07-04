@@ -206,42 +206,21 @@ class AbdoStoreSDK {
 
 
 
-  _account?: AccountEntity
-
-  // Idiomatic facade: `client.account.list()` / `client.account.load({ id })`.
-  get account(): AccountEntity {
-    return (this._account ??= new AccountEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.account` instead. */
+  // Entity access: `client.Account().list()` / `client.Account().load({ id })`.
   Account(data?: any) {
     const self = this
     return new AccountEntity(self,data)
   }
 
 
-  _order?: OrderEntity
-
-  // Idiomatic facade: `client.order.list()` / `client.order.load({ id })`.
-  get order(): OrderEntity {
-    return (this._order ??= new OrderEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.order` instead. */
+  // Entity access: `client.Order().list()` / `client.Order().load({ id })`.
   Order(data?: any) {
     const self = this
     return new OrderEntity(self,data)
   }
 
 
-  _service?: ServiceEntity
-
-  // Idiomatic facade: `client.service.list()` / `client.service.load({ id })`.
-  get service(): ServiceEntity {
-    return (this._service ??= new ServiceEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.service` instead. */
+  // Entity access: `client.Service().list()` / `client.Service().load({ id })`.
   Service(data?: any) {
     const self = this
     return new ServiceEntity(self,data)

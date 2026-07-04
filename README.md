@@ -28,9 +28,9 @@ const client = new AbdoStoreSDK({
   apikey: process.env.ABDO_STORE_APIKEY,
 })
 
-// Load account data
-const account = await client.account.load({})
-console.log(account.data)
+// Load account data (returns a Account)
+const account = await client.Account().load()
+console.log(account)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -91,8 +91,8 @@ client = AbdoStoreSDK({
 })
 
 
-# Load a specific account
-account = client.account.load({"id": "example_id"})
+# Load a specific account (returns the record, raises on error)
+account = client.Account().load({"id": "example_id"})
 print(account)
 ```
 
@@ -107,8 +107,8 @@ $client = new AbdoStoreSDK([
 ]);
 
 
-// Load a specific account
-$account = $client->account()->load(["id" => "example_id"]);
+// Load a specific account (returns the bare record; throws on error)
+$account = $client->Account()->load(["id" => "example_id"]);
 print_r($account);
 ```
 
@@ -136,8 +136,8 @@ client = AbdoStoreSDK.new({
 })
 
 
-# Load a specific account
-account = client.account.load({ "id" => "example_id" })
+# Load a specific account (returns the bare record; raises on error)
+account = client.Account.load({ "id" => "example_id" })
 puts account
 ```
 
@@ -152,7 +152,7 @@ local client = sdk.new({
 
 
 -- Load a specific account
-local account, err = client:account():load({ id = "example_id" })
+local account, err = client:Account():load({ id = "example_id" })
 print(account)
 ```
 
@@ -165,22 +165,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = AbdoStoreSDK.test()
-const result = await client.account.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const account = await client.Account().load({ id: 'test01' })
+// account is a bare Account populated with mock data
+console.log(account)
 ```
 
 ### Python
 
 ```python
 client = AbdoStoreSDK.test()
-result = client.account.load({"id": "test01"})
+account = client.Account().load({"id": "test01"})
+print(account)
 ```
 
 ### PHP
 
 ```php
-$client = AbdoStoreSDK::test();
-$result = $client->account()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = AbdoStoreSDK::test([
+    "entity" => ["account" => ["test01" => ["id" => "test01"]]],
+]);
+$account = $client->Account()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -195,15 +200,18 @@ result, err := client.Account(nil).Load(
 ### Ruby
 
 ```ruby
-client = AbdoStoreSDK.test
-result = client.account.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = AbdoStoreSDK.test({
+  "entity" => { "account" => { "test01" => { "id" => "test01" } } },
+})
+account = client.Account.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:account():load({ id = "test01" })
+local result, err = client:Account():load({ id = "test01" })
 ```
 
 ## How it works
@@ -251,6 +259,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

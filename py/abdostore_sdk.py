@@ -220,57 +220,27 @@ class AbdoStoreSDK:
         }
 
 
-    @property
-    def account(self):
-        """Idiomatic facade: client.account.list() / client.account.load({"id": ...})."""
-        from entity.account_entity import AccountEntity
-        cached = getattr(self, "_account", None)
-        if cached is None:
-            cached = AccountEntity(self, None)
-            self._account = cached
-        return cached
-
-    def Account(self, data=None):
-        # Deprecated: use client.account instead.
+    def Account(self, data=None) -> "AccountEntity":
+        """Entity factory: client.Account().list({}) / client.Account().load({"id": ...})."""
         from entity.account_entity import AccountEntity
         return AccountEntity(self, data)
 
 
-    @property
-    def order(self):
-        """Idiomatic facade: client.order.list() / client.order.load({"id": ...})."""
-        from entity.order_entity import OrderEntity
-        cached = getattr(self, "_order", None)
-        if cached is None:
-            cached = OrderEntity(self, None)
-            self._order = cached
-        return cached
-
-    def Order(self, data=None):
-        # Deprecated: use client.order instead.
+    def Order(self, data=None) -> "OrderEntity":
+        """Entity factory: client.Order().list({}) / client.Order().load({"id": ...})."""
         from entity.order_entity import OrderEntity
         return OrderEntity(self, data)
 
 
-    @property
-    def service(self):
-        """Idiomatic facade: client.service.list() / client.service.load({"id": ...})."""
-        from entity.service_entity import ServiceEntity
-        cached = getattr(self, "_service", None)
-        if cached is None:
-            cached = ServiceEntity(self, None)
-            self._service = cached
-        return cached
-
-    def Service(self, data=None):
-        # Deprecated: use client.service instead.
+    def Service(self, data=None) -> "ServiceEntity":
+        """Entity factory: client.Service().list({}) / client.Service().load({"id": ...})."""
         from entity.service_entity import ServiceEntity
         return ServiceEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "AbdoStoreSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class AbdoStoreSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.account_entity import AccountEntity
+    from entity.order_entity import OrderEntity
+    from entity.service_entity import ServiceEntity

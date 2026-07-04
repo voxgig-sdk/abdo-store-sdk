@@ -36,10 +36,12 @@ client = AbdoStoreSDK({
 
 ### 3. Load an account
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.account.load({"id": "example_id"})
-    print(result)
+    account = client.Account().load({"id": "example_id"})
+    print(account)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -87,8 +89,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = AbdoStoreSDK.test()
 
-result = client.account.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+account = client.Account().load({"id": "test01"})
+# account contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -166,8 +169,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Account` | `(data) -> AccountEntity` | Create a Account entity instance. |
-| `Order` | `(data) -> OrderEntity` | Create a Order entity instance. |
+| `Account` | `(data) -> AccountEntity` | Create an Account entity instance. |
+| `Order` | `(data) -> OrderEntity` | Create an Order entity instance. |
 | `Service` | `(data) -> ServiceEntity` | Create a Service entity instance. |
 
 ### Entity interface
@@ -260,7 +263,7 @@ API path: `/api/services`
 
 ### Account
 
-Create an instance: `const account = client.account`
+Create an instance: `account = client.Account()`
 
 #### Operations
 
@@ -278,14 +281,14 @@ Create an instance: `const account = client.account`
 
 #### Example: Load
 
-```ts
-const account = await client.account.load({ id: 'account_id' })
+```python
+account = client.Account().load({"id": "account_id"})
 ```
 
 
 ### Order
 
-Create an instance: `const order = client.order`
+Create an instance: `order = client.Order()`
 
 #### Operations
 
@@ -309,24 +312,24 @@ Create an instance: `const order = client.order`
 
 #### Example: Load
 
-```ts
-const order = await client.order.load({ id: 'order_id' })
+```python
+order = client.Order().load({"id": "order_id"})
 ```
 
 #### Example: Create
 
-```ts
-const order = await client.order.create({
-  link: /* `$STRING` */,
-  quantity: /* `$INTEGER` */,
-  service_id: /* `$INTEGER` */,
+```python
+order = client.Order().create({
+    "link": ...,  # `$STRING`
+    "quantity": ...,  # `$INTEGER`
+    "service_id": ...,  # `$INTEGER`
 })
 ```
 
 
 ### Service
 
-Create an instance: `const service = client.service`
+Create an instance: `service = client.Service()`
 
 #### Operations
 
@@ -348,8 +351,8 @@ Create an instance: `const service = client.service`
 
 #### Example: List
 
-```ts
-const services = await client.service.list()
+```python
+services = client.Service().list({})
 ```
 
 
@@ -423,7 +426,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-account = client.account
+account = client.Account()
 account.load({"id": "example_id"})
 
 # account.data_get() now returns the loaded account data

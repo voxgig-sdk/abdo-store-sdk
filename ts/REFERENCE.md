@@ -134,7 +134,7 @@ Alias for `AbdoStoreSDK.test()`.
 ## AccountEntity
 
 ```ts
-const account = client.account
+const account = client.Account()
 ```
 
 ### Fields
@@ -152,7 +152,7 @@ const account = client.account
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.account.load({ id: 'account_id' })
+const result = await client.Account().load({ id: 'account_id' })
 ```
 
 ### Common Methods
@@ -186,7 +186,7 @@ Return a copy of the entity options.
 ## OrderEntity
 
 ```ts
-const order = client.order
+const order = client.Order()
 ```
 
 ### Fields
@@ -209,7 +209,7 @@ const order = client.order
 Create a new entity with the given data.
 
 ```ts
-const result = await client.order.create({
+const result = await client.Order().create({
   link: /* `$STRING` */,
   quantity: /* `$INTEGER` */,
   service_id: /* `$INTEGER` */,
@@ -221,7 +221,7 @@ const result = await client.order.create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.order.load({ id: 'order_id' })
+const result = await client.Order().load({ id: 'order_id' })
 ```
 
 ### Common Methods
@@ -255,7 +255,7 @@ Return a copy of the entity options.
 ## ServiceEntity
 
 ```ts
-const service = client.service
+const service = client.Service()
 ```
 
 ### Fields
@@ -277,7 +277,7 @@ const service = client.service
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.service.list()
+const results = await client.Service().list()
 ```
 
 ### Common Methods

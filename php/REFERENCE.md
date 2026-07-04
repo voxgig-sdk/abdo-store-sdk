@@ -94,7 +94,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## AccountEntity
 
 ```php
-$account = $client->account();
+$account = $client->Account();
 ```
 
 ### Fields
@@ -112,7 +112,7 @@ $account = $client->account();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->account()->load(["id" => "account_id"]);
+$result = $client->Account()->load(["id" => "account_id"]);
 ```
 
 ### Common Methods
@@ -148,7 +148,7 @@ Return the entity name.
 ## OrderEntity
 
 ```php
-$order = $client->order();
+$order = $client->Order();
 ```
 
 ### Fields
@@ -171,7 +171,7 @@ $order = $client->order();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->order()->create([
+$result = $client->Order()->create([
   "link" => /* `$STRING` */,
   "quantity" => /* `$INTEGER` */,
   "service_id" => /* `$INTEGER` */,
@@ -183,7 +183,7 @@ $result = $client->order()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->order()->load(["id" => "order_id"]);
+$result = $client->Order()->load(["id" => "order_id"]);
 ```
 
 ### Common Methods
@@ -219,7 +219,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```php
-$service = $client->service();
+$service = $client->Service();
 ```
 
 ### Fields
@@ -241,7 +241,7 @@ $service = $client->service();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->service()->list([]);
+$results = $client->Service()->list([]);
 ```
 
 ### Common Methods

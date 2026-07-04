@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:account():list() / client:account():load({ id = ... })
-function AbdoStoreSDK:account(data)
+-- Idiomatic facade: client:Account():list() / client:Account():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbdoStoreSDK:Account(data)
   local EntityMod = require("entity.account_entity")
   if data == nil then
     if self._account == nil then
@@ -256,15 +257,10 @@ function AbdoStoreSDK:account(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:account() instead.
-function AbdoStoreSDK:Account(data)
-  local EntityMod = require("entity.account_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:order():list() / client:order():load({ id = ... })
-function AbdoStoreSDK:order(data)
+-- Idiomatic facade: client:Order():list() / client:Order():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbdoStoreSDK:Order(data)
   local EntityMod = require("entity.order_entity")
   if data == nil then
     if self._order == nil then
@@ -275,15 +271,10 @@ function AbdoStoreSDK:order(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:order() instead.
-function AbdoStoreSDK:Order(data)
-  local EntityMod = require("entity.order_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:service():list() / client:service():load({ id = ... })
-function AbdoStoreSDK:service(data)
+-- Idiomatic facade: client:Service():list() / client:Service():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AbdoStoreSDK:Service(data)
   local EntityMod = require("entity.service_entity")
   if data == nil then
     if self._service == nil then
@@ -291,12 +282,6 @@ function AbdoStoreSDK:service(data)
     end
     return self._service
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:service() instead.
-function AbdoStoreSDK:Service(data)
-  local EntityMod = require("entity.service_entity")
   return EntityMod.new(self, data)
 end
 

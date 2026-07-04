@@ -4,74 +4,74 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Account:
-    balance: Optional[float] = None
-    currency: Optional[str] = None
-    status: Optional[str] = None
+class Account(TypedDict, total=False):
+    balance: float
+    currency: str
+    status: str
 
 
-@dataclass
-class AccountLoadMatch:
-    balance: Optional[float] = None
-    currency: Optional[str] = None
-    status: Optional[str] = None
+class AccountLoadMatch(TypedDict, total=False):
+    balance: float
+    currency: str
+    status: str
 
 
-@dataclass
-class Order:
+class OrderRequired(TypedDict):
     link: str
     quantity: int
     service_id: int
-    charge: Optional[float] = None
-    comment: Optional[str] = None
-    order: Optional[dict] = None
-    order_id: Optional[int] = None
-    status: Optional[str] = None
 
 
-@dataclass
-class OrderLoadMatch:
+class Order(OrderRequired, total=False):
+    charge: float
+    comment: str
+    order: dict
+    order_id: int
+    status: str
+
+
+class OrderLoadMatch(TypedDict):
     id: int
 
 
-@dataclass
-class OrderCreateData:
-    charge: Optional[float] = None
-    comment: Optional[str] = None
-    link: Optional[str] = None
-    order: Optional[dict] = None
-    order_id: Optional[int] = None
-    quantity: Optional[int] = None
-    service_id: Optional[int] = None
-    status: Optional[str] = None
+class OrderCreateData(TypedDict, total=False):
+    charge: float
+    comment: str
+    link: str
+    order: dict
+    order_id: int
+    quantity: int
+    service_id: int
+    status: str
 
 
-@dataclass
-class Service:
-    category: Optional[str] = None
-    description: Optional[str] = None
-    id: Optional[int] = None
-    max: Optional[int] = None
-    min: Optional[int] = None
-    name: Optional[str] = None
-    price: Optional[float] = None
+class Service(TypedDict, total=False):
+    category: str
+    description: str
+    id: int
+    max: int
+    min: int
+    name: str
+    price: float
 
 
-@dataclass
-class ServiceListMatch:
-    category: Optional[str] = None
-    description: Optional[str] = None
-    id: Optional[int] = None
-    max: Optional[int] = None
-    min: Optional[int] = None
-    name: Optional[str] = None
-    price: Optional[float] = None
-
+class ServiceListMatch(TypedDict, total=False):
+    category: str
+    description: str
+    id: int
+    max: int
+    min: int
+    name: str
+    price: float

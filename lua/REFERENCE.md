@@ -92,7 +92,7 @@ same parameters as `direct()`.
 ## AccountEntity
 
 ```lua
-local account = client:account(nil)
+local account = client:Account(nil)
 ```
 
 ### Fields
@@ -110,7 +110,7 @@ local account = client:account(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:account():load({ id = "account_id" })
+local result, err = client:Account():load({ id = "account_id" })
 ```
 
 ### Common Methods
@@ -146,7 +146,7 @@ Return the entity name.
 ## OrderEntity
 
 ```lua
-local order = client:order(nil)
+local order = client:Order(nil)
 ```
 
 ### Fields
@@ -169,7 +169,7 @@ local order = client:order(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:order():create({
+local result, err = client:Order():create({
   link = --[[ `$STRING` ]],
   quantity = --[[ `$INTEGER` ]],
   service_id = --[[ `$INTEGER` ]],
@@ -181,7 +181,7 @@ local result, err = client:order():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:order():load({ id = "order_id" })
+local result, err = client:Order():load({ id = "order_id" })
 ```
 
 ### Common Methods
@@ -217,7 +217,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```lua
-local service = client:service(nil)
+local service = client:Service(nil)
 ```
 
 ### Fields
@@ -239,7 +239,7 @@ local service = client:service(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:service():list()
+local results, err = client:Service():list()
 ```
 
 ### Common Methods
