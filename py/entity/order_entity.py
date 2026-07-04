@@ -1,7 +1,14 @@
 # AbdoStore SDK Order entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from abdostore_types import (
+    Order,
+    OrderLoadMatch,
+    OrderCreateData,
+)
 
 
 class OrderEntity:
@@ -44,7 +51,7 @@ class OrderEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Order:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +60,12 @@ class OrderEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Order:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: OrderLoadMatch, ctrl=None) -> Order:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -82,7 +89,7 @@ class OrderEntity:
     
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: OrderCreateData, ctrl=None) -> Order:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",

@@ -214,7 +214,8 @@ class Config {
                     "name": "id",
                     "orig": "order_id",
                     "reqd": true,
-                    "type": "`$INTEGER`"
+                    "type": "`$INTEGER`",
+                    "index$": 0
                   }
                 ]
               },

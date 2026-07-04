@@ -43,8 +43,7 @@ class ServiceEntityTest < Minitest::Test
     service_ref01_ent = client.Service(nil)
     service_ref01_match = {}
 
-    service_ref01_list_result, err = service_ref01_ent.list(service_ref01_match, nil)
-    assert_nil err
+    service_ref01_list_result = service_ref01_ent.list(service_ref01_match, nil)
     assert service_ref01_list_result.is_a?(Array)
 
   end

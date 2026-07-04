@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch ServiceListMatch
+---@param ctrl? table
+---@return Service[]
+---@return string? err
 function ServiceEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

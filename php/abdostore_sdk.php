@@ -103,7 +103,7 @@ class AbdoStoreSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class AbdoStoreSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class AbdoStoreSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,38 +216,71 @@ class AbdoStoreSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Account($data = null)
+    private $_account = null;
+
+    // Idiomatic facade: $client->account()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Account() (PHP method
+    // names are case-insensitive).
+    public function account($data = null)
     {
         require_once __DIR__ . '/entity/account_entity.php';
+        if ($data === null) {
+            if ($this->_account === null) {
+                $this->_account = new AccountEntity($this, null);
+            }
+            return $this->_account;
+        }
         return new AccountEntity($this, $data);
     }
 
 
-    public function Order($data = null)
+    private $_order = null;
+
+    // Idiomatic facade: $client->order()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Order() (PHP method
+    // names are case-insensitive).
+    public function order($data = null)
     {
         require_once __DIR__ . '/entity/order_entity.php';
+        if ($data === null) {
+            if ($this->_order === null) {
+                $this->_order = new OrderEntity($this, null);
+            }
+            return $this->_order;
+        }
         return new OrderEntity($this, $data);
     }
 
 
-    public function Service($data = null)
+    private $_service = null;
+
+    // Idiomatic facade: $client->service()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Service() (PHP method
+    // names are case-insensitive).
+    public function service($data = null)
     {
         require_once __DIR__ . '/entity/service_entity.php';
+        if ($data === null) {
+            if ($this->_service === null) {
+                $this->_service = new ServiceEntity($this, null);
+            }
+            return $this->_service;
+        }
         return new ServiceEntity($this, $data);
     }
 

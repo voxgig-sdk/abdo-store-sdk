@@ -245,16 +245,25 @@ func (sdk *AbdoStoreSDK) Direct(fetchargs map[string]any) (map[string]any, error
 }
 
 
+// Account returns a Account entity bound to this client.
+// Idiomatic usage: client.Account(nil).List(nil, nil) or
+// client.Account(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbdoStoreSDK) Account(data map[string]any) AbdoStoreEntity {
 	return NewAccountEntityFunc(sdk, data)
 }
 
 
+// Order returns a Order entity bound to this client.
+// Idiomatic usage: client.Order(nil).List(nil, nil) or
+// client.Order(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbdoStoreSDK) Order(data map[string]any) AbdoStoreEntity {
 	return NewOrderEntityFunc(sdk, data)
 }
 
 
+// Service returns a Service entity bound to this client.
+// Idiomatic usage: client.Service(nil).List(nil, nil) or
+// client.Service(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AbdoStoreSDK) Service(data map[string]any) AbdoStoreEntity {
 	return NewServiceEntityFunc(sdk, data)
 }

@@ -244,18 +244,57 @@ end
 
 
 
+-- Idiomatic facade: client:account():list() / client:account():load({ id = ... })
+function AbdoStoreSDK:account(data)
+  local EntityMod = require("entity.account_entity")
+  if data == nil then
+    if self._account == nil then
+      self._account = EntityMod.new(self, nil)
+    end
+    return self._account
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:account() instead.
 function AbdoStoreSDK:Account(data)
   local EntityMod = require("entity.account_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:order():list() / client:order():load({ id = ... })
+function AbdoStoreSDK:order(data)
+  local EntityMod = require("entity.order_entity")
+  if data == nil then
+    if self._order == nil then
+      self._order = EntityMod.new(self, nil)
+    end
+    return self._order
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:order() instead.
 function AbdoStoreSDK:Order(data)
   local EntityMod = require("entity.order_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:service():list() / client:service():load({ id = ... })
+function AbdoStoreSDK:service(data)
+  local EntityMod = require("entity.service_entity")
+  if data == nil then
+    if self._service == nil then
+      self._service = EntityMod.new(self, nil)
+    end
+    return self._service
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:service() instead.
 function AbdoStoreSDK:Service(data)
   local EntityMod = require("entity.service_entity")
   return EntityMod.new(self, data)

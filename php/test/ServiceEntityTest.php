@@ -50,8 +50,7 @@ class ServiceEntityTest extends TestCase
         $service_ref01_ent = $client->Service(null);
         $service_ref01_match = [];
 
-        [$service_ref01_list_result, $err] = $service_ref01_ent->list($service_ref01_match, null);
-        $this->assertNull($err);
+        $service_ref01_list_result = $service_ref01_ent->list($service_ref01_match, null);
         $this->assertIsArray($service_ref01_list_result);
 
     }

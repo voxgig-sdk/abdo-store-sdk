@@ -49,8 +49,7 @@ class AccountEntityTest extends TestCase
         // LOAD
         $account_ref01_ent = $client->Account(null);
         $account_ref01_match_dt0 = [];
-        [$account_ref01_data_dt0_loaded, $err] = $account_ref01_ent->load($account_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $account_ref01_data_dt0_loaded = $account_ref01_ent->load($account_ref01_match_dt0, null);
         $this->assertNotNull($account_ref01_data_dt0_loaded);
 
     }

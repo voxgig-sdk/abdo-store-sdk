@@ -181,6 +181,7 @@ def make_config():
                       "orig": "order_id",
                       "reqd": True,
                       "type": "`$INTEGER`",
+                      "index$": 0,
                     },
                   ],
                 },

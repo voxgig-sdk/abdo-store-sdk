@@ -9,9 +9,10 @@ The PHP SDK for the AbdoStore API — an entity-oriented client using PHP conven
 
 
 ## Install
-```bash
-composer require voxgig-sdk/abdo-store
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/abdo-store-sdk/releases](https://github.com/voxgig-sdk/abdo-store-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -26,16 +27,19 @@ loading a specific record.
 require_once 'abdostore_sdk.php';
 
 $client = new AbdoStoreSDK([
-    "apikey" => getenv("ABDO-STORE_APIKEY"),
+    "apikey" => getenv("ABDO_STORE_APIKEY"),
 ]);
 ```
 
-### 3. Load a account
+### 3. Load an account
 
 ```php
-[$result, $err] = $client->Account()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->account()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 
@@ -46,28 +50,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = AbdoStoreSDK::test();
 
-[$result, $err] = $client->AbdoStore()->load(["id" => "test01"]);
+$result = $client->account()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -115,8 +122,8 @@ $client = new AbdoStoreSDK([
 Create a `.env.local` file at the project root:
 
 ```
-ABDO-STORE_TEST_LIVE=TRUE
-ABDO-STORE_APIKEY=<your-key>
+ABDO_STORE_TEST_LIVE=TRUE
+ABDO_STORE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -187,8 +194,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -253,7 +264,7 @@ API path: `/api/services`
 
 ### Account
 
-Create an instance: `const account = client.Account()`
+Create an instance: `const account = client.account`
 
 #### Operations
 
@@ -272,13 +283,13 @@ Create an instance: `const account = client.Account()`
 #### Example: Load
 
 ```ts
-const account = await client.Account().load({ id: 'account_id' })
+const account = await client.account.load({ id: 'account_id' })
 ```
 
 
 ### Order
 
-Create an instance: `const order = client.Order()`
+Create an instance: `const order = client.order`
 
 #### Operations
 
@@ -303,13 +314,13 @@ Create an instance: `const order = client.Order()`
 #### Example: Load
 
 ```ts
-const order = await client.Order().load({ id: 'order_id' })
+const order = await client.order.load({ id: 'order_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const order = await client.Order().create({
+const order = await client.order.create({
   link: /* `$STRING` */,
   quantity: /* `$INTEGER` */,
   service_id: /* `$INTEGER` */,
@@ -319,7 +330,7 @@ const order = await client.Order().create({
 
 ### Service
 
-Create an instance: `const service = client.Service()`
+Create an instance: `const service = client.service`
 
 #### Operations
 
@@ -342,7 +353,7 @@ Create an instance: `const service = client.Service()`
 #### Example: List
 
 ```ts
-const services = await client.Service().list()
+const services = await client.service.list()
 ```
 
 
@@ -417,11 +428,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$account = $client->account();
+$account->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $account->dataGet() now returns the loaded account data
+// $account->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -62,9 +62,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -77,11 +77,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -89,7 +89,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## AccountEntity
 
 ```python
-account = client.Account()
+account = client.account
 ```
 
 ### Fields
@@ -102,12 +102,12 @@ account = client.Account()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Account().load({"id": "account_id"})
+result = client.account.load({"id": "account_id"})
 ```
 
 ### Common Methods
@@ -142,7 +142,7 @@ Return the entity name.
 ## OrderEntity
 
 ```python
-order = client.Order()
+order = client.order
 ```
 
 ### Fields
@@ -160,24 +160,24 @@ order = client.Order()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Order().create({
+result = client.order.create({
     "link": # `$STRING`,
     "quantity": # `$INTEGER`,
     "service_id": # `$INTEGER`,
 })
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Order().load({"id": "order_id"})
+result = client.order.load({"id": "order_id"})
 ```
 
 ### Common Methods
@@ -212,7 +212,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```python
-service = client.Service()
+service = client.service
 ```
 
 ### Fields
@@ -229,12 +229,12 @@ service = client.Service()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Service().list({})
+results = client.service.list({})
 ```
 
 ### Common Methods

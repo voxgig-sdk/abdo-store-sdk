@@ -180,6 +180,7 @@ func MakeConfig() map[string]any {
 											"orig": "order_id",
 											"reqd": true,
 											"type": "`$INTEGER`",
+											"index$": 0,
 										},
 									},
 								},

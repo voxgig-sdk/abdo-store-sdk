@@ -181,6 +181,7 @@ module AbdoStoreConfig
                         "orig" => "order_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
+                        "index$" => 0,
                       },
                     ],
                   },

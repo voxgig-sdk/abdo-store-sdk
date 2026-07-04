@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Order,
+  OrderLoadMatch,
+  OrderCreateData,
+} from '../AbdoStoreTypes'
 
 // TODO: needs Entity superclass
-class OrderEntity extends AbdoStoreEntityBase {
+class OrderEntity extends AbdoStoreEntityBase<Order> {
 
   constructor(client: AbdoStoreSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class OrderEntity extends AbdoStoreEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: OrderLoadMatch, ctrl?: Control): Promise<Order> {
 
     const utility = this._utility
 
@@ -136,7 +141,9 @@ class OrderEntity extends AbdoStoreEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Order> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
@@ -144,7 +151,7 @@ class OrderEntity extends AbdoStoreEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: OrderCreateData, ctrl?: Control): Promise<Order> {
 
     const utility = this._utility
     const {
@@ -243,7 +250,9 @@ class OrderEntity extends AbdoStoreEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Order> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

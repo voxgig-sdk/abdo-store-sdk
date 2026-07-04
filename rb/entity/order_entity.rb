@@ -45,6 +45,7 @@ class OrderEntity
     end
   end
 
+  # @return [Order, Hash] the current Order data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class OrderEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Order fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Order.
+  #
+  # @param reqmatch [OrderLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Order, Hash] the loaded Order; raises AbdoStoreError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -88,6 +95,11 @@ class OrderEntity
   
 
   
+  # Create a new Order.
+  #
+  # @param reqdata [OrderCreateData, Hash, nil] body data
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Order, Hash] the created Order; raises AbdoStoreError on failure
   def create(reqdata, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

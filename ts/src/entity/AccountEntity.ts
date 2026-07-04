@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Account,
+  AccountLoadMatch,
+} from '../AbdoStoreTypes'
 
 // TODO: needs Entity superclass
-class AccountEntity extends AbdoStoreEntityBase {
+class AccountEntity extends AbdoStoreEntityBase<Account> {
 
   constructor(client: AbdoStoreSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class AccountEntity extends AbdoStoreEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: AccountLoadMatch, ctrl?: Control): Promise<Account> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class AccountEntity extends AbdoStoreEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Account> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

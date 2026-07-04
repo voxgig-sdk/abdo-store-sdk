@@ -45,6 +45,7 @@ class ServiceEntity
     end
   end
 
+  # @return [Service, Hash] the current Service data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class ServiceEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Service fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class ServiceEntity
   
 
   
+  # List Service items matching the given filter.
+  #
+  # @param reqmatch [ServiceListMatch, Hash, nil] match filter (any subset of Service fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Service>, Array] the matching Service items; raises AbdoStoreError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

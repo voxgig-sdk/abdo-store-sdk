@@ -36,15 +36,13 @@ class OrderEntityTest < Minitest::Test
     order_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.order"), "order_ref01"))
 
-    order_ref01_data_result, err = order_ref01_ent.create(order_ref01_data, nil)
-    assert_nil err
+    order_ref01_data_result = order_ref01_ent.create(order_ref01_data, nil)
     order_ref01_data = Helpers.to_map(order_ref01_data_result)
     assert !order_ref01_data.nil?
 
     # LOAD
     order_ref01_match_dt0 = {}
-    order_ref01_data_dt0_loaded, err = order_ref01_ent.load(order_ref01_match_dt0, nil)
-    assert_nil err
+    order_ref01_data_dt0_loaded = order_ref01_ent.load(order_ref01_match_dt0, nil)
     assert !order_ref01_data_dt0_loaded.nil?
 
   end

@@ -43,15 +43,13 @@ class OrderEntityTest extends TestCase
         $order_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.order"), "order_ref01"));
 
-        [$order_ref01_data_result, $err] = $order_ref01_ent->create($order_ref01_data, null);
-        $this->assertNull($err);
+        $order_ref01_data_result = $order_ref01_ent->create($order_ref01_data, null);
         $order_ref01_data = Helpers::to_map($order_ref01_data_result);
         $this->assertNotNull($order_ref01_data);
 
         // LOAD
         $order_ref01_match_dt0 = [];
-        [$order_ref01_data_dt0_loaded, $err] = $order_ref01_ent->load($order_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $order_ref01_data_dt0_loaded = $order_ref01_ent->load($order_ref01_match_dt0, null);
         $this->assertNotNull($order_ref01_data_dt0_loaded);
 
     }

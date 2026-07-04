@@ -9,11 +9,9 @@ The Python SDK for the AbdoStore API — an entity-oriented client following Pyt
 
 
 ## Install
-```bash
-pip install voxgig-sdk-abdo-store
-```
-
-Or install from source:
+This package is not yet published to PyPI. Install it from the GitHub
+release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/abdo-store-sdk/releases)) or
+from a source checkout:
 
 ```bash
 pip install -e .
@@ -32,17 +30,18 @@ import os
 from abdostore_sdk import AbdoStoreSDK
 
 client = AbdoStoreSDK({
-    "apikey": os.environ.get("ABDO-STORE_APIKEY"),
+    "apikey": os.environ.get("ABDO_STORE_APIKEY"),
 })
 ```
 
-### 3. Load a account
+### 3. Load an account
 
 ```python
-result, err = client.Account().load({"id": "example_id"})
-if err:
-    raise Exception(err)
-print(result)
+try:
+    result = client.account.load({"id": "example_id"})
+    print(result)
+except Exception as err:
+    print(f"load failed: {err}")
 ```
 
 
@@ -53,29 +52,28 @@ print(result)
 For endpoints not covered by entity methods:
 
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
+else:
+    print(result["err"])     # error value
 ```
 
 ### Prepare a request without sending it
 
 ```python
-fetchdef, err = client.prepare({
+# prepare() returns the fetch definition and raises on error.
+fetchdef = client.prepare({
     "path": "/api/resource/{id}",
     "method": "DELETE",
     "params": {"id": "example"},
 })
-if err:
-    raise Exception(err)
 
 print(fetchdef["url"])
 print(fetchdef["method"])
@@ -89,7 +87,7 @@ Create a mock client for unit testing — no server required:
 ```python
 client = AbdoStoreSDK.test()
 
-result, err = client.AbdoStore().load({"id": "test01"})
+result = client.account.load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -119,8 +117,8 @@ client = AbdoStoreSDK({
 Create a `.env.local` file at the project root:
 
 ```
-ABDO-STORE_TEST_LIVE=TRUE
-ABDO-STORE_APIKEY=<your-key>
+ABDO_STORE_TEST_LIVE=TRUE
+ABDO_STORE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -166,8 +164,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | --- | --- | --- |
 | `options_map` | `() -> dict` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> (dict, err)` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> (dict, err)` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `Account` | `(data) -> AccountEntity` | Create a Account entity instance. |
 | `Order` | `(data) -> OrderEntity` | Create a Order entity instance. |
 | `Service` | `(data) -> ServiceEntity` | Create a Service entity instance. |
@@ -178,11 +176,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> (any, err)` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> (any, err)` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> (any, err)` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> (any, err)` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> (any, err)` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -192,8 +190,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`dict` with these keys:
+Entity operations return the bare result data (a `dict` for single-entity
+ops, a `list` for `list`) and raise on error. Wrap calls in
+`try`/`except` to handle failures.
+
+The `direct()` escape hatch never raises — it returns a result `dict`
+you branch on via `result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -258,7 +260,7 @@ API path: `/api/services`
 
 ### Account
 
-Create an instance: `const account = client.Account()`
+Create an instance: `const account = client.account`
 
 #### Operations
 
@@ -277,13 +279,13 @@ Create an instance: `const account = client.Account()`
 #### Example: Load
 
 ```ts
-const account = await client.Account().load({ id: 'account_id' })
+const account = await client.account.load({ id: 'account_id' })
 ```
 
 
 ### Order
 
-Create an instance: `const order = client.Order()`
+Create an instance: `const order = client.order`
 
 #### Operations
 
@@ -308,13 +310,13 @@ Create an instance: `const order = client.Order()`
 #### Example: Load
 
 ```ts
-const order = await client.Order().load({ id: 'order_id' })
+const order = await client.order.load({ id: 'order_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const order = await client.Order().create({
+const order = await client.order.create({
   link: /* `$STRING` */,
   quantity: /* `$INTEGER` */,
   service_id: /* `$INTEGER` */,
@@ -324,7 +326,7 @@ const order = await client.Order().create({
 
 ### Service
 
-Create an instance: `const service = client.Service()`
+Create an instance: `const service = client.service`
 
 #### Operations
 
@@ -347,7 +349,7 @@ Create an instance: `const service = client.Service()`
 #### Example: List
 
 ```ts
-const services = await client.Service().list()
+const services = await client.service.list()
 ```
 
 
@@ -421,11 +423,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-moon = client.Moon()
-moon.load({"planet_id": "earth", "id": "luna"})
+account = client.account
+account.load({"id": "example_id"})
 
-# moon.data_get() now returns the loaded moon data
-# moon.match_get() returns the last match criteria
+# account.data_get() now returns the loaded account data
+# account.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

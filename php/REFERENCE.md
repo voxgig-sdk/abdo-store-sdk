@@ -64,7 +64,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -78,11 +81,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -90,7 +94,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## AccountEntity
 
 ```php
-$account = $client->Account();
+$account = $client->account();
 ```
 
 ### Fields
@@ -103,12 +107,12 @@ $account = $client->Account();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Account()->load(["id" => "account_id"]);
+$result = $client->account()->load(["id" => "account_id"]);
 ```
 
 ### Common Methods
@@ -144,7 +148,7 @@ Return the entity name.
 ## OrderEntity
 
 ```php
-$order = $client->Order();
+$order = $client->order();
 ```
 
 ### Fields
@@ -162,24 +166,24 @@ $order = $client->Order();
 
 ### Operations
 
-#### `create(array $reqdata, ?array $ctrl = null): array`
+#### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Throws on error.
 
 ```php
-[$result, $err] = $client->Order()->create([
+$result = $client->order()->create([
   "link" => /* `$STRING` */,
   "quantity" => /* `$INTEGER` */,
   "service_id" => /* `$INTEGER` */,
 ]);
 ```
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Order()->load(["id" => "order_id"]);
+$result = $client->order()->load(["id" => "order_id"]);
 ```
 
 ### Common Methods
@@ -215,7 +219,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```php
-$service = $client->Service();
+$service = $client->service();
 ```
 
 ### Fields
@@ -232,12 +236,12 @@ $service = $client->Service();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Service()->list([]);
+$results = $client->service()->list([]);
 ```
 
 ### Common Methods

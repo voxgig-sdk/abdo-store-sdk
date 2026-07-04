@@ -49,8 +49,7 @@ class TestAccountEntity:
         # LOAD
         account_ref01_ent = client.Account(None)
         account_ref01_match_dt0 = {}
-        account_ref01_data_dt0_loaded, err = account_ref01_ent.load(account_ref01_match_dt0, None)
-        assert err is None
+        account_ref01_data_dt0_loaded = account_ref01_ent.load(account_ref01_match_dt0, None)
         assert account_ref01_data_dt0_loaded is not None
 
 

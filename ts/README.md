@@ -9,9 +9,12 @@ The TypeScript SDK for the AbdoStore API — a type-safe, entity-oriented client
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/abdo-store
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/abdo-store-sdk/releases](https://github.com/voxgig-sdk/abdo-store-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { AbdoStoreSDK } from 'abdo-store'
+import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store'
 
 const client = new AbdoStoreSDK({
-  apikey: process.env.ABDO-STORE_APIKEY,
+  apikey: process.env.ABDO_STORE_APIKEY,
 })
 ```
 
-### 3. Load a account
+### 3. Load an account
 
 ```ts
-const result = await client.Account().load({ id: 'example_id' })
+const result = await client.account.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AbdoStoreSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.account.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -96,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.account
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,8 +136,8 @@ const client = new AbdoStoreSDK({
 Create a `.env.local` file at the project root:
 
 ```
-ABDO-STORE_TEST_LIVE=TRUE
-ABDO-STORE_APIKEY=<your-key>
+ABDO_STORE_TEST_LIVE=TRUE
+ABDO_STORE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -303,7 +306,7 @@ API path: `/api/services`
 
 ### Account
 
-Create an instance: `const account = client.Account()`
+Create an instance: `const account = client.account`
 
 #### Operations
 
@@ -322,13 +325,13 @@ Create an instance: `const account = client.Account()`
 #### Example: Load
 
 ```ts
-const account = await client.Account().load({ id: 'account_id' })
+const account = await client.account.load({ id: 'account_id' })
 ```
 
 
 ### Order
 
-Create an instance: `const order = client.Order()`
+Create an instance: `const order = client.order`
 
 #### Operations
 
@@ -353,13 +356,13 @@ Create an instance: `const order = client.Order()`
 #### Example: Load
 
 ```ts
-const order = await client.Order().load({ id: 'order_id' })
+const order = await client.order.load({ id: 'order_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const order = await client.Order().create({
+const order = await client.order.create({
   link: /* `$STRING` */,
   quantity: /* `$INTEGER` */,
   service_id: /* `$INTEGER` */,
@@ -369,7 +372,7 @@ const order = await client.Order().create({
 
 ### Service
 
-Create an instance: `const service = client.Service()`
+Create an instance: `const service = client.service`
 
 #### Operations
 
@@ -392,7 +395,7 @@ Create an instance: `const service = client.Service()`
 #### Example: List
 
 ```ts
-const services = await client.Service().list()
+const services = await client.service.list()
 ```
 
 
@@ -453,7 +456,7 @@ abdo-store/
 Import the SDK from the package root:
 
 ```ts
-import { AbdoStoreSDK } from 'abdo-store'
+import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store'
 ```
 
 ### Entity state
@@ -463,11 +466,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const account = client.account
+await account.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// account.data() now returns the loaded account data
+// account.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

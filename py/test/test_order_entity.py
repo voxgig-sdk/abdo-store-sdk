@@ -44,15 +44,12 @@ class TestOrderEntity:
         order_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.order"), "order_ref01"))
 
-        order_ref01_data_result, err = order_ref01_ent.create(order_ref01_data, None)
-        assert err is None
-        order_ref01_data = helpers.to_map(order_ref01_data_result)
+        order_ref01_data = helpers.to_map(order_ref01_ent.create(order_ref01_data, None))
         assert order_ref01_data is not None
 
         # LOAD
         order_ref01_match_dt0 = {}
-        order_ref01_data_dt0_loaded, err = order_ref01_ent.load(order_ref01_match_dt0, None)
-        assert err is None
+        order_ref01_data_dt0_loaded = order_ref01_ent.load(order_ref01_match_dt0, None)
         assert order_ref01_data_dt0_loaded is not None
 
 

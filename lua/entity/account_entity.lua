@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch AccountLoadMatch
+---@param ctrl? table
+---@return Account
+---@return string? err
 function AccountEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

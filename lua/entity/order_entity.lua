@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch OrderLoadMatch
+---@param ctrl? table
+---@return Order
+---@return string? err
 function OrderEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -106,6 +110,10 @@ end
 
 
 
+---@param reqdata OrderCreateData
+---@param ctrl? table
+---@return Order
+---@return string? err
 function OrderEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -42,8 +42,7 @@ class AccountEntityTest < Minitest::Test
     # LOAD
     account_ref01_ent = client.Account(nil)
     account_ref01_match_dt0 = {}
-    account_ref01_data_dt0_loaded, err = account_ref01_ent.load(account_ref01_match_dt0, nil)
-    assert_nil err
+    account_ref01_data_dt0_loaded = account_ref01_ent.load(account_ref01_match_dt0, nil)
     assert !account_ref01_data_dt0_loaded.nil?
 
   end

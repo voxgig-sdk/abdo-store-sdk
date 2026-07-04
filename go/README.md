@@ -10,14 +10,18 @@ The Golang SDK for the AbdoStore API — an entity-oriented client using standar
 
 ## Install
 ```bash
-go get github.com/voxgig-sdk/abdo-store-sdk/go
+go get github.com/voxgig-sdk/abdo-store-sdk/go@latest
 ```
 
-If the module is not yet published to a registry, use a `replace` directive
-in your `go.mod` to point to a local checkout:
+The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
+release tag — see [Releases](https://github.com/voxgig-sdk/abdo-store-sdk/releases) for the available versions.
+
+To vendor from a local checkout instead, clone this repo alongside your
+project and add a `replace` directive pointing at the checked-out
+`go/` directory:
 
 ```bash
-go mod edit -replace github.com/voxgig-sdk/abdo-store-sdk/go=../path/to/github.com/voxgig-sdk/abdo-store-sdk/go
+go mod edit -replace github.com/voxgig-sdk/abdo-store-sdk/go=../abdo-store-sdk/go
 ```
 
 
@@ -41,11 +45,11 @@ import (
 
 func main() {
     client := sdk.NewAbdoStoreSDK(map[string]any{
-        "apikey": os.Getenv("ABDO-STORE_APIKEY"),
+        "apikey": os.Getenv("ABDO_STORE_APIKEY"),
     })
 ```
 
-### 3. Load a account
+### 3. Load an account
 
 ```go
     result, err = client.Account(nil).Load(
@@ -109,7 +113,7 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Planet(nil).Load(
+result, err := client.Account(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 // result contains mock response data
@@ -144,8 +148,8 @@ client := sdk.NewAbdoStoreSDK(map[string]any{
 Create a `.env.local` file at the project root:
 
 ```
-ABDO-STORE_TEST_LIVE=TRUE
-ABDO-STORE_APIKEY=<your-key>
+ABDO_STORE_TEST_LIVE=TRUE
+ABDO_STORE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -441,11 +445,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-moon := client.Moon(nil)
-moon.Load(map[string]any{"planet_id": "earth", "id": "luna"}, nil)
+account := client.Account(nil)
+account.Load(map[string]any{"id": "example_id"}, nil)
 
-// moon.Data() now returns the loaded moon data
-// moon.Match() returns the last match criteria
+// account.Data() now returns the loaded account data
+// account.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

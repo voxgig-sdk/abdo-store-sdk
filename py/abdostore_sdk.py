@@ -144,16 +144,23 @@ class AbdoStoreSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class AbdoStoreSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,25 +212,58 @@ class AbdoStoreSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def account(self):
+        """Idiomatic facade: client.account.list() / client.account.load({"id": ...})."""
+        from entity.account_entity import AccountEntity
+        cached = getattr(self, "_account", None)
+        if cached is None:
+            cached = AccountEntity(self, None)
+            self._account = cached
+        return cached
 
     def Account(self, data=None):
+        # Deprecated: use client.account instead.
         from entity.account_entity import AccountEntity
         return AccountEntity(self, data)
 
 
+    @property
+    def order(self):
+        """Idiomatic facade: client.order.list() / client.order.load({"id": ...})."""
+        from entity.order_entity import OrderEntity
+        cached = getattr(self, "_order", None)
+        if cached is None:
+            cached = OrderEntity(self, None)
+            self._order = cached
+        return cached
+
     def Order(self, data=None):
+        # Deprecated: use client.order instead.
         from entity.order_entity import OrderEntity
         return OrderEntity(self, data)
 
 
+    @property
+    def service(self):
+        """Idiomatic facade: client.service.list() / client.service.load({"id": ...})."""
+        from entity.service_entity import ServiceEntity
+        cached = getattr(self, "_service", None)
+        if cached is None:
+            cached = ServiceEntity(self, None)
+            self._service = cached
+        return cached
+
     def Service(self, data=None):
+        # Deprecated: use client.service instead.
         from entity.service_entity import ServiceEntity
         return ServiceEntity(self, data)
 
