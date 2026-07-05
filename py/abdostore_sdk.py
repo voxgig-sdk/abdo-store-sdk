@@ -221,19 +221,19 @@ class AbdoStoreSDK:
 
 
     def Account(self, data=None) -> "AccountEntity":
-        """Entity factory: client.Account().list({}) / client.Account().load({"id": ...})."""
+        """Entity factory: client.Account().list() / client.Account().load({"id": ...})."""
         from entity.account_entity import AccountEntity
         return AccountEntity(self, data)
 
 
     def Order(self, data=None) -> "OrderEntity":
-        """Entity factory: client.Order().list({}) / client.Order().load({"id": ...})."""
+        """Entity factory: client.Order().list() / client.Order().load({"id": ...})."""
         from entity.order_entity import OrderEntity
         return OrderEntity(self, data)
 
 
     def Service(self, data=None) -> "ServiceEntity":
-        """Entity factory: client.Service().list({}) / client.Service().load({"id": ...})."""
+        """Entity factory: client.Service().list() / client.Service().load({"id": ...})."""
         from entity.service_entity import ServiceEntity
         return ServiceEntity(self, data)
 

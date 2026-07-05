@@ -15,8 +15,7 @@ type Account struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// AccountLoadMatch mirrors the account fields as an all-optional match
-// filter (Go analog of Partial<Account>).
+// AccountLoadMatch is the typed request payload for Account.LoadTyped.
 type AccountLoadMatch struct {
 	Balance *float64 `json:"balance,omitempty"`
 	Currency *string `json:"currency,omitempty"`
@@ -40,16 +39,15 @@ type OrderLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// OrderCreateData mirrors the order fields as an all-optional match
-// filter (Go analog of Partial<Order>).
+// OrderCreateData is the typed request payload for Order.CreateTyped.
 type OrderCreateData struct {
 	Charge *float64 `json:"charge,omitempty"`
 	Comment *string `json:"comment,omitempty"`
-	Link *string `json:"link,omitempty"`
+	Link string `json:"link"`
 	Order *map[string]any `json:"order,omitempty"`
 	OrderId *int `json:"order_id,omitempty"`
-	Quantity *int `json:"quantity,omitempty"`
-	ServiceId *int `json:"service_id,omitempty"`
+	Quantity int `json:"quantity"`
+	ServiceId int `json:"service_id"`
 	Status *string `json:"status,omitempty"`
 }
 
@@ -64,8 +62,7 @@ type Service struct {
 	Price *float64 `json:"price,omitempty"`
 }
 
-// ServiceListMatch mirrors the service fields as an all-optional match
-// filter (Go analog of Partial<Service>).
+// ServiceListMatch is the typed request payload for Service.ListTyped.
 type ServiceListMatch struct {
 	Category *string `json:"category,omitempty"`
 	Description *string `json:"description,omitempty"`

@@ -8,7 +8,7 @@ Complete API reference for the AbdoStore Python SDK.
 ### Constructor
 
 ```python
-from abdo-store_sdk import AbdoStoreSDK
+from abdostore_sdk import AbdoStoreSDK
 
 client = AbdoStoreSDK(options)
 ```
@@ -96,9 +96,9 @@ account = client.Account()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | ``$NUMBER`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `balance` | `float` | No |  |
+| `currency` | `str` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -107,7 +107,7 @@ account = client.Account()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Account().load({"id": "account_id"})
+result = client.Account().load()
 ```
 
 ### Common Methods
@@ -149,14 +149,14 @@ order = client.Order()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | ``$NUMBER`` | No |  |
-| `comment` | ``$STRING`` | No |  |
-| `link` | ``$STRING`` | Yes |  |
-| `order` | ``$OBJECT`` | No |  |
-| `order_id` | ``$INTEGER`` | No |  |
-| `quantity` | ``$INTEGER`` | Yes |  |
-| `service_id` | ``$INTEGER`` | Yes |  |
-| `status` | ``$STRING`` | No |  |
+| `charge` | `float` | No |  |
+| `comment` | `str` | No |  |
+| `link` | `str` | Yes |  |
+| `order` | `dict` | No |  |
+| `order_id` | `int` | No |  |
+| `quantity` | `int` | Yes |  |
+| `service_id` | `int` | Yes |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -166,9 +166,9 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Order().create({
-    "link": ...,  # `$STRING`
-    "quantity": ...,  # `$INTEGER`
-    "service_id": ...,  # `$INTEGER`
+    "link": "example",  # str
+    "quantity": 1,  # int
+    "service_id": 1,  # int
 })
 ```
 
@@ -219,22 +219,22 @@ service = client.Service()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `max` | ``$INTEGER`` | No |  |
-| `min` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `price` | ``$NUMBER`` | No |  |
+| `category` | `str` | No |  |
+| `description` | `str` | No |  |
+| `id` | `int` | No |  |
+| `max` | `int` | No |  |
+| `min` | `int` | No |  |
+| `name` | `str` | No |  |
+| `price` | `float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Service().list({})
+results = client.Service().list()
 for service in results:
     print(service)
 ```

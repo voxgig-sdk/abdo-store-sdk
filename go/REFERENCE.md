@@ -106,9 +106,9 @@ account := client.Account(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | ``$NUMBER`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `balance` | `float64` | No |  |
+| `currency` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -117,7 +117,7 @@ account := client.Account(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Account(nil).Load(map[string]any{"id": "account_id"}, nil)
+result, err := client.Account(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -154,14 +154,14 @@ order := client.Order(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | ``$NUMBER`` | No |  |
-| `comment` | ``$STRING`` | No |  |
-| `link` | ``$STRING`` | Yes |  |
-| `order` | ``$OBJECT`` | No |  |
-| `order_id` | ``$INTEGER`` | No |  |
-| `quantity` | ``$INTEGER`` | Yes |  |
-| `service_id` | ``$INTEGER`` | Yes |  |
-| `status` | ``$STRING`` | No |  |
+| `charge` | `float64` | No |  |
+| `comment` | `string` | No |  |
+| `link` | `string` | Yes |  |
+| `order` | `map[string]any` | No |  |
+| `order_id` | `int` | No |  |
+| `quantity` | `int` | Yes |  |
+| `service_id` | `int` | Yes |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -171,9 +171,9 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Order(nil).Create(map[string]any{
-    "link": /* `$STRING` */,
-    "quantity": /* `$INTEGER` */,
-    "service_id": /* `$INTEGER` */,
+    "link": /* string */,
+    "quantity": /* int */,
+    "service_id": /* int */,
 }, nil)
 ```
 
@@ -219,13 +219,13 @@ service := client.Service(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `max` | ``$INTEGER`` | No |  |
-| `min` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `price` | ``$NUMBER`` | No |  |
+| `category` | `string` | No |  |
+| `description` | `string` | No |  |
+| `id` | `int` | No |  |
+| `max` | `int` | No |  |
+| `min` | `int` | No |  |
+| `name` | `string` | No |  |
+| `price` | `float64` | No |  |
 
 ### Operations
 

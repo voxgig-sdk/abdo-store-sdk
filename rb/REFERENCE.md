@@ -8,7 +8,7 @@ Complete API reference for the AbdoStore Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'abdo-store_sdk'
+require_relative 'AbdoStore_sdk'
 
 client = AbdoStoreSDK.new(options)
 ```
@@ -102,9 +102,9 @@ account = client.Account
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | ``$NUMBER`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `balance` | `Float` | No |  |
+| `currency` | `String` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -113,7 +113,7 @@ account = client.Account
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Account.load({ "id" => "account_id" })
+result = client.Account.load()
 ```
 
 ### Common Methods
@@ -156,14 +156,14 @@ order = client.Order
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | ``$NUMBER`` | No |  |
-| `comment` | ``$STRING`` | No |  |
-| `link` | ``$STRING`` | Yes |  |
-| `order` | ``$OBJECT`` | No |  |
-| `order_id` | ``$INTEGER`` | No |  |
-| `quantity` | ``$INTEGER`` | Yes |  |
-| `service_id` | ``$INTEGER`` | Yes |  |
-| `status` | ``$STRING`` | No |  |
+| `charge` | `Float` | No |  |
+| `comment` | `String` | No |  |
+| `link` | `String` | Yes |  |
+| `order` | `Hash` | No |  |
+| `order_id` | `Integer` | No |  |
+| `quantity` | `Integer` | Yes |  |
+| `service_id` | `Integer` | Yes |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -173,9 +173,9 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Order.create({
-  "link" => # `$STRING`,
-  "quantity" => # `$INTEGER`,
-  "service_id" => # `$INTEGER`,
+  "link" => "example", # String
+  "quantity" => 1, # Integer
+  "service_id" => 1, # Integer
 })
 ```
 
@@ -227,22 +227,22 @@ service = client.Service
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `max` | ``$INTEGER`` | No |  |
-| `min` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `price` | ``$NUMBER`` | No |  |
+| `category` | `String` | No |  |
+| `description` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `max` | `Integer` | No |  |
+| `min` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `price` | `Float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Service.list(nil)
+results = client.Service.list
 ```
 
 ### Common Methods

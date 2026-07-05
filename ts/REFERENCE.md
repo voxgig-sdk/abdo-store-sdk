@@ -141,9 +141,9 @@ const account = client.Account()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | ``$NUMBER`` | No |  |
-| `currency` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `balance` | `number` | No |  |
+| `currency` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -152,7 +152,7 @@ const account = client.Account()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Account().load({ id: 'account_id' })
+const result = await client.Account().load()
 ```
 
 ### Common Methods
@@ -193,14 +193,14 @@ const order = client.Order()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | ``$NUMBER`` | No |  |
-| `comment` | ``$STRING`` | No |  |
-| `link` | ``$STRING`` | Yes |  |
-| `order` | ``$OBJECT`` | No |  |
-| `order_id` | ``$INTEGER`` | No |  |
-| `quantity` | ``$INTEGER`` | Yes |  |
-| `service_id` | ``$INTEGER`` | Yes |  |
-| `status` | ``$STRING`` | No |  |
+| `charge` | `number` | No |  |
+| `comment` | `string` | No |  |
+| `link` | `string` | Yes |  |
+| `order` | `Record<string, any>` | No |  |
+| `order_id` | `number` | No |  |
+| `quantity` | `number` | Yes |  |
+| `service_id` | `number` | Yes |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -210,9 +210,9 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Order().create({
-  link: /* `$STRING` */,
-  quantity: /* `$INTEGER` */,
-  service_id: /* `$INTEGER` */,
+  link: /* string */,
+  quantity: /* number */,
+  service_id: /* number */,
 })
 ```
 
@@ -221,7 +221,7 @@ const result = await client.Order().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Order().load({ id: 'order_id' })
+const result = await client.Order().load({ id: 1 })
 ```
 
 ### Common Methods
@@ -262,13 +262,13 @@ const service = client.Service()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `max` | ``$INTEGER`` | No |  |
-| `min` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `price` | ``$NUMBER`` | No |  |
+| `category` | `string` | No |  |
+| `description` | `string` | No |  |
+| `id` | `number` | No |  |
+| `max` | `number` | No |  |
+| `min` | `number` | No |  |
+| `name` | `string` | No |  |
+| `price` | `number` | No |  |
 
 ### Operations
 

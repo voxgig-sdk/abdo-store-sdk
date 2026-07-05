@@ -11,7 +11,11 @@ export interface Account {
   status?: string
 }
 
-export type AccountLoadMatch = Partial<Account>
+export interface AccountLoadMatch {
+  balance?: number
+  currency?: string
+  status?: string
+}
 
 export interface Order {
   charge?: number
@@ -28,7 +32,16 @@ export interface OrderLoadMatch {
   id: number
 }
 
-export type OrderCreateData = Partial<Order>
+export interface OrderCreateData {
+  charge?: number
+  comment?: string
+  link: string
+  order?: Record<string, any>
+  order_id?: number
+  quantity: number
+  service_id: number
+  status?: string
+}
 
 export interface Service {
   category?: string
@@ -40,5 +53,13 @@ export interface Service {
   price?: number
 }
 
-export type ServiceListMatch = Partial<Service>
+export interface ServiceListMatch {
+  category?: string
+  description?: string
+  id?: number
+  max?: number
+  min?: number
+  name?: string
+  price?: number
+}
 

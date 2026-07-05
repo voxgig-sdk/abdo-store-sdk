@@ -20,7 +20,7 @@ class Account
     public ?string $status = null;
 }
 
-/** Match filter for Account#load (any subset of Account fields). */
+/** Request payload for Account#load. */
 class AccountLoadMatch
 {
     public ?float $balance = null;
@@ -47,16 +47,16 @@ class OrderLoadMatch
     public int $id;
 }
 
-/** Match filter for Order#create (any subset of Order fields). */
+/** Request payload for Order#create. */
 class OrderCreateData
 {
     public ?float $charge = null;
     public ?string $comment = null;
-    public ?string $link = null;
+    public string $link;
     public ?array $order = null;
     public ?int $order_id = null;
-    public ?int $quantity = null;
-    public ?int $service_id = null;
+    public int $quantity;
+    public int $service_id;
     public ?string $status = null;
 }
 
@@ -72,7 +72,7 @@ class Service
     public ?float $price = null;
 }
 
-/** Match filter for Service#list (any subset of Service fields). */
+/** Request payload for Service#list. */
 class ServiceListMatch
 {
     public ?string $category = null;

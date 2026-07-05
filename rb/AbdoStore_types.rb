@@ -25,7 +25,7 @@ Account = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Account#load (any subset of Account fields).
+# Request payload for Account#load.
 #
 # @!attribute [rw] balance
 #   @return [Float, nil]
@@ -88,7 +88,7 @@ OrderLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Order#create (any subset of Order fields).
+# Request payload for Order#create.
 #
 # @!attribute [rw] charge
 #   @return [Float, nil]
@@ -97,7 +97,7 @@ OrderLoadMatch = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] link
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] order
 #   @return [Hash, nil]
@@ -106,10 +106,10 @@ OrderLoadMatch = Struct.new(
 #   @return [Integer, nil]
 #
 # @!attribute [rw] quantity
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] service_id
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] status
 #   @return [String, nil]
@@ -158,7 +158,7 @@ Service = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Service#list (any subset of Service fields).
+# Request payload for Service#list.
 #
 # @!attribute [rw] category
 #   @return [String, nil]
