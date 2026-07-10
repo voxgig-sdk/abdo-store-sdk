@@ -342,14 +342,14 @@ Create an instance: `order = client.Order`
 
 ```ruby
 # load returns the bare Order record (raises on error).
-order = client.Order.load({ "id" => "order_id" })
+order = client.Order.load({ "id" => 1 })
 ```
 
 #### Example: Create
 
 ```ruby
 order = client.Order.create({
-  "link" => "example", # String
+  "link" => "example_link", # String
   "quantity" => 1, # Integer
   "service_id" => 1, # Integer
 })

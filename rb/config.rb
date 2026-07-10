@@ -16,7 +16,7 @@ module AbdoStoreConfig
       "options" => {
         "base" => "https://abdoastore.store",
         "auth" => {
-          "prefix" => "Bearer",
+          "prefix" => "",
         },
         "headers" => {
           "content-type" => "application/json",

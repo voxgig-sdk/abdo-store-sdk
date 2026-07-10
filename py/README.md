@@ -347,14 +347,14 @@ Create an instance: `order = client.Order()`
 #### Example: Load
 
 ```python
-order = client.Order().load({"id": "order_id"})
+order = client.Order().load({"id": 1})
 ```
 
 #### Example: Create
 
 ```python
 order = client.Order().create({
-    "link": "example",  # str
+    "link": "example_link",  # str
     "quantity": 1,  # int
     "service_id": 1,  # int
 })

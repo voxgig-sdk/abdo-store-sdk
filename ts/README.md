@@ -401,9 +401,9 @@ const order = await client.Order().load({ id: 1 })
 
 ```ts
 const order = await client.Order().create({
-  link: /* string */,
-  quantity: /* number */,
-  service_id: /* number */,
+  link: 'example_link',
+  quantity: 1,
+  service_id: 1,
 })
 ```
 

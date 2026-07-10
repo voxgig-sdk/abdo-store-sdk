@@ -183,7 +183,7 @@ $result = $client->Order()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Order()->load(["id" => "order_id"]);
+$result = $client->Order()->load(["id" => 1]);
 ```
 
 ### Common Methods

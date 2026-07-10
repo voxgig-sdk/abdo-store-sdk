@@ -181,7 +181,7 @@ local result, err = client:Order():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Order():load({ id = "order_id" })
+local result, err = client:Order():load({ id = 1 })
 ```
 
 ### Common Methods

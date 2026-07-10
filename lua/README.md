@@ -332,16 +332,16 @@ Create an instance: `local order = client:Order(nil)`
 #### Example: Load
 
 ```lua
-local order, err = client:Order():load({ id = "order_id" })
+local order, err = client:Order():load({ id = 1 })
 ```
 
 #### Example: Create
 
 ```lua
 local order, err = client:Order():create({
-  link = nil, -- string
-  quantity = nil, -- number
-  service_id = nil, -- number
+  link = "example_link", -- string
+  quantity = 1, -- number
+  service_id = 1, -- number
 })
 ```
 

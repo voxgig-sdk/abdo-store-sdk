@@ -100,6 +100,7 @@ same parameters as `Direct()`.
 
 ```go
 account := client.Account(nil)
+fmt.Println(account.GetName()) // "account"
 ```
 
 ### Fields
@@ -118,6 +119,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Account(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -148,6 +153,7 @@ Return the entity name.
 
 ```go
 order := client.Order(nil)
+fmt.Println(order.GetName()) // "order"
 ```
 
 ### Fields
@@ -165,24 +171,32 @@ order := client.Order(nil)
 
 ### Operations
 
+#### `Load(reqmatch, ctrl map[string]any) (any, error)`
+
+Load a single entity matching the given criteria.
+
+```go
+result, err := client.Order(nil).Load(map[string]any{"id": 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
 Create a new entity with the given data.
 
 ```go
 result, err := client.Order(nil).Create(map[string]any{
-    "link": /* string */,
-    "quantity": /* int */,
-    "service_id": /* int */,
+    "link": "example_link",
+    "quantity": 1,
+    "service_id": 1,
 }, nil)
-```
-
-#### `Load(reqmatch, ctrl map[string]any) (any, error)`
-
-Load a single entity matching the given criteria.
-
-```go
-result, err := client.Order(nil).Load(map[string]any{"id": "order_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -213,6 +227,7 @@ Return the entity name.
 
 ```go
 service := client.Service(nil)
+fmt.Println(service.GetName()) // "service"
 ```
 
 ### Fields
@@ -235,6 +250,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Service(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods

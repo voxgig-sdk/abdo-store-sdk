@@ -352,7 +352,7 @@ Create an instance: `$order = $client->Order();`
 
 ```php
 // load() returns the bare Order record (throws on error).
-$order = $client->Order()->load(["id" => "order_id"]);
+$order = $client->Order()->load(["id" => 1]);
 ```
 
 #### Example: Create

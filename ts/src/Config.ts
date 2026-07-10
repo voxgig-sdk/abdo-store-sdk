@@ -39,7 +39,7 @@ class Config {
     base: 'https://abdoastore.store',
 
     auth: {
-      prefix: 'Bearer',
+      prefix: '',
     },
 
     headers: {

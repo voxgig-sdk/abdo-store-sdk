@@ -166,7 +166,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Order().create({
-    "link": "example",  # str
+    "link": "example_link",  # str
     "quantity": 1,  # int
     "service_id": 1,  # int
 })
@@ -177,7 +177,7 @@ result = client.Order().create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Order().load({"id": "order_id"})
+result = client.Order().load({"id": 1})
 ```
 
 ### Common Methods

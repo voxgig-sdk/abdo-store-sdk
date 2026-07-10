@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -481,14 +478,24 @@
           "url": "https://abdoastore.store/"
         },
         "description": "Abdo Store API offers a range of social media marketing services, providing users with access to tools for enhancing their online presence. It supports services like account management, balance loading, and order placement, all aimed at improving social media engagement. The API is designed for ease of use with robust customer support available 24/7.",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "header",
+          "name": "X-API-Key",
+          "prefix": "",
+          "scheme": "ApiKeyAuth",
+          "type": "apiKey"
+        },
         "servers": [
           {
             "description": "Production server",
             "url": "https://abdoastore.store"
           }
         ],
+        "summary": "Abdo Store API offers a range of social media marketing services, providing users with access to tools for enhancing their online presence.",
         "title": "Abdo Store API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://abdoastore.store"
       },
       "option": {},
       "target": {
@@ -541,6 +548,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -591,6 +601,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

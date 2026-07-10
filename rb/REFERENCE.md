@@ -173,7 +173,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Order.create({
-  "link" => "example", # String
+  "link" => "example_link", # String
   "quantity" => 1, # Integer
   "service_id" => 1, # Integer
 })
@@ -184,7 +184,7 @@ result = client.Order.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Order.load({ "id" => "order_id" })
+result = client.Order.load({ "id" => 1 })
 ```
 
 ### Common Methods

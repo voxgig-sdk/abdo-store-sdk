@@ -210,9 +210,9 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Order().create({
-  link: /* string */,
-  quantity: /* number */,
-  service_id: /* number */,
+  link: 'example_link',
+  quantity: 1,
+  service_id: 1,
 })
 ```
 

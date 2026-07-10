@@ -351,8 +351,8 @@ Create an instance: `order := client.Order(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -370,7 +370,7 @@ Create an instance: `order := client.Order(nil)`
 #### Example: Load
 
 ```go
-order, err := client.Order(nil).Load(map[string]any{"id": "order_id"}, nil)
+order, err := client.Order(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -381,10 +381,14 @@ fmt.Println(order) // the loaded record
 
 ```go
 result, err := client.Order(nil).Create(map[string]any{
-    "link": /* string */,
-    "quantity": /* int */,
-    "service_id": /* int */,
+    "link": "example_link",
+    "quantity": 1,
+    "service_id": 1,
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
