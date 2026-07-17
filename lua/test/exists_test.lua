@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- AbdoStore SDK exists test
 
 local sdk = require("abdo-store_sdk")
 
