@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import AbdoStoreControl
-from core.error import AbdoStoreError
-from core.result import AbdoStoreResult
-from core.spec import AbdoStoreSpec
+from abdostore_sdk.config import make_config
+from abdostore_sdk.features import _make_feature
+from abdostore_sdk.core.control import AbdoStoreControl
+from abdostore_sdk.core.error import AbdoStoreError
+from abdostore_sdk.core.result import AbdoStoreResult
+from abdostore_sdk.core.spec import AbdoStoreSpec
 
 
 # True when this SDK was generated with the named feature.

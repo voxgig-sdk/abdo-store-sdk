@@ -43,8 +43,8 @@ class AbdoStoreTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('ABDOSTORE_TEST_LIVE');
-        $override = self::getenv('ABDOSTORE_TEST_OVERRIDE');
+        $live = self::getenv('ABDO_STORE_TEST_LIVE');
+        $override = self::getenv('ABDO_STORE_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class AbdoStoreTestRunner
             }
         }
 
-        $explain = self::getenv('ABDOSTORE_TEST_EXPLAIN');
+        $explain = self::getenv('ABDO_STORE_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['ABDOSTORE_TEST_EXPLAIN'] = $explain;
+            $m['ABDO_STORE_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

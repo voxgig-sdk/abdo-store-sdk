@@ -55,10 +55,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const account = await client.Account().load()
-  console.log(account)
+  const services = await client.Service().list()
+  console.log(services)
 } catch (err) {
-  console.error('load failed:', err)
+  console.error('list failed:', err)
 }
 ```
 
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AbdoStoreSDK.test()
 
-const account = await client.Account().load()
-// account is a bare entity populated with mock response data
-console.log(account)
+const service = await client.Service().list()
+// service is the entity, populated with mock response data
+// — call service.data() for the record itself
+console.log(service)
 ```
 
 You can also use the instance method:
@@ -139,14 +140,14 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Account()
+const entity = client.Service()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -309,12 +310,13 @@ API path: `/api/balance`
 | Field | Description |
 | --- | --- |
 | `charge` |  |
-| `comment` |  |
+| `comments` |  |
 | `link` |  |
-| `order` |  |
 | `order_id` |  |
 | `quantity` |  |
+| `remains` |  |
 | `service_id` |  |
+| `start_count` |  |
 | `status` |  |
 
 Operations: create, load.
@@ -383,12 +385,13 @@ Create an instance: `const order = client.Order()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `charge` | `number` |  |
-| `comment` | `string` |  |
+| `comments` | `string` |  |
 | `link` | `string` |  |
-| `order` | `Record<string, any>` |  |
 | `order_id` | `number` |  |
 | `quantity` | `number` |  |
+| `remains` | `number` |  |
 | `service_id` | `number` |  |
+| `start_count` | `number` |  |
 | `status` | `string` |  |
 
 #### Example: Load
@@ -401,9 +404,6 @@ const order = await client.Order().load({ id: 1 })
 
 ```ts
 const order = await client.Order().create({
-  link: 'example_link',
-  quantity: 1,
-  service_id: 1,
 })
 ```
 
@@ -501,16 +501,16 @@ import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const account = client.Account()
-await account.load()
+const service = client.Service()
+await service.list()
 
-// account.data() now returns the account data from the last `load`
-// account.match() returns the last match criteria
+// service.data() now returns the service data from the last `list`
+// service.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

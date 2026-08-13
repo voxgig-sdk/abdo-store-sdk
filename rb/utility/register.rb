@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ AbdoStoreUtility.registrar = ->(u) {
   u.prepare_params = AbdoStoreUtilities::PrepareParams
   u.prepare_path = AbdoStoreUtilities::PreparePath
   u.prepare_query = AbdoStoreUtilities::PrepareQuery
+  u.graphql_body = AbdoStoreUtilities::GraphqlBody
+  u.graphql_errors = AbdoStoreUtilities::GraphqlErrors
   u.result_basic = AbdoStoreUtilities::ResultBasic
   u.result_body = AbdoStoreUtilities::ResultBody
   u.result_headers = AbdoStoreUtilities::ResultHeaders

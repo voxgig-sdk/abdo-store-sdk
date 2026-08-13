@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from abdostore_sdk.utility.voxgig_struct import voxgig_struct as vs
 from abdostore_sdk import AbdoStoreSDK
-from core import helpers
+from abdostore_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -36,7 +36,7 @@ class TestAccountEntity:
         # without an *_ENTID env override, those IDs hit the live API and 4xx.
         if setup.get("synthetic_only"):
             pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set ABDOSTORE_TEST_ACCOUNT_ENTID JSON to run live")
+                        "set ABDO_STORE_TEST_ACCOUNT_ENTID JSON to run live")
         client = setup["client"]
 
         # Bootstrap entity data from existing test data.
@@ -83,37 +83,37 @@ def _account_basic_setup(extra):
     # mode is on without a real override, the basic test runs against synthetic
     # IDs from the fixture and 4xx's. We surface this so the test can skip.
     _entid_env_raw = os.environ.get(
-        "ABDOSTORE_TEST_ACCOUNT_ENTID")
+        "ABDO_STORE_TEST_ACCOUNT_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")
 
     env = runner.env_override({
-        "ABDOSTORE_TEST_ACCOUNT_ENTID": idmap,
-        "ABDOSTORE_TEST_LIVE": "FALSE",
-        "ABDOSTORE_TEST_EXPLAIN": "FALSE",
-        "ABDOSTORE_APIKEY": "NONE",
+        "ABDO_STORE_TEST_ACCOUNT_ENTID": idmap,
+        "ABDO_STORE_TEST_LIVE": "FALSE",
+        "ABDO_STORE_TEST_EXPLAIN": "FALSE",
+        "ABDO_STORE_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
-        env.get("ABDOSTORE_TEST_ACCOUNT_ENTID"))
+        env.get("ABDO_STORE_TEST_ACCOUNT_ENTID"))
     if idmap_resolved is None:
         idmap_resolved = helpers.to_map(idmap)
 
-    if env.get("ABDOSTORE_TEST_LIVE") == "TRUE":
+    if env.get("ABDO_STORE_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("ABDOSTORE_APIKEY"),
+                "apikey": env.get("ABDO_STORE_APIKEY"),
             },
             extra or {},
         ])
         client = AbdoStoreSDK(helpers.to_map(merged_opts))
 
-    _live = env.get("ABDOSTORE_TEST_LIVE") == "TRUE"
+    _live = env.get("ABDO_STORE_TEST_LIVE") == "TRUE"
     return {
         "client": client,
         "data": entity_data,
         "idmap": idmap_resolved,
         "env": env,
-        "explain": env.get("ABDOSTORE_TEST_EXPLAIN") == "TRUE",
+        "explain": env.get("ABDO_STORE_TEST_EXPLAIN") == "TRUE",
         "live": _live,
         "synthetic_only": _live and not _idmap_overridden,
         "now": int(time.time() * 1000),

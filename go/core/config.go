@@ -60,6 +60,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api/balance",
 								"parts": []any{
@@ -74,7 +75,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -92,7 +92,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "comment",
+						"name": "comments",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
@@ -100,44 +100,69 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"active": true,
 						"name": "link",
-						"req": true,
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$STRING`",
+							},
+						},
+						"req": false,
 						"type": "`$STRING`",
 						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "order",
-						"req": false,
-						"type": "`$OBJECT`",
-						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
 						"name": "order_id",
 						"req": false,
 						"type": "`$INTEGER`",
-						"index$": 4,
+						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
 						"name": "quantity",
-						"req": true,
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$INTEGER`",
+							},
+						},
+						"req": false,
+						"type": "`$INTEGER`",
+						"index$": 4,
+					},
+					map[string]any{
+						"active": true,
+						"name": "remains",
+						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 5,
 					},
 					map[string]any{
 						"active": true,
 						"name": "service_id",
-						"req": true,
+						"op": map[string]any{
+							"create": map[string]any{
+								"req": true,
+								"type": "`$INTEGER`",
+							},
+						},
+						"req": false,
 						"type": "`$INTEGER`",
 						"index$": 6,
+					},
+					map[string]any{
+						"active": true,
+						"name": "start_count",
+						"req": false,
+						"type": "`$INTEGER`",
+						"index$": 7,
 					},
 					map[string]any{
 						"active": true,
 						"name": "status",
 						"req": false,
 						"type": "`$STRING`",
-						"index$": 7,
+						"index$": 8,
 					},
 				},
 				"name": "order",
@@ -149,6 +174,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/api/order",
 								"parts": []any{
@@ -163,7 +189,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 					"load": map[string]any{
 						"input": "data",
@@ -184,6 +209,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api/order/{order_id}",
 								"parts": []any{
@@ -208,7 +234,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -276,6 +301,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/api/services",
 								"parts": []any{
@@ -285,12 +311,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.services`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{

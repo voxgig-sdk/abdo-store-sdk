@@ -26,8 +26,8 @@ import {
 describe('ServiceEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when ABDOSTORE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('ABDOSTORE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when ABDO_STORE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('ABDO_STORE_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AbdoStoreSDK.test()
@@ -63,7 +63,7 @@ describe('ServiceEntity', async () => {
     const service_ref01_ent = client.Service()
     const service_ref01_match: any = {}
 
-    const service_ref01_list = await service_ref01_ent.list(service_ref01_match)
+    const service_ref01_list = (await service_ref01_ent.list(service_ref01_match)).map((e: any) => e.data())
 
 
   })

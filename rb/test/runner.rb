@@ -23,8 +23,8 @@ module AbdoStoreTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("ABDOSTORE_TEST_LIVE")
-    override = getenv("ABDOSTORE_TEST_OVERRIDE")
+    live = getenv("ABDO_STORE_TEST_LIVE")
+    override = getenv("ABDO_STORE_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module AbdoStoreTestRunner
       end
     end
 
-    explain = getenv("ABDOSTORE_TEST_EXPLAIN")
-    m["ABDOSTORE_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("ABDO_STORE_TEST_EXPLAIN")
+    m["ABDO_STORE_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

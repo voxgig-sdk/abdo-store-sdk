@@ -36,7 +36,7 @@ client = AbdoStoreSDK.new({
 
 ```ruby
 begin
-  # load returns the bare Account record (raises on error).
+  # load returns the ENTITY — call data_get for the Account record (raises on error).
   account = client.Account.load()
   puts account
 rescue => err
@@ -51,9 +51,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  account = client.Account.load()
+  services = client.Service.list()
 rescue => err
-  warn "load failed: #{err}"
+  warn "list failed: #{err}"
 end
 ```
 
@@ -119,9 +119,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = AbdoStoreSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-account = client.Account.load()
-puts account
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+service = client.Service.list()
+puts service
 ```
 
 ### Use a custom fetch function
@@ -255,12 +256,13 @@ API path: `/api/balance`
 | Field | Description |
 | --- | --- |
 | `charge` |  |
-| `comment` |  |
+| `comments` |  |
 | `link` |  |
-| `order` |  |
 | `order_id` |  |
 | `quantity` |  |
+| `remains` |  |
 | `service_id` |  |
+| `start_count` |  |
 | `status` |  |
 
 Operations: Create, Load.
@@ -309,7 +311,7 @@ Create an instance: `account = client.Account`
 #### Example: Load
 
 ```ruby
-# load returns the bare Account record (raises on error).
+# load returns the ENTITY — call data_get for the Account record (raises on error).
 account = client.Account.load()
 ```
 
@@ -330,18 +332,19 @@ Create an instance: `order = client.Order`
 | Field | Type | Description |
 | --- | --- | --- |
 | `charge` | `Float` |  |
-| `comment` | `String` |  |
+| `comments` | `String` |  |
 | `link` | `String` |  |
-| `order` | `Hash` |  |
 | `order_id` | `Integer` |  |
 | `quantity` | `Integer` |  |
+| `remains` | `Integer` |  |
 | `service_id` | `Integer` |  |
+| `start_count` | `Integer` |  |
 | `status` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Order record (raises on error).
+# load returns the ENTITY — call data_get for the Order record (raises on error).
 order = client.Order.load({ "id" => 1 })
 ```
 
@@ -349,9 +352,6 @@ order = client.Order.load({ "id" => 1 })
 
 ```ruby
 order = client.Order.create({
-  "link" => "example_link", # String
-  "quantity" => 1, # Integer
-  "service_id" => 1, # Integer
 })
 ```
 
@@ -458,15 +458,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-account = client.Account
-account.load()
+service = client.Service
+service.list()
 
-# account.data_get now returns the account data from the last load
-# account.match_get returns the last match criteria
+# service.data_get now returns the service data from the last list
+# service.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

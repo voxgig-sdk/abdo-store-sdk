@@ -157,13 +157,28 @@ order = client.Order
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `charge` | `Float` | No |  |
-| `comment` | `String` | No |  |
-| `link` | `String` | Yes |  |
-| `order` | `Hash` | No |  |
+| `comments` | `String` | No |  |
+| `link` | `String` | No |  |
 | `order_id` | `Integer` | No |  |
-| `quantity` | `Integer` | Yes |  |
-| `service_id` | `Integer` | Yes |  |
+| `quantity` | `Integer` | No |  |
+| `remains` | `Integer` | No |  |
+| `service_id` | `Integer` | No |  |
+| `start_count` | `Integer` | No |  |
 | `status` | `String` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create |
+| --- | --- | --- |
+| `charge` | - | - |
+| `comments` | - | - |
+| `link` | - | Yes |
+| `order_id` | - | - |
+| `quantity` | - | Yes |
+| `remains` | - | - |
+| `service_id` | - | Yes |
+| `start_count` | - | - |
+| `status` | - | - |
 
 ### Operations
 
@@ -173,9 +188,6 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Order.create({
-  "link" => "example_link", # String
-  "quantity" => 1, # Integer
-  "service_id" => 1, # Integer
 })
 ```
 

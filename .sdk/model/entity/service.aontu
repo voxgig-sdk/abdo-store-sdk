@@ -61,7 +61,7 @@ main: kit: entity: service: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.services`"
           }
         }
       ]

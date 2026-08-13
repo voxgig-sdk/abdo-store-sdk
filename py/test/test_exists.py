@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# AbdoStore SDK exists test
 
 import pytest
 from abdostore_sdk import AbdoStoreSDK

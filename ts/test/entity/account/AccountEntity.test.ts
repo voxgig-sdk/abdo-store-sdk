@@ -26,8 +26,8 @@ import {
 describe('AccountEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when ABDOSTORE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('ABDOSTORE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when ABDO_STORE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('ABDO_STORE_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AbdoStoreSDK.test()
@@ -62,7 +62,7 @@ describe('AccountEntity', async () => {
     // LOAD
     const account_ref01_ent = client.Account()
     const account_ref01_match_dt0: any = {}
-    const account_ref01_data_dt0 = await account_ref01_ent.load(account_ref01_match_dt0)
+    const account_ref01_data_dt0 = (await account_ref01_ent.load(account_ref01_match_dt0)).data()
     assert(null != account_ref01_data_dt0)
 
 

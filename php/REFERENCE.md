@@ -156,13 +156,28 @@ $order = $client->Order();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `charge` | `float` | No |  |
-| `comment` | `string` | No |  |
-| `link` | `string` | Yes |  |
-| `order` | `array` | No |  |
+| `comments` | `string` | No |  |
+| `link` | `string` | No |  |
 | `order_id` | `int` | No |  |
-| `quantity` | `int` | Yes |  |
-| `service_id` | `int` | Yes |  |
+| `quantity` | `int` | No |  |
+| `remains` | `int` | No |  |
+| `service_id` | `int` | No |  |
+| `start_count` | `int` | No |  |
 | `status` | `string` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create |
+| --- | --- | --- |
+| `charge` | - | - |
+| `comments` | - | - |
+| `link` | - | Yes |
+| `order_id` | - | - |
+| `quantity` | - | Yes |
+| `remains` | - | - |
+| `service_id` | - | Yes |
+| `start_count` | - | - |
+| `status` | - | - |
 
 ### Operations
 
@@ -172,9 +187,6 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Order()->create([
-  "link" => null, // string
-  "quantity" => null, // int
-  "service_id" => null, // int
 ]);
 ```
 

@@ -50,7 +50,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local account, err = client:Account():load()
+local services, err = client:Service():list()
 if err then error(err) end
 ```
 
@@ -108,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Account():load()
+local result, err = client:Service():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -247,12 +247,13 @@ API path: `/api/balance`
 | Field | Description |
 | --- | --- |
 | `charge` |  |
-| `comment` |  |
+| `comments` |  |
 | `link` |  |
-| `order` |  |
 | `order_id` |  |
 | `quantity` |  |
+| `remains` |  |
 | `service_id` |  |
+| `start_count` |  |
 | `status` |  |
 
 Operations: Create, Load.
@@ -321,12 +322,13 @@ Create an instance: `local order = client:Order(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `charge` | `number` |  |
-| `comment` | `string` |  |
+| `comments` | `string` |  |
 | `link` | `string` |  |
-| `order` | `table` |  |
 | `order_id` | `number` |  |
 | `quantity` | `number` |  |
+| `remains` | `number` |  |
 | `service_id` | `number` |  |
+| `start_count` | `number` |  |
 | `status` | `string` |  |
 
 #### Example: Load
@@ -339,9 +341,6 @@ local order, err = client:Order():load({ id = 1 })
 
 ```lua
 local order, err = client:Order():create({
-  link = "example_link", -- string
-  quantity = 1, -- number
-  service_id = 1, -- number
 })
 ```
 
@@ -447,15 +446,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local account = client:Account()
-account:load()
+local service = client:Service()
+service:list()
 
--- account:data_get() now returns the account data from the last load
--- account:match_get() returns the last match criteria
+-- service:data_get() now returns the service data from the last list
+-- service:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -2,36 +2,39 @@
   "existing": {
     "order": {
       "ORDER00": {
-        "charge": 80,
-        "comment": "s51",
-        "link": "s52",
-        "order": {},
+        "charge": 90,
+        "comments": "s5b",
+        "link": "s5c",
         "order_id": "ORDER01",
-        "quantity": "s55",
+        "quantity": "s5e",
+        "remains": "s5f",
         "service_id": "SERVICE01",
-        "status": "s57",
+        "start_count": "s61",
+        "status": "s62",
         "id": "ORDER00"
       },
       "ORDER01": {
-        "charge": 160,
-        "comment": "sa1",
-        "link": "sa2",
-        "order": {},
+        "charge": 180,
+        "comments": "sb5",
+        "link": "sb6",
         "order_id": "ORDER01",
-        "quantity": "sa5",
+        "quantity": "sb8",
+        "remains": "sb9",
         "service_id": "SERVICE01",
-        "status": "sa7",
+        "start_count": "sbb",
+        "status": "sbc",
         "id": "ORDER01"
       },
       "ORDER02": {
-        "charge": 240,
-        "comment": "sf1",
-        "link": "sf2",
-        "order": {},
+        "charge": 270,
+        "comments": "s10f",
+        "link": "s110",
         "order_id": "ORDER01",
-        "quantity": "sf5",
+        "quantity": "s112",
+        "remains": "s113",
         "service_id": "SERVICE01",
-        "status": "sf7",
+        "start_count": "s115",
+        "status": "s116",
         "id": "ORDER02"
       }
     }
@@ -39,14 +42,15 @@
   "new": {
     "order": {
       "order_ref01": {
-        "charge": 320,
-        "comment": "s141",
-        "link": "s142",
-        "order": {},
+        "charge": 360,
+        "comments": "s169",
+        "link": "s16a",
         "order_id": "ORDER01",
-        "quantity": "s145",
+        "quantity": "s16c",
+        "remains": "s16d",
         "service_id": "SERVICE01",
-        "status": "s147"
+        "start_count": "s16f",
+        "status": "s170"
       }
     }
   }

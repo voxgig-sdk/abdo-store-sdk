@@ -19,12 +19,13 @@ export interface AccountLoadMatch {
 
 export interface Order {
   charge?: number
-  comment?: string
-  link: string
-  order?: Record<string, any>
+  comments?: string
+  link?: string
   order_id?: number
-  quantity: number
-  service_id: number
+  quantity?: number
+  remains?: number
+  service_id?: number
+  start_count?: number
   status?: string
 }
 
@@ -34,12 +35,13 @@ export interface OrderLoadMatch {
 
 export interface OrderCreateData {
   charge?: number
-  comment?: string
-  link: string
-  order?: Record<string, any>
+  comments?: string
+  link?: string
   order_id?: number
-  quantity: number
-  service_id: number
+  quantity?: number
+  remains?: number
+  service_id?: number
+  start_count?: number
   status?: string
 }
 

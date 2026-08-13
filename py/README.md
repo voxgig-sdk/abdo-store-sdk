@@ -41,7 +41,7 @@ client = AbdoStoreSDK({
 
 ### 3. Load an account
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -58,10 +58,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    account = client.Account().load()
-    print(account)
+    services = client.Service().list()
+    print(services)
 except Exception as err:
-    print(f"load failed: {err}")
+    print(f"list failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = AbdoStoreSDK.test()
 
-# Entity ops return the bare record and raise on error.
-account = client.Account().load()
-# account contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+service = client.Service().list()
+# service contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -227,7 +228,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -262,12 +263,13 @@ API path: `/api/balance`
 | Field | Description |
 | --- | --- |
 | `charge` |  |
-| `comment` |  |
+| `comments` |  |
 | `link` |  |
-| `order` |  |
 | `order_id` |  |
 | `quantity` |  |
+| `remains` |  |
 | `service_id` |  |
+| `start_count` |  |
 | `status` |  |
 
 Operations: Create, Load.
@@ -336,12 +338,13 @@ Create an instance: `order = client.Order()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `charge` | `float` |  |
-| `comment` | `str` |  |
+| `comments` | `str` |  |
 | `link` | `str` |  |
-| `order` | `dict` |  |
 | `order_id` | `int` |  |
 | `quantity` | `int` |  |
+| `remains` | `int` |  |
 | `service_id` | `int` |  |
+| `start_count` | `int` |  |
 | `status` | `str` |  |
 
 #### Example: Load
@@ -354,9 +357,6 @@ order = client.Order().load({"id": 1})
 
 ```python
 order = client.Order().create({
-    "link": "example_link",  # str
-    "quantity": 1,  # int
-    "service_id": 1,  # int
 })
 ```
 
@@ -461,15 +461,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-account = client.Account()
-account.load()
+service = client.Service()
+service.list()
 
-# account.data_get() now returns the account data from the last load
-# account.match_get() returns the last match criteria
+# service.data_get() now returns the service data from the last list
+# service.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

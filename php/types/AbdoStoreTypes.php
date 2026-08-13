@@ -32,12 +32,13 @@ class AccountLoadMatch
 class Order
 {
     public ?float $charge = null;
-    public ?string $comment = null;
-    public string $link;
-    public ?array $order = null;
+    public ?string $comments = null;
+    public ?string $link = null;
     public ?int $order_id = null;
-    public int $quantity;
-    public int $service_id;
+    public ?int $quantity = null;
+    public ?int $remains = null;
+    public ?int $service_id = null;
+    public ?int $start_count = null;
     public ?string $status = null;
 }
 
@@ -51,12 +52,13 @@ class OrderLoadMatch
 class OrderCreateData
 {
     public ?float $charge = null;
-    public ?string $comment = null;
-    public string $link;
-    public ?array $order = null;
+    public ?string $comments = null;
+    public ?string $link = null;
     public ?int $order_id = null;
-    public int $quantity;
-    public int $service_id;
+    public ?int $quantity = null;
+    public ?int $remains = null;
+    public ?int $service_id = null;
+    public ?int $start_count = null;
     public ?string $status = null;
 }
 

@@ -36,9 +36,10 @@ func TestServiceDirect(t *testing.T) {
 			"params": map[string]any{},
 		})
 		if setup.live {
-			// Live mode is lenient: synthetic IDs frequently 4xx and the
-			// list-response shape varies wildly across public APIs. Skip
-			// rather than fail when the call doesn't return a usable list.
+			// Live-mode leniency is a model decision
+			// (main.kit.test.live.strict): synthetic IDs 4xx constantly
+			// against an arbitrary public API, so the default SKIPS here.
+			// A project that owns its test server sets strict and FAILS.
 			if err != nil {
 				t.Skipf("list call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -91,21 +92,21 @@ func serviceDirectSetup(mockres any) *serviceDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"ABDOSTORE_TEST_SERVICE_ENTID": map[string]any{},
-		"ABDOSTORE_TEST_LIVE":    "FALSE",
-		"ABDOSTORE_APIKEY":       "NONE",
+		"ABDO_STORE_TEST_SERVICE_ENTID": map[string]any{},
+		"ABDO_STORE_TEST_LIVE":    "FALSE",
+		"ABDO_STORE_APIKEY":       "NONE",
 	})
 
-	live := env["ABDOSTORE_TEST_LIVE"] == "TRUE"
+	live := env["ABDO_STORE_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["ABDOSTORE_APIKEY"],
+			"apikey": env["ABDO_STORE_APIKEY"],
 		}
 		client := sdk.NewAbdoStoreSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["ABDOSTORE_TEST_SERVICE_ENTID"]; ok {
+		if entidRaw, ok := env["ABDO_STORE_TEST_SERVICE_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

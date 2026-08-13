@@ -60,16 +60,16 @@ function account_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["ABDOSTORE_TEST_ACCOUNT_ENTID"] = {},
-    ["ABDOSTORE_TEST_LIVE"] = "FALSE",
-    ["ABDOSTORE_APIKEY"] = "NONE",
+    ["ABDO_STORE_TEST_ACCOUNT_ENTID"] = {},
+    ["ABDO_STORE_TEST_LIVE"] = "FALSE",
+    ["ABDO_STORE_APIKEY"] = "NONE",
   })
 
-  local live = env["ABDOSTORE_TEST_LIVE"] == "TRUE"
+  local live = env["ABDO_STORE_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["ABDOSTORE_APIKEY"],
+      apikey = env["ABDO_STORE_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

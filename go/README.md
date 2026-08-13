@@ -69,12 +69,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-account, err := client.Account(nil).Load(nil, nil)
+services, err := client.Service(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = account
+_ = services
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-account, err := client.Account(nil).Load(
+service, err := client.Service(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(account) // the returned mock data
+fmt.Println(service) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -281,12 +281,13 @@ API path: `/api/balance`
 | Field | Description |
 | --- | --- |
 | `"charge"` |  |
-| `"comment"` |  |
+| `"comments"` |  |
 | `"link"` |  |
-| `"order"` |  |
 | `"order_id"` |  |
 | `"quantity"` |  |
+| `"remains"` |  |
 | `"service_id"` |  |
+| `"start_count"` |  |
 | `"status"` |  |
 
 Operations: Create, Load.
@@ -359,12 +360,13 @@ Create an instance: `order := client.Order(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `charge` | `float64` |  |
-| `comment` | `string` |  |
+| `comments` | `string` |  |
 | `link` | `string` |  |
-| `order` | `map[string]any` |  |
 | `order_id` | `int` |  |
 | `quantity` | `int` |  |
+| `remains` | `int` |  |
 | `service_id` | `int` |  |
+| `start_count` | `int` |  |
 | `status` | `string` |  |
 
 #### Example: Load
@@ -381,9 +383,6 @@ fmt.Println(order) // the loaded record
 
 ```go
 result, err := client.Order(nil).Create(map[string]any{
-    "link": "example_link",
-    "quantity": 1,
-    "service_id": 1,
 }, nil)
 if err != nil {
     panic(err)
@@ -494,15 +493,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Load`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-account := client.Account(nil)
-account.Load(nil, nil)
+service := client.Service(nil)
+service.List(nil, nil)
 
-// account.Data() now returns the account data from the last load
-// account.Match() returns the last match criteria
+// service.Data() now returns the service data from the last list
+// service.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

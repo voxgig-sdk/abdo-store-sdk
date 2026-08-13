@@ -161,13 +161,28 @@ fmt.Println(order.GetName()) // "order"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `charge` | `float64` | No |  |
-| `comment` | `string` | No |  |
-| `link` | `string` | Yes |  |
-| `order` | `map[string]any` | No |  |
+| `comments` | `string` | No |  |
+| `link` | `string` | No |  |
 | `order_id` | `int` | No |  |
-| `quantity` | `int` | Yes |  |
-| `service_id` | `int` | Yes |  |
+| `quantity` | `int` | No |  |
+| `remains` | `int` | No |  |
+| `service_id` | `int` | No |  |
+| `start_count` | `int` | No |  |
 | `status` | `string` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create |
+| --- | --- | --- |
+| `charge` | - | - |
+| `comments` | - | - |
+| `link` | - | Yes |
+| `order_id` | - | - |
+| `quantity` | - | Yes |
+| `remains` | - | - |
+| `service_id` | - | Yes |
+| `start_count` | - | - |
+| `status` | - | - |
 
 ### Operations
 
@@ -189,9 +204,6 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Order(nil).Create(map[string]any{
-    "link": "example_link",
-    "quantity": 1,
-    "service_id": 1,
 }, nil)
 if err != nil {
     panic(err)

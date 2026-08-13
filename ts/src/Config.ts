@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'AbdoStore',
   }
 
 
@@ -95,6 +95,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/api/balance",
               "parts": [
@@ -127,7 +128,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "comment",
+          "name": "comments",
           "req": false,
           "type": "`$STRING`",
           "index$": 1
@@ -135,44 +136,69 @@ class Config {
         {
           "active": true,
           "name": "link",
-          "req": true,
+          "op": {
+            "create": {
+              "req": true,
+              "type": "`$STRING`"
+            }
+          },
+          "req": false,
           "type": "`$STRING`",
           "index$": 2
-        },
-        {
-          "active": true,
-          "name": "order",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 3
         },
         {
           "active": true,
           "name": "order_id",
           "req": false,
           "type": "`$INTEGER`",
-          "index$": 4
+          "index$": 3
         },
         {
           "active": true,
           "name": "quantity",
-          "req": true,
+          "op": {
+            "create": {
+              "req": true,
+              "type": "`$INTEGER`"
+            }
+          },
+          "req": false,
+          "type": "`$INTEGER`",
+          "index$": 4
+        },
+        {
+          "active": true,
+          "name": "remains",
+          "req": false,
           "type": "`$INTEGER`",
           "index$": 5
         },
         {
           "active": true,
           "name": "service_id",
-          "req": true,
+          "op": {
+            "create": {
+              "req": true,
+              "type": "`$INTEGER`"
+            }
+          },
+          "req": false,
           "type": "`$INTEGER`",
           "index$": 6
+        },
+        {
+          "active": true,
+          "name": "start_count",
+          "req": false,
+          "type": "`$INTEGER`",
+          "index$": 7
         },
         {
           "active": true,
           "name": "status",
           "req": false,
           "type": "`$STRING`",
-          "index$": 7
+          "index$": 8
         }
       ],
       "name": "order",
@@ -184,6 +210,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/api/order",
               "parts": [
@@ -219,6 +246,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/order/{order_id}",
               "parts": [
@@ -311,6 +339,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/api/services",
               "parts": [
@@ -320,7 +349,7 @@ class Config {
               "select": {},
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.services`"
               },
               "index$": 0
             }

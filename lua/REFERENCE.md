@@ -154,13 +154,28 @@ local order = client:Order(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `charge` | `number` | No |  |
-| `comment` | `string` | No |  |
-| `link` | `string` | Yes |  |
-| `order` | `table` | No |  |
+| `comments` | `string` | No |  |
+| `link` | `string` | No |  |
 | `order_id` | `number` | No |  |
-| `quantity` | `number` | Yes |  |
-| `service_id` | `number` | Yes |  |
+| `quantity` | `number` | No |  |
+| `remains` | `number` | No |  |
+| `service_id` | `number` | No |  |
+| `start_count` | `number` | No |  |
 | `status` | `string` | No |  |
+
+### Field Usage by Operation
+
+| Field | load | create |
+| --- | --- | --- |
+| `charge` | - | - |
+| `comments` | - | - |
+| `link` | - | Yes |
+| `order_id` | - | - |
+| `quantity` | - | Yes |
+| `remains` | - | - |
+| `service_id` | - | Yes |
+| `start_count` | - | - |
+| `status` | - | - |
 
 ### Operations
 
@@ -170,9 +185,6 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Order():create({
-  link = --[[ string ]],
-  quantity = --[[ number ]],
-  service_id = --[[ number ]],
 })
 ```
 

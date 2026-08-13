@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from abdostore_sdk.utility.voxgig_struct import voxgig_struct as vs
 from abdostore_sdk import AbdoStoreSDK
-from core import helpers
+from abdostore_sdk.core import helpers
 from test import runner
 
 
@@ -58,16 +58,16 @@ def _service_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "ABDOSTORE_TEST_SERVICE_ENTID": {},
-        "ABDOSTORE_TEST_LIVE": "FALSE",
-        "ABDOSTORE_APIKEY": "NONE",
+        "ABDO_STORE_TEST_SERVICE_ENTID": {},
+        "ABDO_STORE_TEST_LIVE": "FALSE",
+        "ABDO_STORE_APIKEY": "NONE",
     })
 
-    live = env.get("ABDOSTORE_TEST_LIVE") == "TRUE"
+    live = env.get("ABDO_STORE_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("ABDOSTORE_APIKEY"),
+            "apikey": env.get("ABDO_STORE_APIKEY"),
         }
         client = AbdoStoreSDK(merged_opts)
         return {

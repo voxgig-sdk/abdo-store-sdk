@@ -11,19 +11,20 @@ main: kit: entity: order: {
       type: "`$NUMBER`"
     }
     {
-      name: "comment"
+      name: "comments"
       req: false
       type: "`$STRING`"
     }
     {
       name: "link"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "order"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
       req: false
-      type: "`$OBJECT`"
+      type: "`$STRING`"
     }
     {
       name: "order_id"
@@ -32,12 +33,34 @@ main: kit: entity: order: {
     }
     {
       name: "quantity"
-      req: true
+      op: {
+        create: {
+          req: true
+          type: "`$INTEGER`"
+        }
+      }
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "remains"
+      req: false
       type: "`$INTEGER`"
     }
     {
       name: "service_id"
-      req: true
+      op: {
+        create: {
+          req: true
+          type: "`$INTEGER`"
+        }
+      }
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "start_count"
+      req: false
       type: "`$INTEGER`"
     }
     {

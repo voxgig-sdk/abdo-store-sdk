@@ -16,11 +16,11 @@
 import pytest
 
 from abdostore_sdk import AbdoStoreSDK
-from core.error import AbdoStoreError
-from core.result import AbdoStoreResult
-from core.response import AbdoStoreResponse
-from core.spec import AbdoStoreSpec
-from feature.base_feature import AbdoStoreBaseFeature
+from abdostore_sdk.core.error import AbdoStoreError
+from abdostore_sdk.core.result import AbdoStoreResult
+from abdostore_sdk.core.response import AbdoStoreResponse
+from abdostore_sdk.core.spec import AbdoStoreSpec
+from abdostore_sdk.feature.base_feature import AbdoStoreBaseFeature
 
 
 def _client():

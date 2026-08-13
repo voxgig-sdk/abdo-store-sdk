@@ -66,6 +66,7 @@ class AbdoStoreConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/balance',
                   'parts' => [
@@ -98,7 +99,7 @@ class AbdoStoreConfig
             ],
             [
               'active' => true,
-              'name' => 'comment',
+              'name' => 'comments',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
@@ -106,44 +107,69 @@ class AbdoStoreConfig
             [
               'active' => true,
               'name' => 'link',
-              'req' => true,
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$STRING`',
+                ],
+              ],
+              'req' => false,
               'type' => '`$STRING`',
               'index$' => 2,
-            ],
-            [
-              'active' => true,
-              'name' => 'order',
-              'req' => false,
-              'type' => '`$OBJECT`',
-              'index$' => 3,
             ],
             [
               'active' => true,
               'name' => 'order_id',
               'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 4,
+              'index$' => 3,
             ],
             [
               'active' => true,
               'name' => 'quantity',
-              'req' => true,
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$INTEGER`',
+                ],
+              ],
+              'req' => false,
+              'type' => '`$INTEGER`',
+              'index$' => 4,
+            ],
+            [
+              'active' => true,
+              'name' => 'remains',
+              'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 5,
             ],
             [
               'active' => true,
               'name' => 'service_id',
-              'req' => true,
+              'op' => [
+                'create' => [
+                  'req' => true,
+                  'type' => '`$INTEGER`',
+                ],
+              ],
+              'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 6,
+            ],
+            [
+              'active' => true,
+              'name' => 'start_count',
+              'req' => false,
+              'type' => '`$INTEGER`',
+              'index$' => 7,
             ],
             [
               'active' => true,
               'name' => 'status',
               'req' => false,
               'type' => '`$STRING`',
-              'index$' => 7,
+              'index$' => 8,
             ],
           ],
           'name' => 'order',
@@ -155,6 +181,7 @@ class AbdoStoreConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/api/order',
                   'parts' => [
@@ -190,6 +217,7 @@ class AbdoStoreConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/order/{order_id}',
                   'parts' => [
@@ -282,6 +310,7 @@ class AbdoStoreConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/services',
                   'parts' => [
@@ -291,7 +320,7 @@ class AbdoStoreConfig
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.services`',
                   ],
                   'index$' => 0,
                 ],

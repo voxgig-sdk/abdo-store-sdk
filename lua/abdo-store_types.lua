@@ -18,12 +18,13 @@
 
 ---@class Order
 ---@field charge? number
----@field comment? string
----@field link string
----@field order? table
+---@field comments? string
+---@field link? string
 ---@field order_id? number
----@field quantity number
----@field service_id number
+---@field quantity? number
+---@field remains? number
+---@field service_id? number
+---@field start_count? number
 ---@field status? string
 
 ---@class OrderLoadMatch
@@ -31,12 +32,13 @@
 
 ---@class OrderCreateData
 ---@field charge? number
----@field comment? string
----@field link string
----@field order? table
+---@field comments? string
+---@field link? string
 ---@field order_id? number
----@field quantity number
----@field service_id number
+---@field quantity? number
+---@field remains? number
+---@field service_id? number
+---@field start_count? number
 ---@field status? string
 
 ---@class Service

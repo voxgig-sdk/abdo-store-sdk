@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = AbdoStoreSDK.test()
-const account = await client.Account().load()
-// account is a bare Account populated with mock data
-console.log(account)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = AbdoStoreSDK.test({
+  entity: {
+    service: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const services = await client.Service().list()
+// services is an array of Service entities, populated with mock data
+// — call services[0].data() for the record itself
+console.log(services)
 ```
 
 ### Python
 
 ```python
 client = AbdoStoreSDK.test()
-account = client.Account().load()
-print(account)
+services = client.Service().list()
+print(services)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(account)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = AbdoStoreSDK::test([
-    "entity" => ["account" => ["test01" => []]],
+    "entity" => ["service" => ["test01" => []]],
 ]);
-$account = $client->Account()->load();
+$services = $client->Service()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Account(nil).Load(
+result, err := client.Service(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Account(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = AbdoStoreSDK.test({
-  "entity" => { "account" => { "test01" => {} } },
+  "entity" => { "service" => { "test01" => {} } },
 })
-account = client.Account.load()
+services = client.Service.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Account():load()
+local results, err = client:Service():list()
 ```
 
 ## Packages
@@ -156,7 +165,7 @@ The API exposes 3 entities:
 | Entity | Description | API path |
 | --- | --- | --- |
 | **Account** | The Account entity (load). | `/api/balance` |
-| **Order** | The Order entity (create, load). | `/api/order` |
+| **Order** | The Order entity (create, load). | `/api/order/{order_id}` |
 | **Service** | The Service entity (list). | `/api/services` |
 
 The operations available across these entities are **load**, **list**, **create** — see each entity's
@@ -191,7 +200,7 @@ $client = new AbdoStoreSDK([
 ]);
 
 
-// Load a specific account (returns the bare record; throws on error)
+// Load a specific account (returns the ENTITY; call data_get() for the record; throws on error)
 $account = $client->Account()->load();
 print_r($account);
 ```
@@ -223,7 +232,7 @@ client = AbdoStoreSDK.new({
 })
 
 
-# Load a specific account (returns the bare record; raises on error)
+# Load a specific account (returns the ENTITY; call data_get for the record)
 account = client.Account.load()
 puts account
 ```
@@ -359,6 +368,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://abdoastore.store/](https://abdoastore.store/)
 

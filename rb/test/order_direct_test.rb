@@ -69,16 +69,16 @@ def order_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "ABDOSTORE_TEST_ORDER_ENTID" => {},
-    "ABDOSTORE_TEST_LIVE" => "FALSE",
-    "ABDOSTORE_APIKEY" => "NONE",
+    "ABDO_STORE_TEST_ORDER_ENTID" => {},
+    "ABDO_STORE_TEST_LIVE" => "FALSE",
+    "ABDO_STORE_APIKEY" => "NONE",
   })
 
-  live = env["ABDOSTORE_TEST_LIVE"] == "TRUE"
+  live = env["ABDO_STORE_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["ABDOSTORE_APIKEY"],
+      "apikey" => env["ABDO_STORE_APIKEY"],
     }
     client = AbdoStoreSDK.new(merged_opts)
     return {

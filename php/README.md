@@ -37,7 +37,7 @@ $client = new AbdoStoreSDK([
 
 ```php
 try {
-    // load() returns the bare Account record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Account record (throws on error).
     $account = $client->Account()->load();
     print_r($account);
 } catch (\Throwable $err) {
@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $account = $client->Account()->load();
+    $services = $client->Service()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = AbdoStoreSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$account = $client->Account()->load();
-print_r($account);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$service = $client->Service()->list();
+print_r($service);
 ```
 
 ### Use a custom fetch function
@@ -230,7 +231,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -265,12 +266,13 @@ API path: `/api/balance`
 | Field | Description |
 | --- | --- |
 | `charge` |  |
-| `comment` |  |
+| `comments` |  |
 | `link` |  |
-| `order` |  |
 | `order_id` |  |
 | `quantity` |  |
+| `remains` |  |
 | `service_id` |  |
+| `start_count` |  |
 | `status` |  |
 
 Operations: Create, Load.
@@ -319,7 +321,7 @@ Create an instance: `$account = $client->Account();`
 #### Example: Load
 
 ```php
-// load() returns the bare Account record (throws on error).
+// load() returns the ENTITY — call data_get() for the Account record (throws on error).
 $account = $client->Account()->load();
 ```
 
@@ -340,18 +342,19 @@ Create an instance: `$order = $client->Order();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `charge` | `float` |  |
-| `comment` | `string` |  |
+| `comments` | `string` |  |
 | `link` | `string` |  |
-| `order` | `array` |  |
 | `order_id` | `int` |  |
 | `quantity` | `int` |  |
+| `remains` | `int` |  |
 | `service_id` | `int` |  |
+| `start_count` | `int` |  |
 | `status` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Order record (throws on error).
+// load() returns the ENTITY — call data_get() for the Order record (throws on error).
 $order = $client->Order()->load(["id" => 1]);
 ```
 
@@ -359,9 +362,6 @@ $order = $client->Order()->load(["id" => 1]);
 
 ```php
 $order = $client->Order()->create([
-    "link" => null, // string
-    "quantity" => null, // int
-    "service_id" => null, // int
 ]);
 ```
 
@@ -468,15 +468,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$account = $client->Account();
-$account->load();
+$service = $client->Service();
+$service->list();
 
-// $account->data_get() now returns the account data from the last load
-// $account->match_get() returns the last match criteria
+// $service->data_get() now returns the service data from the last list
+// $service->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

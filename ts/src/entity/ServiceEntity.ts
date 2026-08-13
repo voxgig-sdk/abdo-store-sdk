@@ -37,7 +37,7 @@ class ServiceEntity extends AbdoStoreEntityBase<Service> {
 
 
 
-  async list(this: any, reqmatch?: ServiceListMatch, ctrl?: Control): Promise<Service[]> {
+  async list(this: any, reqmatch?: ServiceListMatch, ctrl?: Control): Promise<ServiceEntity[]> {
 
     const utility = this._utility
 

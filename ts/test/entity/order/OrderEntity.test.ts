@@ -26,8 +26,8 @@ import {
 describe('OrderEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when ABDOSTORE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('ABDOSTORE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when ABDO_STORE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('ABDO_STORE_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AbdoStoreSDK.test()
@@ -62,7 +62,7 @@ describe('OrderEntity', async () => {
     const order_ref01_ent = client.Order()
     let order_ref01_data = setup.data.new.order['order_ref01']
 
-    order_ref01_data = await order_ref01_ent.create(order_ref01_data)
+    order_ref01_data = (await order_ref01_ent.create(order_ref01_data)).data()
     assert(null != order_ref01_data)
 
 
