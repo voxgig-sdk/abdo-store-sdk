@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://abdoastore.store',
+    base: "https://abdoastore.store",
 
     auth: {
       prefix: '',
@@ -65,25 +65,16 @@ class Config {
     "account": {
       "fields": [
         {
-          "active": true,
           "name": "balance",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 0
+          "type": "`$NUMBER`"
         },
         {
-          "active": true,
           "name": "currency",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "status",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         }
       ],
       "name": "account",
@@ -93,7 +84,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -106,11 +96,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -120,21 +108,14 @@ class Config {
     "order": {
       "fields": [
         {
-          "active": true,
           "name": "charge",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 0
+          "type": "`$NUMBER`"
         },
         {
-          "active": true,
           "name": "comments",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "link",
           "op": {
             "create": {
@@ -142,19 +123,13 @@ class Config {
               "type": "`$STRING`"
             }
           },
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "order_id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "quantity",
           "op": {
             "create": {
@@ -162,19 +137,13 @@ class Config {
               "type": "`$INTEGER`"
             }
           },
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "remains",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "service_id",
           "op": {
             "create": {
@@ -182,23 +151,15 @@ class Config {
               "type": "`$INTEGER`"
             }
           },
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 6
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "start_count",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 7
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "status",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 8
+          "type": "`$STRING`"
         }
       ],
       "name": "order",
@@ -208,7 +169,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -221,28 +181,23 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         },
         "load": {
           "input": "data",
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "order_id",
                     "reqd": true,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -267,11 +222,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.order`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -281,53 +234,32 @@ class Config {
     "service": {
       "fields": [
         {
-          "active": true,
           "name": "category",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "description",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 2
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "max",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "min",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 4
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 5
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "price",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 6
+          "type": "`$NUMBER`"
         }
       ],
       "name": "service",
@@ -337,7 +269,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "GET",
@@ -350,11 +281,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.services`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {

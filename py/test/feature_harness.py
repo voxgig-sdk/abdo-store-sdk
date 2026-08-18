@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from abdostore_sdk.config import make_config
+from abdostore_sdk.config import shared_config
 from abdostore_sdk.features import _make_feature
 from abdostore_sdk.core.control import AbdoStoreControl
 from abdostore_sdk.core.error import AbdoStoreError
@@ -24,7 +24,7 @@ from abdostore_sdk.core.spec import AbdoStoreSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

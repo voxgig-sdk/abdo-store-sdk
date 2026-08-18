@@ -40,7 +40,7 @@ class AbdoStoreSDK
         $utility = new AbdoStoreUtility();
         $this->_utility = $utility;
 
-        $config = AbdoStoreConfig::make_config();
+        $config = AbdoStoreConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

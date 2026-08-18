@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class AbdoStoreConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -36,25 +59,16 @@ class AbdoStoreConfig
         'account' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'balance',
-              'req' => false,
               'type' => '`$NUMBER`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'currency',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'status',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
           ],
           'name' => 'account',
@@ -64,7 +78,6 @@ class AbdoStoreConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
@@ -78,10 +91,8 @@ class AbdoStoreConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -91,21 +102,14 @@ class AbdoStoreConfig
         'order' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'charge',
-              'req' => false,
               'type' => '`$NUMBER`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'comments',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'link',
               'op' => [
                 'create' => [
@@ -113,19 +117,13 @@ class AbdoStoreConfig
                   'type' => '`$STRING`',
                 ],
               ],
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'order_id',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'quantity',
               'op' => [
                 'create' => [
@@ -133,19 +131,13 @@ class AbdoStoreConfig
                   'type' => '`$INTEGER`',
                 ],
               ],
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'remains',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'service_id',
               'op' => [
                 'create' => [
@@ -153,23 +145,15 @@ class AbdoStoreConfig
                   'type' => '`$INTEGER`',
                 ],
               ],
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 6,
             ],
             [
-              'active' => true,
               'name' => 'start_count',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 7,
             ],
             [
-              'active' => true,
               'name' => 'status',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 8,
             ],
           ],
           'name' => 'order',
@@ -179,7 +163,6 @@ class AbdoStoreConfig
               'name' => 'create',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
@@ -193,27 +176,22 @@ class AbdoStoreConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'create',
             ],
             'load' => [
               'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'params' => [
                       [
-                        'active' => true,
                         'kind' => 'param',
                         'name' => 'id',
                         'orig' => 'order_id',
                         'reqd' => true,
                         'type' => '`$INTEGER`',
-                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -239,10 +217,8 @@ class AbdoStoreConfig
                     'req' => '`reqdata`',
                     'res' => '`body.order`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -252,53 +228,32 @@ class AbdoStoreConfig
         'service' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'category',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'description',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'id',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'max',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'min',
-              'req' => false,
               'type' => '`$INTEGER`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'name',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 5,
             ],
             [
-              'active' => true,
               'name' => 'price',
-              'req' => false,
               'type' => '`$NUMBER`',
-              'index$' => 6,
             ],
           ],
           'name' => 'service',
@@ -308,7 +263,6 @@ class AbdoStoreConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
@@ -322,10 +276,8 @@ class AbdoStoreConfig
                     'req' => '`reqdata`',
                     'res' => '`body.services`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [

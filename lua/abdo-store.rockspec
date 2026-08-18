@@ -23,6 +23,7 @@ build = {
   modules = {
     ["abdo-store_sdk"] = "abdo-store_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

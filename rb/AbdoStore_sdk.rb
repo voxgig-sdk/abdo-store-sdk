@@ -28,7 +28,7 @@ class AbdoStoreSDK
     utility = AbdoStoreUtility.new
     @_utility = utility
 
-    config = AbdoStoreConfig.make_config
+    config = AbdoStoreConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

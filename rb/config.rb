@@ -1,6 +1,20 @@
 # AbdoStore SDK configuration
 
 module AbdoStoreConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
@@ -31,25 +45,16 @@ module AbdoStoreConfig
         "account" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "balance",
-              "req" => false,
               "type" => "`$NUMBER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "currency",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "status",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 2,
             },
           ],
           "name" => "account",
@@ -59,7 +64,6 @@ module AbdoStoreConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -73,10 +77,8 @@ module AbdoStoreConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -86,21 +88,14 @@ module AbdoStoreConfig
         "order" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "charge",
-              "req" => false,
               "type" => "`$NUMBER`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "comments",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "link",
               "op" => {
                 "create" => {
@@ -108,19 +103,13 @@ module AbdoStoreConfig
                   "type" => "`$STRING`",
                 },
               },
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "order_id",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "quantity",
               "op" => {
                 "create" => {
@@ -128,19 +117,13 @@ module AbdoStoreConfig
                   "type" => "`$INTEGER`",
                 },
               },
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "remains",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "service_id",
               "op" => {
                 "create" => {
@@ -148,23 +131,15 @@ module AbdoStoreConfig
                   "type" => "`$INTEGER`",
                 },
               },
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 6,
             },
             {
-              "active" => true,
               "name" => "start_count",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 7,
             },
             {
-              "active" => true,
               "name" => "status",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 8,
             },
           ],
           "name" => "order",
@@ -174,7 +149,6 @@ module AbdoStoreConfig
               "name" => "create",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "POST",
@@ -188,27 +162,22 @@ module AbdoStoreConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "create",
             },
             "load" => {
               "input" => "data",
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "params" => [
                       {
-                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "order_id",
                         "reqd" => true,
                         "type" => "`$INTEGER`",
-                        "index$" => 0,
                       },
                     ],
                   },
@@ -234,10 +203,8 @@ module AbdoStoreConfig
                     "req" => "`reqdata`",
                     "res" => "`body.order`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -247,53 +214,32 @@ module AbdoStoreConfig
         "service" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "category",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "description",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "id",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "max",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "min",
-              "req" => false,
               "type" => "`$INTEGER`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "name",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 5,
             },
             {
-              "active" => true,
               "name" => "price",
-              "req" => false,
               "type" => "`$NUMBER`",
-              "index$" => 6,
             },
           ],
           "name" => "service",
@@ -303,7 +249,6 @@ module AbdoStoreConfig
               "name" => "list",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {},
                   "kind" => "http",
                   "method" => "GET",
@@ -317,10 +262,8 @@ module AbdoStoreConfig
                     "req" => "`reqdata`",
                     "res" => "`body.services`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "list",
             },
           },
           "relations" => {
