@@ -19,6 +19,9 @@ module AbdoStoreConfig
     {
       "main" => {
         "name" => "AbdoStore",
+        "slug" => "abdo-store",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -46,10 +49,12 @@ module AbdoStoreConfig
           "fields" => [
             {
               "name" => "balance",
+              "short" => "Current account balance",
               "type" => "`$NUMBER`",
             },
             {
               "name" => "currency",
+              "short" => "Currency code",
               "type" => "`$STRING`",
             },
             {
@@ -89,10 +94,12 @@ module AbdoStoreConfig
           "fields" => [
             {
               "name" => "charge",
+              "short" => "Order charge",
               "type" => "`$NUMBER`",
             },
             {
               "name" => "comments",
+              "short" => "Additional comments or instructions (optional)",
               "type" => "`$STRING`",
             },
             {
@@ -103,10 +110,12 @@ module AbdoStoreConfig
                   "type" => "`$STRING`",
                 },
               },
+              "short" => "Target link",
               "type" => "`$STRING`",
             },
             {
               "name" => "order_id",
+              "short" => "Order ID",
               "type" => "`$INTEGER`",
             },
             {
@@ -117,10 +126,12 @@ module AbdoStoreConfig
                   "type" => "`$INTEGER`",
                 },
               },
+              "short" => "Order quantity",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "remains",
+              "short" => "Remaining quantity",
               "type" => "`$INTEGER`",
             },
             {
@@ -131,14 +142,17 @@ module AbdoStoreConfig
                   "type" => "`$INTEGER`",
                 },
               },
+              "short" => "Service ID",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "start_count",
+              "short" => "Start count",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "status",
+              "short" => "Order status",
               "type" => "`$STRING`",
             },
           ],
@@ -215,30 +229,37 @@ module AbdoStoreConfig
           "fields" => [
             {
               "name" => "category",
+              "short" => "Service category",
               "type" => "`$STRING`",
             },
             {
               "name" => "description",
+              "short" => "Service description",
               "type" => "`$STRING`",
             },
             {
               "name" => "id",
+              "short" => "Service ID",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "max",
+              "short" => "Maximum order quantity",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "min",
+              "short" => "Minimum order quantity",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "name",
+              "short" => "Service name",
               "type" => "`$STRING`",
             },
             {
               "name" => "price",
+              "short" => "Service price",
               "type" => "`$NUMBER`",
             },
           ],

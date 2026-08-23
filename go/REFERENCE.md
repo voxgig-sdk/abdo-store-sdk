@@ -107,8 +107,8 @@ fmt.Println(account.GetName()) // "account"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | `float64` | No |  |
-| `currency` | `string` | No |  |
+| `balance` | `float64` | No | Current account balance |
+| `currency` | `string` | No | Currency code |
 | `status` | `string` | No |  |
 
 ### Operations
@@ -160,15 +160,15 @@ fmt.Println(order.GetName()) // "order"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | `float64` | No |  |
-| `comments` | `string` | No |  |
-| `link` | `string` | No |  |
-| `order_id` | `int` | No |  |
-| `quantity` | `int` | No |  |
-| `remains` | `int` | No |  |
-| `service_id` | `int` | No |  |
-| `start_count` | `int` | No |  |
-| `status` | `string` | No |  |
+| `charge` | `float64` | No | Order charge |
+| `comments` | `string` | No | Additional comments or instructions (optional) |
+| `link` | `string` | No | Target link |
+| `order_id` | `int` | No | Order ID |
+| `quantity` | `int` | No | Order quantity |
+| `remains` | `int` | No | Remaining quantity |
+| `service_id` | `int` | No | Service ID |
+| `start_count` | `int` | No | Start count |
+| `status` | `string` | No | Order status |
 
 ### Field Usage by Operation
 
@@ -246,13 +246,13 @@ fmt.Println(service.GetName()) // "service"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | No |  |
-| `description` | `string` | No |  |
-| `id` | `int` | No |  |
-| `max` | `int` | No |  |
-| `min` | `int` | No |  |
-| `name` | `string` | No |  |
-| `price` | `float64` | No |  |
+| `category` | `string` | No | Service category |
+| `description` | `string` | No | Service description |
+| `id` | `int` | No | Service ID |
+| `max` | `int` | No | Maximum order quantity |
+| `min` | `int` | No | Minimum order quantity |
+| `name` | `string` | No | Service name |
+| `price` | `float64` | No | Service price |
 
 ### Operations
 

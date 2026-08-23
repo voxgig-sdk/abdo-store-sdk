@@ -6,7 +6,7 @@ The Golang SDK for the AbdoStore API — an entity-oriented client using standar
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Account(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -268,8 +268,8 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"balance"` |  |
-| `"currency"` |  |
+| `"balance"` | Current account balance |
+| `"currency"` | Currency code |
 | `"status"` |  |
 
 Operations: Load.
@@ -280,15 +280,15 @@ API path: `/api/balance`
 
 | Field | Description |
 | --- | --- |
-| `"charge"` |  |
-| `"comments"` |  |
-| `"link"` |  |
-| `"order_id"` |  |
-| `"quantity"` |  |
-| `"remains"` |  |
-| `"service_id"` |  |
-| `"start_count"` |  |
-| `"status"` |  |
+| `"charge"` | Order charge |
+| `"comments"` | Additional comments or instructions (optional) |
+| `"link"` | Target link |
+| `"order_id"` | Order ID |
+| `"quantity"` | Order quantity |
+| `"remains"` | Remaining quantity |
+| `"service_id"` | Service ID |
+| `"start_count"` | Start count |
+| `"status"` | Order status |
 
 Operations: Create, Load.
 
@@ -298,13 +298,13 @@ API path: `/api/order`
 
 | Field | Description |
 | --- | --- |
-| `"category"` |  |
-| `"description"` |  |
-| `"id"` |  |
-| `"max"` |  |
-| `"min"` |  |
-| `"name"` |  |
-| `"price"` |  |
+| `"category"` | Service category |
+| `"description"` | Service description |
+| `"id"` | Service ID |
+| `"max"` | Maximum order quantity |
+| `"min"` | Minimum order quantity |
+| `"name"` | Service name |
+| `"price"` | Service price |
 
 Operations: List.
 
@@ -329,8 +329,8 @@ Create an instance: `account := client.Account(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `float64` |  |
-| `currency` | `string` |  |
+| `balance` | `float64` | Current account balance |
+| `currency` | `string` | Currency code |
 | `status` | `string` |  |
 
 #### Example: Load
@@ -359,15 +359,15 @@ Create an instance: `order := client.Order(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `charge` | `float64` |  |
-| `comments` | `string` |  |
-| `link` | `string` |  |
-| `order_id` | `int` |  |
-| `quantity` | `int` |  |
-| `remains` | `int` |  |
-| `service_id` | `int` |  |
-| `start_count` | `int` |  |
-| `status` | `string` |  |
+| `charge` | `float64` | Order charge |
+| `comments` | `string` | Additional comments or instructions (optional) |
+| `link` | `string` | Target link |
+| `order_id` | `int` | Order ID |
+| `quantity` | `int` | Order quantity |
+| `remains` | `int` | Remaining quantity |
+| `service_id` | `int` | Service ID |
+| `start_count` | `int` | Start count |
+| `status` | `string` | Order status |
 
 #### Example: Load
 
@@ -405,13 +405,13 @@ Create an instance: `service := client.Service(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `string` |  |
-| `description` | `string` |  |
-| `id` | `int` |  |
-| `max` | `int` |  |
-| `min` | `int` |  |
-| `name` | `string` |  |
-| `price` | `float64` |  |
+| `category` | `string` | Service category |
+| `description` | `string` | Service description |
+| `id` | `int` | Service ID |
+| `max` | `int` | Maximum order quantity |
+| `min` | `int` | Minimum order quantity |
+| `name` | `string` | Service name |
+| `price` | `float64` | Service price |
 
 #### Example: List
 

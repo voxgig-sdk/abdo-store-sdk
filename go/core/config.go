@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "AbdoStore",
+			"slug": "abdo-store",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -38,10 +41,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "balance",
+						"short": "Current account balance",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "currency",
+						"short": "Currency code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -81,10 +86,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "charge",
+						"short": "Order charge",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "comments",
+						"short": "Additional comments or instructions (optional)",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -95,10 +102,12 @@ func MakeConfig() map[string]any {
 								"type": "`$STRING`",
 							},
 						},
+						"short": "Target link",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "order_id",
+						"short": "Order ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -109,10 +118,12 @@ func MakeConfig() map[string]any {
 								"type": "`$INTEGER`",
 							},
 						},
+						"short": "Order quantity",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "remains",
+						"short": "Remaining quantity",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -123,14 +134,17 @@ func MakeConfig() map[string]any {
 								"type": "`$INTEGER`",
 							},
 						},
+						"short": "Service ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "start_count",
+						"short": "Start count",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "status",
+						"short": "Order status",
 						"type": "`$STRING`",
 					},
 				},
@@ -207,30 +221,37 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "category",
+						"short": "Service category",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Service description",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Service ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "max",
+						"short": "Maximum order quantity",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "min",
+						"short": "Minimum order quantity",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Service name",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "price",
+						"short": "Service price",
 						"type": "`$NUMBER`",
 					},
 				},

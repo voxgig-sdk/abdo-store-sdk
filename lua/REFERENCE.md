@@ -99,8 +99,8 @@ local account = client:Account(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | `number` | No |  |
-| `currency` | `string` | No |  |
+| `balance` | `number` | No | Current account balance |
+| `currency` | `string` | No | Currency code |
 | `status` | `string` | No |  |
 
 ### Operations
@@ -153,15 +153,15 @@ local order = client:Order(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | `number` | No |  |
-| `comments` | `string` | No |  |
-| `link` | `string` | No |  |
-| `order_id` | `number` | No |  |
-| `quantity` | `number` | No |  |
-| `remains` | `number` | No |  |
-| `service_id` | `number` | No |  |
-| `start_count` | `number` | No |  |
-| `status` | `string` | No |  |
+| `charge` | `number` | No | Order charge |
+| `comments` | `string` | No | Additional comments or instructions (optional) |
+| `link` | `string` | No | Target link |
+| `order_id` | `number` | No | Order ID |
+| `quantity` | `number` | No | Order quantity |
+| `remains` | `number` | No | Remaining quantity |
+| `service_id` | `number` | No | Service ID |
+| `start_count` | `number` | No | Start count |
+| `status` | `string` | No | Order status |
 
 ### Field Usage by Operation
 
@@ -236,13 +236,13 @@ local service = client:Service(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | No |  |
-| `description` | `string` | No |  |
-| `id` | `number` | No |  |
-| `max` | `number` | No |  |
-| `min` | `number` | No |  |
-| `name` | `string` | No |  |
-| `price` | `number` | No |  |
+| `category` | `string` | No | Service category |
+| `description` | `string` | No | Service description |
+| `id` | `number` | No | Service ID |
+| `max` | `number` | No | Maximum order quantity |
+| `min` | `number` | No | Minimum order quantity |
+| `name` | `string` | No | Service name |
+| `price` | `number` | No | Service price |
 
 ### Operations
 

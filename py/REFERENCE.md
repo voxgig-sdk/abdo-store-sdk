@@ -96,8 +96,8 @@ account = client.Account()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | `float` | No |  |
-| `currency` | `str` | No |  |
+| `balance` | `float` | No | Current account balance |
+| `currency` | `str` | No | Currency code |
 | `status` | `str` | No |  |
 
 ### Operations
@@ -149,15 +149,15 @@ order = client.Order()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | `float` | No |  |
-| `comments` | `str` | No |  |
-| `link` | `str` | No |  |
-| `order_id` | `int` | No |  |
-| `quantity` | `int` | No |  |
-| `remains` | `int` | No |  |
-| `service_id` | `int` | No |  |
-| `start_count` | `int` | No |  |
-| `status` | `str` | No |  |
+| `charge` | `float` | No | Order charge |
+| `comments` | `str` | No | Additional comments or instructions (optional) |
+| `link` | `str` | No | Target link |
+| `order_id` | `int` | No | Order ID |
+| `quantity` | `int` | No | Order quantity |
+| `remains` | `int` | No | Remaining quantity |
+| `service_id` | `int` | No | Service ID |
+| `start_count` | `int` | No | Start count |
+| `status` | `str` | No | Order status |
 
 ### Field Usage by Operation
 
@@ -231,13 +231,13 @@ service = client.Service()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `str` | No |  |
-| `description` | `str` | No |  |
-| `id` | `int` | No |  |
-| `max` | `int` | No |  |
-| `min` | `int` | No |  |
-| `name` | `str` | No |  |
-| `price` | `float` | No |  |
+| `category` | `str` | No | Service category |
+| `description` | `str` | No | Service description |
+| `id` | `int` | No | Service ID |
+| `max` | `int` | No | Maximum order quantity |
+| `min` | `int` | No | Minimum order quantity |
+| `name` | `str` | No | Service name |
+| `price` | `float` | No | Service price |
 
 ### Operations
 

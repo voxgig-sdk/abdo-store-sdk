@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'AbdoStore',
+        slug: "abdo-store",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -66,10 +77,12 @@ class Config {
       "fields": [
         {
           "name": "balance",
+          "short": "Current account balance",
           "type": "`$NUMBER`"
         },
         {
           "name": "currency",
+          "short": "Currency code",
           "type": "`$STRING`"
         },
         {
@@ -109,10 +122,12 @@ class Config {
       "fields": [
         {
           "name": "charge",
+          "short": "Order charge",
           "type": "`$NUMBER`"
         },
         {
           "name": "comments",
+          "short": "Additional comments or instructions (optional)",
           "type": "`$STRING`"
         },
         {
@@ -123,10 +138,12 @@ class Config {
               "type": "`$STRING`"
             }
           },
+          "short": "Target link",
           "type": "`$STRING`"
         },
         {
           "name": "order_id",
+          "short": "Order ID",
           "type": "`$INTEGER`"
         },
         {
@@ -137,10 +154,12 @@ class Config {
               "type": "`$INTEGER`"
             }
           },
+          "short": "Order quantity",
           "type": "`$INTEGER`"
         },
         {
           "name": "remains",
+          "short": "Remaining quantity",
           "type": "`$INTEGER`"
         },
         {
@@ -151,14 +170,17 @@ class Config {
               "type": "`$INTEGER`"
             }
           },
+          "short": "Service ID",
           "type": "`$INTEGER`"
         },
         {
           "name": "start_count",
+          "short": "Start count",
           "type": "`$INTEGER`"
         },
         {
           "name": "status",
+          "short": "Order status",
           "type": "`$STRING`"
         }
       ],
@@ -235,30 +257,37 @@ class Config {
       "fields": [
         {
           "name": "category",
+          "short": "Service category",
           "type": "`$STRING`"
         },
         {
           "name": "description",
+          "short": "Service description",
           "type": "`$STRING`"
         },
         {
           "name": "id",
+          "short": "Service ID",
           "type": "`$INTEGER`"
         },
         {
           "name": "max",
+          "short": "Maximum order quantity",
           "type": "`$INTEGER`"
         },
         {
           "name": "min",
+          "short": "Minimum order quantity",
           "type": "`$INTEGER`"
         },
         {
           "name": "name",
+          "short": "Service name",
           "type": "`$STRING`"
         },
         {
           "name": "price",
+          "short": "Service price",
           "type": "`$NUMBER`"
         }
       ],

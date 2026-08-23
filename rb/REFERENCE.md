@@ -102,8 +102,8 @@ account = client.Account
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | `Float` | No |  |
-| `currency` | `String` | No |  |
+| `balance` | `Float` | No | Current account balance |
+| `currency` | `String` | No | Currency code |
 | `status` | `String` | No |  |
 
 ### Operations
@@ -156,15 +156,15 @@ order = client.Order
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | `Float` | No |  |
-| `comments` | `String` | No |  |
-| `link` | `String` | No |  |
-| `order_id` | `Integer` | No |  |
-| `quantity` | `Integer` | No |  |
-| `remains` | `Integer` | No |  |
-| `service_id` | `Integer` | No |  |
-| `start_count` | `Integer` | No |  |
-| `status` | `String` | No |  |
+| `charge` | `Float` | No | Order charge |
+| `comments` | `String` | No | Additional comments or instructions (optional) |
+| `link` | `String` | No | Target link |
+| `order_id` | `Integer` | No | Order ID |
+| `quantity` | `Integer` | No | Order quantity |
+| `remains` | `Integer` | No | Remaining quantity |
+| `service_id` | `Integer` | No | Service ID |
+| `start_count` | `Integer` | No | Start count |
+| `status` | `String` | No | Order status |
 
 ### Field Usage by Operation
 
@@ -239,13 +239,13 @@ service = client.Service
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `String` | No |  |
-| `description` | `String` | No |  |
-| `id` | `Integer` | No |  |
-| `max` | `Integer` | No |  |
-| `min` | `Integer` | No |  |
-| `name` | `String` | No |  |
-| `price` | `Float` | No |  |
+| `category` | `String` | No | Service category |
+| `description` | `String` | No | Service description |
+| `id` | `Integer` | No | Service ID |
+| `max` | `Integer` | No | Maximum order quantity |
+| `min` | `Integer` | No | Minimum order quantity |
+| `name` | `String` | No | Service name |
+| `price` | `Float` | No | Service price |
 
 ### Operations
 

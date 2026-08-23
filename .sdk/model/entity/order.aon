@@ -8,11 +8,13 @@ main: kit: entity: order: {
     {
       name: "charge"
       req: false
+      short: "Order charge"
       type: "`$NUMBER`"
     }
     {
       name: "comments"
       req: false
+      short: "Additional comments or instructions (optional)"
       type: "`$STRING`"
     }
     {
@@ -24,11 +26,13 @@ main: kit: entity: order: {
         }
       }
       req: false
+      short: "Target link"
       type: "`$STRING`"
     }
     {
       name: "order_id"
       req: false
+      short: "Order ID"
       type: "`$INTEGER`"
     }
     {
@@ -40,11 +44,13 @@ main: kit: entity: order: {
         }
       }
       req: false
+      short: "Order quantity"
       type: "`$INTEGER`"
     }
     {
       name: "remains"
       req: false
+      short: "Remaining quantity"
       type: "`$INTEGER`"
     }
     {
@@ -56,16 +62,19 @@ main: kit: entity: order: {
         }
       }
       req: false
+      short: "Service ID"
       type: "`$INTEGER`"
     }
     {
       name: "start_count"
       req: false
+      short: "Start count"
       type: "`$INTEGER`"
     }
     {
       name: "status"
       req: false
+      short: "Order status"
       type: "`$STRING`"
     }
   ]

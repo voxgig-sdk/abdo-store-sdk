@@ -36,12 +36,14 @@
               "active": true,
               "name": "balance",
               "req": false,
+              "short": "Current account balance",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "currency",
               "req": false,
+              "short": "Currency code",
               "type": "`$STRING`"
             },
             {
@@ -90,12 +92,14 @@
               "active": true,
               "name": "charge",
               "req": false,
+              "short": "Order charge",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "comments",
               "req": false,
+              "short": "Additional comments or instructions (optional)",
               "type": "`$STRING`"
             },
             {
@@ -108,12 +112,14 @@
                 }
               },
               "req": false,
+              "short": "Target link",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "order_id",
               "req": false,
+              "short": "Order ID",
               "type": "`$INTEGER`"
             },
             {
@@ -126,12 +132,14 @@
                 }
               },
               "req": false,
+              "short": "Order quantity",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "remains",
               "req": false,
+              "short": "Remaining quantity",
               "type": "`$INTEGER`"
             },
             {
@@ -144,18 +152,21 @@
                 }
               },
               "req": false,
+              "short": "Service ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "start_count",
               "req": false,
+              "short": "Start count",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "status",
               "req": false,
+              "short": "Order status",
               "type": "`$STRING`"
             }
           ],
@@ -241,42 +252,49 @@
               "active": true,
               "name": "category",
               "req": false,
+              "short": "Service category",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Service description",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Service ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "max",
               "req": false,
+              "short": "Maximum order quantity",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "min",
               "req": false,
+              "short": "Minimum order quantity",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Service name",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "price",
               "req": false,
+              "short": "Service price",
               "type": "`$NUMBER`"
             }
           ],

@@ -234,8 +234,8 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `balance` |  |
-| `currency` |  |
+| `balance` | Current account balance |
+| `currency` | Currency code |
 | `status` |  |
 
 Operations: Load.
@@ -246,15 +246,15 @@ API path: `/api/balance`
 
 | Field | Description |
 | --- | --- |
-| `charge` |  |
-| `comments` |  |
-| `link` |  |
-| `order_id` |  |
-| `quantity` |  |
-| `remains` |  |
-| `service_id` |  |
-| `start_count` |  |
-| `status` |  |
+| `charge` | Order charge |
+| `comments` | Additional comments or instructions (optional) |
+| `link` | Target link |
+| `order_id` | Order ID |
+| `quantity` | Order quantity |
+| `remains` | Remaining quantity |
+| `service_id` | Service ID |
+| `start_count` | Start count |
+| `status` | Order status |
 
 Operations: Create, Load.
 
@@ -264,13 +264,13 @@ API path: `/api/order`
 
 | Field | Description |
 | --- | --- |
-| `category` |  |
-| `description` |  |
-| `id` |  |
-| `max` |  |
-| `min` |  |
-| `name` |  |
-| `price` |  |
+| `category` | Service category |
+| `description` | Service description |
+| `id` | Service ID |
+| `max` | Maximum order quantity |
+| `min` | Minimum order quantity |
+| `name` | Service name |
+| `price` | Service price |
 
 Operations: List.
 
@@ -295,8 +295,8 @@ Create an instance: `local account = client:Account(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `currency` | `string` |  |
+| `balance` | `number` | Current account balance |
+| `currency` | `string` | Currency code |
 | `status` | `string` |  |
 
 #### Example: Load
@@ -321,15 +321,15 @@ Create an instance: `local order = client:Order(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `charge` | `number` |  |
-| `comments` | `string` |  |
-| `link` | `string` |  |
-| `order_id` | `number` |  |
-| `quantity` | `number` |  |
-| `remains` | `number` |  |
-| `service_id` | `number` |  |
-| `start_count` | `number` |  |
-| `status` | `string` |  |
+| `charge` | `number` | Order charge |
+| `comments` | `string` | Additional comments or instructions (optional) |
+| `link` | `string` | Target link |
+| `order_id` | `number` | Order ID |
+| `quantity` | `number` | Order quantity |
+| `remains` | `number` | Remaining quantity |
+| `service_id` | `number` | Service ID |
+| `start_count` | `number` | Start count |
+| `status` | `string` | Order status |
 
 #### Example: Load
 
@@ -359,13 +359,13 @@ Create an instance: `local service = client:Service(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `string` |  |
-| `description` | `string` |  |
-| `id` | `number` |  |
-| `max` | `number` |  |
-| `min` | `number` |  |
-| `name` | `string` |  |
-| `price` | `number` |  |
+| `category` | `string` | Service category |
+| `description` | `string` | Service description |
+| `id` | `number` | Service ID |
+| `max` | `number` | Maximum order quantity |
+| `min` | `number` | Minimum order quantity |
+| `name` | `string` | Service name |
+| `price` | `number` | Service price |
 
 #### Example: List
 

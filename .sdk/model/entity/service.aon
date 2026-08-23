@@ -8,36 +8,43 @@ main: kit: entity: service: {
     {
       name: "category"
       req: false
+      short: "Service category"
       type: "`$STRING`"
     }
     {
       name: "description"
       req: false
+      short: "Service description"
       type: "`$STRING`"
     }
     {
       name: "id"
       req: false
+      short: "Service ID"
       type: "`$INTEGER`"
     }
     {
       name: "max"
       req: false
+      short: "Maximum order quantity"
       type: "`$INTEGER`"
     }
     {
       name: "min"
       req: false
+      short: "Minimum order quantity"
       type: "`$INTEGER`"
     }
     {
       name: "name"
       req: false
+      short: "Service name"
       type: "`$STRING`"
     }
     {
       name: "price"
       req: false
+      short: "Service price"
       type: "`$NUMBER`"
     }
   ]

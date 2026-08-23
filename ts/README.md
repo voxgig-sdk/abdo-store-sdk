@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -297,8 +297,8 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `balance` |  |
-| `currency` |  |
+| `balance` | Current account balance |
+| `currency` | Currency code |
 | `status` |  |
 
 Operations: load.
@@ -309,15 +309,15 @@ API path: `/api/balance`
 
 | Field | Description |
 | --- | --- |
-| `charge` |  |
-| `comments` |  |
-| `link` |  |
-| `order_id` |  |
-| `quantity` |  |
-| `remains` |  |
-| `service_id` |  |
-| `start_count` |  |
-| `status` |  |
+| `charge` | Order charge |
+| `comments` | Additional comments or instructions (optional) |
+| `link` | Target link |
+| `order_id` | Order ID |
+| `quantity` | Order quantity |
+| `remains` | Remaining quantity |
+| `service_id` | Service ID |
+| `start_count` | Start count |
+| `status` | Order status |
 
 Operations: create, load.
 
@@ -327,13 +327,13 @@ API path: `/api/order`
 
 | Field | Description |
 | --- | --- |
-| `category` |  |
-| `description` |  |
-| `id` |  |
-| `max` |  |
-| `min` |  |
-| `name` |  |
-| `price` |  |
+| `category` | Service category |
+| `description` | Service description |
+| `id` | Service ID |
+| `max` | Maximum order quantity |
+| `min` | Minimum order quantity |
+| `name` | Service name |
+| `price` | Service price |
 
 Operations: list.
 
@@ -358,8 +358,8 @@ Create an instance: `const account = client.Account()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `currency` | `string` |  |
+| `balance` | `number` | Current account balance |
+| `currency` | `string` | Currency code |
 | `status` | `string` |  |
 
 #### Example: Load
@@ -384,15 +384,15 @@ Create an instance: `const order = client.Order()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `charge` | `number` |  |
-| `comments` | `string` |  |
-| `link` | `string` |  |
-| `order_id` | `number` |  |
-| `quantity` | `number` |  |
-| `remains` | `number` |  |
-| `service_id` | `number` |  |
-| `start_count` | `number` |  |
-| `status` | `string` |  |
+| `charge` | `number` | Order charge |
+| `comments` | `string` | Additional comments or instructions (optional) |
+| `link` | `string` | Target link |
+| `order_id` | `number` | Order ID |
+| `quantity` | `number` | Order quantity |
+| `remains` | `number` | Remaining quantity |
+| `service_id` | `number` | Service ID |
+| `start_count` | `number` | Start count |
+| `status` | `string` | Order status |
 
 #### Example: Load
 
@@ -422,13 +422,13 @@ Create an instance: `const service = client.Service()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `string` |  |
-| `description` | `string` |  |
-| `id` | `number` |  |
-| `max` | `number` |  |
-| `min` | `number` |  |
-| `name` | `string` |  |
-| `price` | `number` |  |
+| `category` | `string` | Service category |
+| `description` | `string` | Service description |
+| `id` | `number` | Service ID |
+| `max` | `number` | Maximum order quantity |
+| `min` | `number` | Minimum order quantity |
+| `name` | `string` | Service name |
+| `price` | `number` | Service price |
 
 #### Example: List
 

@@ -8,11 +8,13 @@ main: kit: entity: account: {
     {
       name: "balance"
       req: false
+      short: "Current account balance"
       type: "`$NUMBER`"
     }
     {
       name: "currency"
       req: false
+      short: "Currency code"
       type: "`$STRING`"
     }
     {

@@ -33,6 +33,9 @@ class AbdoStoreConfig
         return [
             "main" => [
                 "name" => "AbdoStore",
+                "slug" => "abdo-store",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -60,10 +63,12 @@ class AbdoStoreConfig
           'fields' => [
             [
               'name' => 'balance',
+              'short' => 'Current account balance',
               'type' => '`$NUMBER`',
             ],
             [
               'name' => 'currency',
+              'short' => 'Currency code',
               'type' => '`$STRING`',
             ],
             [
@@ -103,10 +108,12 @@ class AbdoStoreConfig
           'fields' => [
             [
               'name' => 'charge',
+              'short' => 'Order charge',
               'type' => '`$NUMBER`',
             ],
             [
               'name' => 'comments',
+              'short' => 'Additional comments or instructions (optional)',
               'type' => '`$STRING`',
             ],
             [
@@ -117,10 +124,12 @@ class AbdoStoreConfig
                   'type' => '`$STRING`',
                 ],
               ],
+              'short' => 'Target link',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'order_id',
+              'short' => 'Order ID',
               'type' => '`$INTEGER`',
             ],
             [
@@ -131,10 +140,12 @@ class AbdoStoreConfig
                   'type' => '`$INTEGER`',
                 ],
               ],
+              'short' => 'Order quantity',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'remains',
+              'short' => 'Remaining quantity',
               'type' => '`$INTEGER`',
             ],
             [
@@ -145,14 +156,17 @@ class AbdoStoreConfig
                   'type' => '`$INTEGER`',
                 ],
               ],
+              'short' => 'Service ID',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'start_count',
+              'short' => 'Start count',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'status',
+              'short' => 'Order status',
               'type' => '`$STRING`',
             ],
           ],
@@ -229,30 +243,37 @@ class AbdoStoreConfig
           'fields' => [
             [
               'name' => 'category',
+              'short' => 'Service category',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'description',
+              'short' => 'Service description',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'id',
+              'short' => 'Service ID',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'max',
+              'short' => 'Maximum order quantity',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'min',
+              'short' => 'Minimum order quantity',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'name',
+              'short' => 'Service name',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'price',
+              'short' => 'Service price',
               'type' => '`$NUMBER`',
             ],
           ],

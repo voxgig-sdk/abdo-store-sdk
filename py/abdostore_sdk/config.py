@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "AbdoStore",
+            "slug": "abdo-store",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -55,10 +58,12 @@ def make_config():
         "fields": [
           {
             "name": "balance",
+            "short": "Current account balance",
             "type": "`$NUMBER`",
           },
           {
             "name": "currency",
+            "short": "Currency code",
             "type": "`$STRING`",
           },
           {
@@ -98,10 +103,12 @@ def make_config():
         "fields": [
           {
             "name": "charge",
+            "short": "Order charge",
             "type": "`$NUMBER`",
           },
           {
             "name": "comments",
+            "short": "Additional comments or instructions (optional)",
             "type": "`$STRING`",
           },
           {
@@ -112,10 +119,12 @@ def make_config():
                 "type": "`$STRING`",
               },
             },
+            "short": "Target link",
             "type": "`$STRING`",
           },
           {
             "name": "order_id",
+            "short": "Order ID",
             "type": "`$INTEGER`",
           },
           {
@@ -126,10 +135,12 @@ def make_config():
                 "type": "`$INTEGER`",
               },
             },
+            "short": "Order quantity",
             "type": "`$INTEGER`",
           },
           {
             "name": "remains",
+            "short": "Remaining quantity",
             "type": "`$INTEGER`",
           },
           {
@@ -140,14 +151,17 @@ def make_config():
                 "type": "`$INTEGER`",
               },
             },
+            "short": "Service ID",
             "type": "`$INTEGER`",
           },
           {
             "name": "start_count",
+            "short": "Start count",
             "type": "`$INTEGER`",
           },
           {
             "name": "status",
+            "short": "Order status",
             "type": "`$STRING`",
           },
         ],
@@ -224,30 +238,37 @@ def make_config():
         "fields": [
           {
             "name": "category",
+            "short": "Service category",
             "type": "`$STRING`",
           },
           {
             "name": "description",
+            "short": "Service description",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "short": "Service ID",
             "type": "`$INTEGER`",
           },
           {
             "name": "max",
+            "short": "Maximum order quantity",
             "type": "`$INTEGER`",
           },
           {
             "name": "min",
+            "short": "Minimum order quantity",
             "type": "`$INTEGER`",
           },
           {
             "name": "name",
+            "short": "Service name",
             "type": "`$STRING`",
           },
           {
             "name": "price",
+            "short": "Service price",
             "type": "`$NUMBER`",
           },
         ],

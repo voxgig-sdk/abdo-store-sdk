@@ -253,8 +253,8 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `balance` |  |
-| `currency` |  |
+| `balance` | Current account balance |
+| `currency` | Currency code |
 | `status` |  |
 
 Operations: Load.
@@ -265,15 +265,15 @@ API path: `/api/balance`
 
 | Field | Description |
 | --- | --- |
-| `charge` |  |
-| `comments` |  |
-| `link` |  |
-| `order_id` |  |
-| `quantity` |  |
-| `remains` |  |
-| `service_id` |  |
-| `start_count` |  |
-| `status` |  |
+| `charge` | Order charge |
+| `comments` | Additional comments or instructions (optional) |
+| `link` | Target link |
+| `order_id` | Order ID |
+| `quantity` | Order quantity |
+| `remains` | Remaining quantity |
+| `service_id` | Service ID |
+| `start_count` | Start count |
+| `status` | Order status |
 
 Operations: Create, Load.
 
@@ -283,13 +283,13 @@ API path: `/api/order`
 
 | Field | Description |
 | --- | --- |
-| `category` |  |
-| `description` |  |
-| `id` |  |
-| `max` |  |
-| `min` |  |
-| `name` |  |
-| `price` |  |
+| `category` | Service category |
+| `description` | Service description |
+| `id` | Service ID |
+| `max` | Maximum order quantity |
+| `min` | Minimum order quantity |
+| `name` | Service name |
+| `price` | Service price |
 
 Operations: List.
 
@@ -314,8 +314,8 @@ Create an instance: `$account = $client->Account();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `float` |  |
-| `currency` | `string` |  |
+| `balance` | `float` | Current account balance |
+| `currency` | `string` | Currency code |
 | `status` | `string` |  |
 
 #### Example: Load
@@ -341,15 +341,15 @@ Create an instance: `$order = $client->Order();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `charge` | `float` |  |
-| `comments` | `string` |  |
-| `link` | `string` |  |
-| `order_id` | `int` |  |
-| `quantity` | `int` |  |
-| `remains` | `int` |  |
-| `service_id` | `int` |  |
-| `start_count` | `int` |  |
-| `status` | `string` |  |
+| `charge` | `float` | Order charge |
+| `comments` | `string` | Additional comments or instructions (optional) |
+| `link` | `string` | Target link |
+| `order_id` | `int` | Order ID |
+| `quantity` | `int` | Order quantity |
+| `remains` | `int` | Remaining quantity |
+| `service_id` | `int` | Service ID |
+| `start_count` | `int` | Start count |
+| `status` | `string` | Order status |
 
 #### Example: Load
 
@@ -380,13 +380,13 @@ Create an instance: `$service = $client->Service();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `string` |  |
-| `description` | `string` |  |
-| `id` | `int` |  |
-| `max` | `int` |  |
-| `min` | `int` |  |
-| `name` | `string` |  |
-| `price` | `float` |  |
+| `category` | `string` | Service category |
+| `description` | `string` | Service description |
+| `id` | `int` | Service ID |
+| `max` | `int` | Maximum order quantity |
+| `min` | `int` | Minimum order quantity |
+| `name` | `string` | Service name |
+| `price` | `float` | Service price |
 
 #### Example: List
 

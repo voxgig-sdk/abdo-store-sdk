@@ -101,8 +101,8 @@ $account = $client->Account();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `balance` | `float` | No |  |
-| `currency` | `string` | No |  |
+| `balance` | `float` | No | Current account balance |
+| `currency` | `string` | No | Currency code |
 | `status` | `string` | No |  |
 
 ### Operations
@@ -155,15 +155,15 @@ $order = $client->Order();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `charge` | `float` | No |  |
-| `comments` | `string` | No |  |
-| `link` | `string` | No |  |
-| `order_id` | `int` | No |  |
-| `quantity` | `int` | No |  |
-| `remains` | `int` | No |  |
-| `service_id` | `int` | No |  |
-| `start_count` | `int` | No |  |
-| `status` | `string` | No |  |
+| `charge` | `float` | No | Order charge |
+| `comments` | `string` | No | Additional comments or instructions (optional) |
+| `link` | `string` | No | Target link |
+| `order_id` | `int` | No | Order ID |
+| `quantity` | `int` | No | Order quantity |
+| `remains` | `int` | No | Remaining quantity |
+| `service_id` | `int` | No | Service ID |
+| `start_count` | `int` | No | Start count |
+| `status` | `string` | No | Order status |
 
 ### Field Usage by Operation
 
@@ -238,13 +238,13 @@ $service = $client->Service();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `category` | `string` | No |  |
-| `description` | `string` | No |  |
-| `id` | `int` | No |  |
-| `max` | `int` | No |  |
-| `min` | `int` | No |  |
-| `name` | `string` | No |  |
-| `price` | `float` | No |  |
+| `category` | `string` | No | Service category |
+| `description` | `string` | No | Service description |
+| `id` | `int` | No | Service ID |
+| `max` | `int` | No | Maximum order quantity |
+| `min` | `int` | No | Minimum order quantity |
+| `name` | `string` | No | Service name |
+| `price` | `float` | No | Service price |
 
 ### Operations
 

@@ -243,8 +243,8 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `balance` |  |
-| `currency` |  |
+| `balance` | Current account balance |
+| `currency` | Currency code |
 | `status` |  |
 
 Operations: Load.
@@ -255,15 +255,15 @@ API path: `/api/balance`
 
 | Field | Description |
 | --- | --- |
-| `charge` |  |
-| `comments` |  |
-| `link` |  |
-| `order_id` |  |
-| `quantity` |  |
-| `remains` |  |
-| `service_id` |  |
-| `start_count` |  |
-| `status` |  |
+| `charge` | Order charge |
+| `comments` | Additional comments or instructions (optional) |
+| `link` | Target link |
+| `order_id` | Order ID |
+| `quantity` | Order quantity |
+| `remains` | Remaining quantity |
+| `service_id` | Service ID |
+| `start_count` | Start count |
+| `status` | Order status |
 
 Operations: Create, Load.
 
@@ -273,13 +273,13 @@ API path: `/api/order`
 
 | Field | Description |
 | --- | --- |
-| `category` |  |
-| `description` |  |
-| `id` |  |
-| `max` |  |
-| `min` |  |
-| `name` |  |
-| `price` |  |
+| `category` | Service category |
+| `description` | Service description |
+| `id` | Service ID |
+| `max` | Maximum order quantity |
+| `min` | Minimum order quantity |
+| `name` | Service name |
+| `price` | Service price |
 
 Operations: List.
 
@@ -304,8 +304,8 @@ Create an instance: `account = client.Account`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `Float` |  |
-| `currency` | `String` |  |
+| `balance` | `Float` | Current account balance |
+| `currency` | `String` | Currency code |
 | `status` | `String` |  |
 
 #### Example: Load
@@ -331,15 +331,15 @@ Create an instance: `order = client.Order`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `charge` | `Float` |  |
-| `comments` | `String` |  |
-| `link` | `String` |  |
-| `order_id` | `Integer` |  |
-| `quantity` | `Integer` |  |
-| `remains` | `Integer` |  |
-| `service_id` | `Integer` |  |
-| `start_count` | `Integer` |  |
-| `status` | `String` |  |
+| `charge` | `Float` | Order charge |
+| `comments` | `String` | Additional comments or instructions (optional) |
+| `link` | `String` | Target link |
+| `order_id` | `Integer` | Order ID |
+| `quantity` | `Integer` | Order quantity |
+| `remains` | `Integer` | Remaining quantity |
+| `service_id` | `Integer` | Service ID |
+| `start_count` | `Integer` | Start count |
+| `status` | `String` | Order status |
 
 #### Example: Load
 
@@ -370,13 +370,13 @@ Create an instance: `service = client.Service`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `category` | `String` |  |
-| `description` | `String` |  |
-| `id` | `Integer` |  |
-| `max` | `Integer` |  |
-| `min` | `Integer` |  |
-| `name` | `String` |  |
-| `price` | `Float` |  |
+| `category` | `String` | Service category |
+| `description` | `String` | Service description |
+| `id` | `Integer` | Service ID |
+| `max` | `Integer` | Maximum order quantity |
+| `min` | `Integer` | Minimum order quantity |
+| `name` | `String` | Service name |
+| `price` | `Float` | Service price |
 
 #### Example: List
 
