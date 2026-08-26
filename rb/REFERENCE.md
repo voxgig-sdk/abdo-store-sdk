@@ -158,6 +158,7 @@ order = client.Order
 | --- | --- | --- | --- |
 | `charge` | `Float` | No | Order charge |
 | `comments` | `String` | No | Additional comments or instructions (optional) |
+| `id` | `String` | No |  |
 | `link` | `String` | No | Target link |
 | `order_id` | `Integer` | No | Order ID |
 | `quantity` | `Integer` | No | Order quantity |
@@ -172,6 +173,7 @@ order = client.Order
 | --- | --- | --- |
 | `charge` | - | - |
 | `comments` | - | - |
+| `id` | - | - |
 | `link` | - | Yes |
 | `order_id` | - | - |
 | `quantity` | - | Yes |

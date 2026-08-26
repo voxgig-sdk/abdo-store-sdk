@@ -20,6 +20,7 @@ export interface AccountLoadMatch {
 export interface Order {
   charge?: number
   comments?: string
+  id?: string
   link?: string
   order_id?: number
   quantity?: number
@@ -36,6 +37,7 @@ export interface OrderLoadMatch {
 export interface OrderCreateData {
   charge?: number
   comments?: string
+  id?: string
   link?: string
   order_id?: number
   quantity?: number

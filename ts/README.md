@@ -311,6 +311,7 @@ API path: `/api/balance`
 | --- | --- |
 | `charge` | Order charge |
 | `comments` | Additional comments or instructions (optional) |
+| `id` |  |
 | `link` | Target link |
 | `order_id` | Order ID |
 | `quantity` | Order quantity |
@@ -386,6 +387,7 @@ Create an instance: `const order = client.Order()`
 | --- | --- | --- |
 | `charge` | `number` | Order charge |
 | `comments` | `string` | Additional comments or instructions (optional) |
+| `id` | `string` |  |
 | `link` | `string` | Target link |
 | `order_id` | `number` | Order ID |
 | `quantity` | `number` | Order quantity |

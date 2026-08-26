@@ -62,15 +62,24 @@ func TestOrderEntity(t *testing.T) {
 		if orderRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
+		if orderRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 		// LOAD
-		orderRef01MatchDt0 := map[string]any{}
+		orderRef01MatchDt0 := map[string]any{
+			"id": orderRef01Data["id"],
+		}
 		orderRef01DataDt0Loaded, err := orderRef01Ent.Load(orderRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if orderRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		orderRef01DataDt0LoadResult := core.ToMapAny(entityData(orderRef01DataDt0Loaded))
+		if orderRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if orderRef01DataDt0LoadResult["id"] != orderRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

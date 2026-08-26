@@ -33,6 +33,7 @@ class Order
 {
     public ?float $charge = null;
     public ?string $comments = null;
+    public ?string $id = null;
     public ?string $link = null;
     public ?int $order_id = null;
     public ?int $quantity = null;
@@ -53,6 +54,7 @@ class OrderCreateData
 {
     public ?float $charge = null;
     public ?string $comments = null;
+    public ?string $id = null;
     public ?string $link = null;
     public ?int $order_id = null;
     public ?int $quantity = null;

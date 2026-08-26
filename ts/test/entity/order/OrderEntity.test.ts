@@ -63,8 +63,14 @@ describe('OrderEntity', async () => {
     let order_ref01_data = setup.data.new.order['order_ref01']
 
     order_ref01_data = (await order_ref01_ent.create(order_ref01_data)).data()
-    assert(null != order_ref01_data)
+    assert(null != order_ref01_data.id)
 
+
+    // LOAD
+    const order_ref01_match_dt0: any = {}
+    order_ref01_match_dt0.id = order_ref01_data.id
+    const order_ref01_data_dt0 = (await order_ref01_ent.load(order_ref01_match_dt0)).data()
+    assert(order_ref01_data_dt0.id === order_ref01_data.id)
 
 
   })

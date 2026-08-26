@@ -18,6 +18,11 @@ main: kit: entity: order: {
       type: "`$STRING`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "link"
       op: {
         create: {
@@ -78,6 +83,11 @@ main: kit: entity: order: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "order"
   op: {

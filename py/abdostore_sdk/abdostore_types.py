@@ -31,6 +31,7 @@ class AccountLoadMatch(TypedDict, total=False):
 class Order(TypedDict, total=False):
     charge: float
     comments: str
+    id: str
     link: str
     order_id: int
     quantity: int
@@ -47,6 +48,7 @@ class OrderLoadMatch(TypedDict):
 class OrderCreateData(TypedDict, total=False):
     charge: float
     comments: str
+    id: str
     link: str
     order_id: int
     quantity: int

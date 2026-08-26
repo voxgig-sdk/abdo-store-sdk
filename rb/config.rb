@@ -28,6 +28,7 @@ module AbdoStoreConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -100,6 +101,10 @@ module AbdoStoreConfig
             {
               "name" => "comments",
               "short" => "Additional comments or instructions (optional)",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {

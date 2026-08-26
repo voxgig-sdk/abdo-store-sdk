@@ -46,11 +46,16 @@ class OrderEntityTest extends TestCase
         $order_ref01_data_result = $order_ref01_ent->create($order_ref01_data, null);
         $order_ref01_data = Helpers::to_map(is_object($order_ref01_data_result) && method_exists($order_ref01_data_result, 'data_get') ? $order_ref01_data_result->data_get() : $order_ref01_data_result);
         $this->assertNotNull($order_ref01_data);
+        $this->assertNotNull($order_ref01_data["id"]);
 
         // LOAD
-        $order_ref01_match_dt0 = [];
+        $order_ref01_match_dt0 = [
+            "id" => $order_ref01_data["id"],
+        ];
         $order_ref01_data_dt0_loaded = $order_ref01_ent->load($order_ref01_match_dt0, null);
-        $this->assertNotNull($order_ref01_data_dt0_loaded);
+        $order_ref01_data_dt0_load_result = Helpers::to_map(is_object($order_ref01_data_dt0_loaded) && method_exists($order_ref01_data_dt0_loaded, 'data_get') ? $order_ref01_data_dt0_loaded->data_get() : $order_ref01_data_dt0_loaded);
+        $this->assertNotNull($order_ref01_data_dt0_load_result);
+        $this->assertEquals($order_ref01_data_dt0_load_result["id"], $order_ref01_data["id"]);
 
     }
 }

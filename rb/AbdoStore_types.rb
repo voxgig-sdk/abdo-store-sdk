@@ -50,6 +50,9 @@ AccountLoadMatch = Struct.new(
 # @!attribute [rw] comments
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] link
 #   @return [String, nil]
 #
@@ -73,6 +76,7 @@ AccountLoadMatch = Struct.new(
 Order = Struct.new(
   :charge,
   :comments,
+  :id,
   :link,
   :order_id,
   :quantity,
@@ -100,6 +104,9 @@ OrderLoadMatch = Struct.new(
 # @!attribute [rw] comments
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] link
 #   @return [String, nil]
 #
@@ -123,6 +130,7 @@ OrderLoadMatch = Struct.new(
 OrderCreateData = Struct.new(
   :charge,
   :comments,
+  :id,
   :link,
   :order_id,
   :quantity,

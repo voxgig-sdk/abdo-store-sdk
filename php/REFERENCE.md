@@ -157,6 +157,7 @@ $order = $client->Order();
 | --- | --- | --- | --- |
 | `charge` | `float` | No | Order charge |
 | `comments` | `string` | No | Additional comments or instructions (optional) |
+| `id` | `string` | No |  |
 | `link` | `string` | No | Target link |
 | `order_id` | `int` | No | Order ID |
 | `quantity` | `int` | No | Order quantity |
@@ -171,6 +172,7 @@ $order = $client->Order();
 | --- | --- | --- |
 | `charge` | - | - |
 | `comments` | - | - |
+| `id` | - | - |
 | `link` | - | Yes |
 | `order_id` | - | - |
 | `quantity` | - | Yes |

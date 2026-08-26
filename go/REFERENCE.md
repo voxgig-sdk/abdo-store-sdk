@@ -162,6 +162,7 @@ fmt.Println(order.GetName()) // "order"
 | --- | --- | --- | --- |
 | `charge` | `float64` | No | Order charge |
 | `comments` | `string` | No | Additional comments or instructions (optional) |
+| `id` | `string` | No |  |
 | `link` | `string` | No | Target link |
 | `order_id` | `int` | No | Order ID |
 | `quantity` | `int` | No | Order quantity |
@@ -176,6 +177,7 @@ fmt.Println(order.GetName()) // "order"
 | --- | --- | --- |
 | `charge` | - | - |
 | `comments` | - | - |
+| `id` | - | - |
 | `link` | - | Yes |
 | `order_id` | - | - |
 | `quantity` | - | Yes |

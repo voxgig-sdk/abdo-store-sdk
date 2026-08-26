@@ -195,6 +195,7 @@ const order = client.Order()
 | --- | --- | --- | --- |
 | `charge` | `number` | No | Order charge |
 | `comments` | `string` | No | Additional comments or instructions (optional) |
+| `id` | `string` | No |  |
 | `link` | `string` | No | Target link |
 | `order_id` | `number` | No | Order ID |
 | `quantity` | `number` | No | Order quantity |
@@ -209,6 +210,7 @@ const order = client.Order()
 | --- | --- | --- |
 | `charge` | - | - |
 | `comments` | - | - |
+| `id` | - | - |
 | `link` | - | Yes |
 | `order_id` | - | - |
 | `quantity` | - | Yes |

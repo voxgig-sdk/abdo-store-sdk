@@ -43,12 +43,17 @@ describe("OrderEntity", function()
     assert.is_nil(err)
     order_ref01_data = helpers.to_map(type(order_ref01_data_result) == 'table' and order_ref01_data_result.data_get and order_ref01_data_result:data_get() or order_ref01_data_result)
     assert.is_not_nil(order_ref01_data)
+    assert.is_not_nil(order_ref01_data["id"])
 
     -- LOAD
-    local order_ref01_match_dt0 = {}
+    local order_ref01_match_dt0 = {
+      id = order_ref01_data["id"],
+    }
     local order_ref01_data_dt0_loaded, err = order_ref01_ent:load(order_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(order_ref01_data_dt0_loaded)
+    local order_ref01_data_dt0_load_result = helpers.to_map(type(order_ref01_data_dt0_loaded) == 'table' and order_ref01_data_dt0_loaded.data_get and order_ref01_data_dt0_loaded:data_get() or order_ref01_data_dt0_loaded)
+    assert.is_not_nil(order_ref01_data_dt0_load_result)
+    assert.are.equal(order_ref01_data_dt0_load_result["id"], order_ref01_data["id"])
 
   end)
 end)

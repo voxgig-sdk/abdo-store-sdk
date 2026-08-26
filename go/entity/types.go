@@ -30,6 +30,7 @@ type AccountLoadMatch struct {
 type Order struct {
 	Charge *float64 `json:"charge,omitempty"`
 	Comments *string `json:"comments,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
 	OrderId *int `json:"order_id,omitempty"`
 	Quantity *int `json:"quantity,omitempty"`
@@ -48,6 +49,7 @@ type OrderLoadMatch struct {
 type OrderCreateData struct {
 	Charge *float64 `json:"charge,omitempty"`
 	Comments *string `json:"comments,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Link *string `json:"link,omitempty"`
 	OrderId *int `json:"order_id,omitempty"`
 	Quantity *int `json:"quantity,omitempty"`

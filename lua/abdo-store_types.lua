@@ -19,6 +19,7 @@
 ---@class Order
 ---@field charge? number
 ---@field comments? string
+---@field id? string
 ---@field link? string
 ---@field order_id? number
 ---@field quantity? number
@@ -33,6 +34,7 @@
 ---@class OrderCreateData
 ---@field charge? number
 ---@field comments? string
+---@field id? string
 ---@field link? string
 ---@field order_id? number
 ---@field quantity? number

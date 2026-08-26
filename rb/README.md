@@ -257,6 +257,7 @@ API path: `/api/balance`
 | --- | --- |
 | `charge` | Order charge |
 | `comments` | Additional comments or instructions (optional) |
+| `id` |  |
 | `link` | Target link |
 | `order_id` | Order ID |
 | `quantity` | Order quantity |
@@ -333,6 +334,7 @@ Create an instance: `order = client.Order`
 | --- | --- | --- |
 | `charge` | `Float` | Order charge |
 | `comments` | `String` | Additional comments or instructions (optional) |
+| `id` | `String` |  |
 | `link` | `String` | Target link |
 | `order_id` | `Integer` | Order ID |
 | `quantity` | `Integer` | Order quantity |

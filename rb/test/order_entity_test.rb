@@ -39,11 +39,16 @@ class OrderEntityTest < Minitest::Test
     order_ref01_data_result = order_ref01_ent.create(order_ref01_data, nil)
     order_ref01_data = Helpers.to_map(order_ref01_data_result.respond_to?(:data_get) ? order_ref01_data_result.data_get : order_ref01_data_result)
     assert !order_ref01_data.nil?
+    assert !order_ref01_data["id"].nil?
 
     # LOAD
-    order_ref01_match_dt0 = {}
+    order_ref01_match_dt0 = {
+      "id" => order_ref01_data["id"],
+    }
     order_ref01_data_dt0_loaded = order_ref01_ent.load(order_ref01_match_dt0, nil)
-    assert !order_ref01_data_dt0_loaded.nil?
+    order_ref01_data_dt0_load_result = Helpers.to_map(order_ref01_data_dt0_loaded.respond_to?(:data_get) ? order_ref01_data_dt0_loaded.data_get : order_ref01_data_dt0_loaded)
+    assert !order_ref01_data_dt0_load_result.nil?
+    assert_equal order_ref01_data_dt0_load_result["id"], order_ref01_data["id"]
 
   end
 end
