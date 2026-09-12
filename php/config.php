@@ -63,6 +63,7 @@ class AbdoStoreConfig
         'account' => [
           'fields' => [
             [
+              'format' => 'float',
               'name' => 'balance',
               'short' => 'Current account balance',
               'type' => '`$NUMBER`',
@@ -88,14 +89,22 @@ class AbdoStoreConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/balance',
-                  'parts' => [
-                    'api',
-                    'balance',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'balance',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'balance',
                   ],
                 ],
               ],
@@ -108,6 +117,7 @@ class AbdoStoreConfig
         'order' => [
           'fields' => [
             [
+              'format' => 'float',
               'name' => 'charge',
               'short' => 'Order charge',
               'type' => '`$NUMBER`',
@@ -175,6 +185,10 @@ class AbdoStoreConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'order',
           'op' => [
             'create' => [
@@ -186,14 +200,22 @@ class AbdoStoreConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/api/order',
-                  'parts' => [
-                    'api',
-                    'order',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'order',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'order',
                   ],
                 ],
               ],
@@ -217,14 +239,20 @@ class AbdoStoreConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/order/{order_id}',
-                  'parts' => [
-                    'api',
-                    'order',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'order_id' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'order',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -235,6 +263,11 @@ class AbdoStoreConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.order`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'order',
+                    '{id}',
                   ],
                 ],
               ],
@@ -277,10 +310,15 @@ class AbdoStoreConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'float',
               'name' => 'price',
               'short' => 'Service price',
               'type' => '`$NUMBER`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'service',
           'op' => [
@@ -293,14 +331,22 @@ class AbdoStoreConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/services',
-                  'parts' => [
-                    'api',
-                    'services',
+                  'segments' => [
+                    [
+                      'lit' => 'api',
+                    ],
+                    [
+                      'lit' => 'services',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.services`',
+                  ],
+                  'parts' => [
+                    'api',
+                    'services',
                   ],
                 ],
               ],

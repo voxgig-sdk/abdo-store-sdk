@@ -50,7 +50,7 @@ func TestAccountEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		accountRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.account", setup.data)))
+		accountRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.account")))
 		var accountRef01Data map[string]any
 		if len(accountRef01DataRaw) > 0 {
 			accountRef01Data = core.ToMapAny(accountRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func accountBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"account01", "account02", "account03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +117,7 @@ func accountBasicSetup(extra map[string]any) *entityTestSetup {
 		"ABDO_STORE_TEST_ACCOUNT_ENTID": idmap,
 		"ABDO_STORE_TEST_LIVE":      "FALSE",
 		"ABDO_STORE_TEST_EXPLAIN":   "FALSE",
-		"ABDO_STORE_APIKEY":         "NONE",
+		"ABDO_STORE_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["ABDO_STORE_TEST_ACCOUNT_ENTID"])
@@ -126,11 +126,23 @@ func accountBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["ABDO_STORE_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["ABDO_STORE_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewAbdoStoreSDK(core.ToMapAny(mergedOpts))
 	}

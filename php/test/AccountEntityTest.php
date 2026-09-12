@@ -84,7 +84,7 @@ function account_basic_setup($extra)
         "ABDO_STORE_TEST_ACCOUNT_ENTID" => $idmap,
         "ABDO_STORE_TEST_LIVE" => "FALSE",
         "ABDO_STORE_TEST_EXPLAIN" => "FALSE",
-        "ABDO_STORE_APIKEY" => "NONE",
+        "ABDO_STORE_APIKEY" => "",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -95,10 +95,17 @@ function account_basic_setup($extra)
 
     if ($env["ABDO_STORE_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
+            // FIRST, so the generated fields below win: sdk-test-control.json's
+            // test.client.options adds to the live client, it does not redirect it.
+            Runner::live_client_options(),
             [
                 "apikey" => $env["ABDO_STORE_APIKEY"],
             ],
-            $extra ?? [],
+            // ismap, not a plain "?? []" default: an empty PHP array is a
+            // LIST, and a non-map later entry REPLACES the accumulated map in
+            // merge - so the no-extras call discarded live_client_options()
+            // and the apikey/server map above it.
+            Vs::ismap($extra) ? $extra : new \stdClass(),
         ]);
         $client = new AbdoStoreSDK(Helpers::to_map($merged_opts));
     }

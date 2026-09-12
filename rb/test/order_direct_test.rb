@@ -71,15 +71,17 @@ def order_direct_setup(mockres)
   env = Runner.env_override({
     "ABDO_STORE_TEST_ORDER_ENTID" => {},
     "ABDO_STORE_TEST_LIVE" => "FALSE",
-    "ABDO_STORE_APIKEY" => "NONE",
+    "ABDO_STORE_APIKEY" => "",
   })
 
   live = env["ABDO_STORE_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["ABDO_STORE_APIKEY"],
-    }
+    })
     client = AbdoStoreSDK.new(merged_opts)
     return {
       client: client,

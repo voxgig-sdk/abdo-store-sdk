@@ -52,7 +52,7 @@ func TestOrderEntity(t *testing.T) {
 		// CREATE
 		orderRef01Ent := client.Order(nil)
 		orderRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "order"}, setup.data), "order_ref01"))
+			vs.GetPath(setup.data, []any{"new", "order"}), "order_ref01"))
 
 		orderRef01DataResult, err := orderRef01Ent.Create(orderRef01Data, nil)
 		if err != nil {
@@ -109,7 +109,7 @@ func orderBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"order01", "order02", "order03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -129,7 +129,7 @@ func orderBasicSetup(extra map[string]any) *entityTestSetup {
 		"ABDO_STORE_TEST_ORDER_ENTID": idmap,
 		"ABDO_STORE_TEST_LIVE":      "FALSE",
 		"ABDO_STORE_TEST_EXPLAIN":   "FALSE",
-		"ABDO_STORE_APIKEY":         "NONE",
+		"ABDO_STORE_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["ABDO_STORE_TEST_ORDER_ENTID"])
@@ -138,11 +138,23 @@ func orderBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["ABDO_STORE_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["ABDO_STORE_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewAbdoStoreSDK(core.ToMapAny(mergedOpts))
 	}

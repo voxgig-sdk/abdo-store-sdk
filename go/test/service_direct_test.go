@@ -94,14 +94,22 @@ func serviceDirectSetup(mockres any) *serviceDirectSetupResult {
 	env := envOverride(map[string]any{
 		"ABDO_STORE_TEST_SERVICE_ENTID": map[string]any{},
 		"ABDO_STORE_TEST_LIVE":    "FALSE",
-		"ABDO_STORE_APIKEY":       "NONE",
+		"ABDO_STORE_APIKEY":       "",
 	})
 
 	live := env["ABDO_STORE_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["ABDO_STORE_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewAbdoStoreSDK(mergedOpts)
 

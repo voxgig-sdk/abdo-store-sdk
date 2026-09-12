@@ -91,7 +91,7 @@ function account_basic_setup(extra)
     ["ABDO_STORE_TEST_ACCOUNT_ENTID"] = idmap,
     ["ABDO_STORE_TEST_LIVE"] = "FALSE",
     ["ABDO_STORE_TEST_EXPLAIN"] = "FALSE",
-    ["ABDO_STORE_APIKEY"] = "NONE",
+    ["ABDO_STORE_APIKEY"] = "",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +102,9 @@ function account_basic_setup(extra)
 
   if env["ABDO_STORE_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
         apikey = env["ABDO_STORE_APIKEY"],
       },

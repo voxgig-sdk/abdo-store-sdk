@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -77,6 +88,7 @@ class Config {
     "account": {
       "fields": [
         {
+          "format": "float",
           "name": "balance",
           "short": "Current account balance",
           "type": "`$NUMBER`"
@@ -102,15 +114,23 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/balance",
-              "parts": [
-                "api",
-                "balance"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "balance"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "balance"
+              ]
             }
           ]
         }
@@ -122,6 +142,7 @@ class Config {
     "order": {
       "fields": [
         {
+          "format": "float",
           "name": "charge",
           "short": "Order charge",
           "type": "`$NUMBER`"
@@ -189,6 +210,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "order",
       "op": {
         "create": {
@@ -200,15 +225,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/api/order",
-              "parts": [
-                "api",
-                "order"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "order"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "api",
+                "order"
+              ]
             }
           ]
         },
@@ -231,16 +264,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/order/{order_id}",
-              "parts": [
-                "api",
-                "order",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "order_id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "order"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -249,7 +288,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.order`"
-              }
+              },
+              "parts": [
+                "api",
+                "order",
+                "{id}"
+              ]
             }
           ]
         }
@@ -291,11 +335,16 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "float",
           "name": "price",
           "short": "Service price",
           "type": "`$NUMBER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "service",
       "op": {
         "list": {
@@ -307,15 +356,23 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/api/services",
-              "parts": [
-                "api",
-                "services"
+              "segments": [
+                {
+                  "lit": "api"
+                },
+                {
+                  "lit": "services"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.services`"
-              }
+              },
+              "parts": [
+                "api",
+                "services"
+              ]
             }
           ]
         }
@@ -331,6 +388,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

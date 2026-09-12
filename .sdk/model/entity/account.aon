@@ -6,6 +6,7 @@ main: kit: entity: account: {
 
   fields: [
     {
+      format: "float"
       name: "balance"
       req: false
       short: "Current account balance"
@@ -32,9 +33,13 @@ main: kit: entity: account: {
         {
           method: "GET"
           orig: "/api/balance"
-          parts: [
-            "api"
-            "balance"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "balance"
+            }
           ]
           transform: {
             req: "`reqdata`"

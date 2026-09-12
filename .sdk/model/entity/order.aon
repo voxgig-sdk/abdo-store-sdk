@@ -6,6 +6,7 @@ main: kit: entity: order: {
 
   fields: [
     {
+      format: "float"
       name: "charge"
       req: false
       short: "Order charge"
@@ -97,9 +98,13 @@ main: kit: entity: order: {
         {
           method: "POST"
           orig: "/api/order"
-          parts: [
-            "api"
-            "order"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "order"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -125,16 +130,22 @@ main: kit: entity: order: {
           }
           method: "GET"
           orig: "/api/order/{order_id}"
-          parts: [
-            "api"
-            "order"
-            "{id}"
-          ]
           rename: {
             param: {
               order_id: "id"
             }
           }
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "order"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

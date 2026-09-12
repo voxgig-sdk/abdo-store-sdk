@@ -42,6 +42,7 @@ main: kit: entity: service: {
       type: "`$STRING`"
     }
     {
+      format: "float"
       name: "price"
       req: false
       short: "Service price"
@@ -62,9 +63,13 @@ main: kit: entity: service: {
         {
           method: "GET"
           orig: "/api/services"
-          parts: [
-            "api"
-            "services"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "services"
+            }
           ]
           transform: {
             req: "`reqdata`"
