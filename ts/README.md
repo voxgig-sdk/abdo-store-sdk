@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store'
+import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store-sdk'
 
 const client = new AbdoStoreSDK({
   apikey: process.env.ABDO_STORE_APIKEY,
@@ -521,7 +521,7 @@ abdo-store/
 Import the SDK from the package root:
 
 ```ts
-import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store'
+import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store-sdk'
 ```
 
 ### Entity state

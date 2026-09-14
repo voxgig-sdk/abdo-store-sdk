@@ -105,7 +105,7 @@ local results, err = client:Service():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
+| TypeScript | `@voxgig-sdk/abdo-store-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
 | Python | `voxgig-sdk-abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
 | PHP | `voxgig-sdk/abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/abdo-store-sdk/go` | `go get github.com/voxgig-sdk/abdo-store-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Service():list()
 ### TypeScript
 
 ```ts
-import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store'
+import { AbdoStoreSDK } from '@voxgig-sdk/abdo-store-sdk'
 
 const client = new AbdoStoreSDK({
   apikey: process.env.ABDO_STORE_APIKEY,
