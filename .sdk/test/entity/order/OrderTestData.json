@@ -7,10 +7,10 @@
         "id": "ORDER00",
         "link": "s67",
         "order_id": "ORDER01",
-        "quantity": "s69",
-        "remains": "s6a",
+        "quantity": 105,
+        "remains": 106,
         "service_id": "SERVICE01",
-        "start_count": "s6c",
+        "start_count": 108,
         "status": "s6d"
       },
       "ORDER01": {
@@ -19,10 +19,10 @@
         "id": "ORDER01",
         "link": "scb",
         "order_id": "ORDER01",
-        "quantity": "scd",
-        "remains": "sce",
+        "quantity": 205,
+        "remains": 206,
         "service_id": "SERVICE01",
-        "start_count": "sd0",
+        "start_count": 208,
         "status": "sd1"
       },
       "ORDER02": {
@@ -31,10 +31,10 @@
         "id": "ORDER02",
         "link": "s12f",
         "order_id": "ORDER01",
-        "quantity": "s131",
-        "remains": "s132",
+        "quantity": 305,
+        "remains": 306,
         "service_id": "SERVICE01",
-        "start_count": "s134",
+        "start_count": 308,
         "status": "s135"
       }
     }
@@ -46,11 +46,310 @@
         "comments": "s191",
         "link": "s193",
         "order_id": "ORDER01",
-        "quantity": "s195",
-        "remains": "s196",
+        "quantity": 405,
+        "remains": 406,
         "service_id": "SERVICE01",
-        "start_count": "s198",
+        "start_count": 408,
         "status": "s199"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/order": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createOrder",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "comments": {
+                    "description": "Additional comments or instructions (optional)",
+                    "type": "string"
+                  },
+                  "link": {
+                    "description": "Link to the social media post or profile",
+                    "type": "string"
+                  },
+                  "quantity": {
+                    "description": "Quantity of the service to order",
+                    "type": "integer"
+                  },
+                  "service_id": {
+                    "description": "ID of the service to order",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "service_id",
+                  "link",
+                  "quantity"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "charge": {
+                      "description": "Amount charged for the order",
+                      "format": "float",
+                      "type": "number"
+                    },
+                    "order_id": {
+                      "description": "Unique order identifier",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "example": "success",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Order successfully placed"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code for programmatic handling",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message describing what went wrong",
+                      "type": "string"
+                    },
+                    "status": {
+                      "example": "error",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad request - Invalid parameters"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code for programmatic handling",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message describing what went wrong",
+                      "type": "string"
+                    },
+                    "status": {
+                      "example": "error",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized - Invalid or missing API key"
+          },
+          "402": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code for programmatic handling",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message describing what went wrong",
+                      "type": "string"
+                    },
+                    "status": {
+                      "example": "error",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Insufficient balance"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Contact support to obtain your API key.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /api/order/{order_id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getOrderStatus",
+        "parameters": [
+          {
+            "description": "The order ID to retrieve",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "order": {
+                      "properties": {
+                        "charge": {
+                          "description": "Order charge",
+                          "format": "float",
+                          "type": "number"
+                        },
+                        "link": {
+                          "description": "Target link",
+                          "type": "string"
+                        },
+                        "order_id": {
+                          "description": "Order ID",
+                          "type": "integer"
+                        },
+                        "quantity": {
+                          "description": "Order quantity",
+                          "type": "integer"
+                        },
+                        "remains": {
+                          "description": "Remaining quantity",
+                          "type": "integer"
+                        },
+                        "service_id": {
+                          "description": "Service ID",
+                          "type": "integer"
+                        },
+                        "start_count": {
+                          "description": "Start count",
+                          "type": "integer"
+                        },
+                        "status": {
+                          "description": "Order status",
+                          "enum": [
+                            "Pending",
+                            "In progress",
+                            "Completed",
+                            "Canceled",
+                            "Partial"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "status": {
+                      "example": "success",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with order details"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code for programmatic handling",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message describing what went wrong",
+                      "type": "string"
+                    },
+                    "status": {
+                      "example": "error",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized - Invalid or missing API key"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code for programmatic handling",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message describing what went wrong",
+                      "type": "string"
+                    },
+                    "status": {
+                      "example": "error",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Order not found"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Contact support to obtain your API key.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

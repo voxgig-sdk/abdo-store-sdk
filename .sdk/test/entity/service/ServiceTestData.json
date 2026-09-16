@@ -5,8 +5,8 @@
         "category": "s46",
         "description": "s47",
         "id": "SERVICE00",
-        "max": "s49",
-        "min": "s4a",
+        "max": 73,
+        "min": 74,
         "name": "s4b",
         "price": 76
       },
@@ -14,8 +14,8 @@
         "category": "s8c",
         "description": "s8d",
         "id": "SERVICE01",
-        "max": "s8f",
-        "min": "s90",
+        "max": 143,
+        "min": 144,
         "name": "s91",
         "price": 146
       },
@@ -23,8 +23,8 @@
         "category": "sd2",
         "description": "sd3",
         "id": "SERVICE02",
-        "max": "sd5",
-        "min": "sd6",
+        "max": 213,
+        "min": 214,
         "name": "sd7",
         "price": 216
       }
@@ -35,10 +35,137 @@
       "service_ref01": {
         "category": "s118",
         "description": "s119",
-        "max": "s11b",
-        "min": "s11c",
+        "max": 283,
+        "min": 284,
         "name": "s11d",
         "price": 286
+      }
+    }
+  },
+  "requests": {
+    "GET /api/services": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getServices",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "services": {
+                      "items": {
+                        "properties": {
+                          "category": {
+                            "description": "Service category",
+                            "type": "string"
+                          },
+                          "description": {
+                            "description": "Service description",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "Service ID",
+                            "type": "integer"
+                          },
+                          "max": {
+                            "description": "Maximum order quantity",
+                            "type": "integer"
+                          },
+                          "min": {
+                            "description": "Minimum order quantity",
+                            "type": "integer"
+                          },
+                          "name": {
+                            "description": "Service name",
+                            "type": "string"
+                          },
+                          "price": {
+                            "description": "Service price",
+                            "format": "float",
+                            "type": "number"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "example": "success",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with list of services"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code for programmatic handling",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message describing what went wrong",
+                      "type": "string"
+                    },
+                    "status": {
+                      "example": "error",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Unauthorized - Invalid or missing API key"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "code": {
+                      "description": "Error code for programmatic handling",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Error message describing what went wrong",
+                      "type": "string"
+                    },
+                    "status": {
+                      "example": "error",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "ApiKeyAuth": {
+            "description": "API key for authentication. Contact support to obtain your API key.",
+            "in": "header",
+            "name": "X-API-Key",
+            "type": "apiKey"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

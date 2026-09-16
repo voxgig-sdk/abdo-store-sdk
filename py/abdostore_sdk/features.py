@@ -1,12 +1,18 @@
 # AbdoStore SDK feature factory
 
 from abdostore_sdk.feature.base_feature import AbdoStoreBaseFeature
+from abdostore_sdk.feature.ratelimit_feature import AbdoStoreRatelimitFeature
+from abdostore_sdk.feature.retry_feature import AbdoStoreRetryFeature
 from abdostore_sdk.feature.test_feature import AbdoStoreTestFeature
+from abdostore_sdk.feature.timeout_feature import AbdoStoreTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: AbdoStoreBaseFeature(),
+    "ratelimit": lambda: AbdoStoreRatelimitFeature(),
+    "retry": lambda: AbdoStoreRetryFeature(),
     "test": lambda: AbdoStoreTestFeature(),
+    "timeout": lambda: AbdoStoreTimeoutFeature(),
 }
 
 
