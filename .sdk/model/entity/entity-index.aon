@@ -1,5 +1,5 @@
 # Entity Models
 
-@"account.aon"
-@"order.aon"
-@"service.aon"
+@"./account.aon"
+@"./order.aon"
+@"./service.aon"

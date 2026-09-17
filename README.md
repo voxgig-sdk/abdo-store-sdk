@@ -105,12 +105,12 @@ local results, err = client:Service():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/abdo-store-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
-| Python | `voxgig-sdk-abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
-| PHP | `voxgig-sdk/abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
+| TypeScript | `@voxgig-sdk/abdo-store-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/tags) |
+| Python | `voxgig-sdk-abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/tags) |
+| PHP | `voxgig-sdk/abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/abdo-store-sdk/go` | `go get github.com/voxgig-sdk/abdo-store-sdk/go@latest` |
-| Ruby | `voxgig-sdk-abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
-| Lua | `voxgig-sdk-abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/releases) |
+| Ruby | `voxgig-sdk-abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/tags) |
+| Lua | `voxgig-sdk-abdo-store` | publish pending — [install from git tag](https://github.com/voxgig-sdk/abdo-store-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/abdo-store-sdk/go-cli` | `go install github.com/voxgig-sdk/abdo-store-sdk/go-cli/cmd/abdo-store@latest` |
 | Go MCP server | `github.com/voxgig-sdk/abdo-store-sdk/go-mcp` | `go get github.com/voxgig-sdk/abdo-store-sdk/go-mcp@latest` |
 

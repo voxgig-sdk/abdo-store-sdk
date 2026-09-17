@@ -81,6 +81,7 @@ func MakeConfig() map[string]any {
 			"base": "https://abdoastore.store",
 			"auth": map[string]any{
 				"prefix": "",
+				"name": "X-API-Key",
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",

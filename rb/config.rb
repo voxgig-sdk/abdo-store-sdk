@@ -89,6 +89,7 @@ module AbdoStoreConfig
         "base" => "https://abdoastore.store",
         "auth" => {
           "prefix" => "",
+          "name" => "X-API-Key",
         },
         "headers" => {
           "content-type" => "application/json",

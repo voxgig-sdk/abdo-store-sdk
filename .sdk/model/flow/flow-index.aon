@@ -1,5 +1,5 @@
 # Flows
 
-@"BasicAccountFlow.aon"
-@"BasicOrderFlow.aon"
-@"BasicServiceFlow.aon"
+@"./BasicAccountFlow.aon"
+@"./BasicOrderFlow.aon"
+@"./BasicServiceFlow.aon"
