@@ -118,18 +118,21 @@ class AbdoStoreConfig
         'account' => [
           'fields' => [
             [
-              'format' => 'float',
               'name' => 'balance',
-              'short' => 'Current account balance',
+              'title' => 'Balance',
               'type' => '`$NUMBER`',
+              'short' => 'Current account balance',
+              'format' => 'float',
             ],
             [
               'name' => 'currency',
-              'short' => 'Currency code',
+              'title' => 'Currency',
               'type' => '`$STRING`',
+              'short' => 'Currency code',
             ],
             [
               'name' => 'status',
+              'title' => 'Status',
               'type' => '`$STRING`',
             ],
           ],
@@ -140,7 +143,6 @@ class AbdoStoreConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/balance',
@@ -152,15 +154,17 @@ class AbdoStoreConfig
                       'lit' => 'balance',
                     ],
                   ],
-                  'select' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
                   'parts' => [
                     'api',
                     'balance',
                   ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -172,22 +176,27 @@ class AbdoStoreConfig
         'order' => [
           'fields' => [
             [
-              'format' => 'float',
               'name' => 'charge',
-              'short' => 'Order charge',
+              'title' => 'Charge',
               'type' => '`$NUMBER`',
+              'short' => 'Order charge',
+              'format' => 'float',
             ],
             [
               'name' => 'comments',
-              'short' => 'Additional comments or instructions (optional)',
+              'title' => 'Comments',
               'type' => '`$STRING`',
+              'short' => 'Additional comments or instructions (optional)',
             ],
             [
               'name' => 'id',
+              'title' => 'Id',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'link',
+              'title' => 'Link',
+              'type' => '`$STRING`',
               'op' => [
                 'create' => [
                   'req' => true,
@@ -195,15 +204,17 @@ class AbdoStoreConfig
                 ],
               ],
               'short' => 'Target link',
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'order_id',
-              'short' => 'Order ID',
+              'title' => 'Order Id',
               'type' => '`$INTEGER`',
+              'short' => 'Order ID',
             ],
             [
               'name' => 'quantity',
+              'title' => 'Quantity',
+              'type' => '`$INTEGER`',
               'op' => [
                 'create' => [
                   'req' => true,
@@ -211,15 +222,17 @@ class AbdoStoreConfig
                 ],
               ],
               'short' => 'Order quantity',
-              'type' => '`$INTEGER`',
             ],
             [
               'name' => 'remains',
-              'short' => 'Remaining quantity',
+              'title' => 'Remains',
               'type' => '`$INTEGER`',
+              'short' => 'Remaining quantity',
             ],
             [
               'name' => 'service_id',
+              'title' => 'Service Id',
+              'type' => '`$INTEGER`',
               'op' => [
                 'create' => [
                   'req' => true,
@@ -227,17 +240,18 @@ class AbdoStoreConfig
                 ],
               ],
               'short' => 'Service ID',
-              'type' => '`$INTEGER`',
             ],
             [
               'name' => 'start_count',
-              'short' => 'Start count',
+              'title' => 'Start Count',
               'type' => '`$INTEGER`',
+              'short' => 'Start count',
             ],
             [
               'name' => 'status',
-              'short' => 'Order status',
+              'title' => 'Status',
               'type' => '`$STRING`',
+              'short' => 'Order status',
             ],
           ],
           'id' => [
@@ -251,7 +265,6 @@ class AbdoStoreConfig
               'name' => 'create',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/api/order',
@@ -263,15 +276,17 @@ class AbdoStoreConfig
                       'lit' => 'order',
                     ],
                   ],
-                  'select' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
                   'parts' => [
                     'api',
                     'order',
                   ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -280,25 +295,9 @@ class AbdoStoreConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'params' => [
-                      [
-                        'kind' => 'param',
-                        'name' => 'id',
-                        'orig' => 'order_id',
-                        'reqd' => true,
-                        'type' => '`$INTEGER`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/order/{order_id}',
-                  'rename' => [
-                    'param' => [
-                      'order_id' => 'id',
-                    ],
-                  ],
                   'segments' => [
                     [
                       'lit' => 'api',
@@ -310,19 +309,35 @@ class AbdoStoreConfig
                       'var' => 'id',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'id',
+                  'parts' => [
+                    'api',
+                    'order',
+                    '{id}',
+                  ],
+                  'rename' => [
+                    'param' => [
+                      'order_id' => 'id',
                     ],
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.order`',
                   ],
-                  'parts' => [
-                    'api',
-                    'order',
-                    '{id}',
+                  'args' => [
+                    'params' => [
+                      [
+                        'name' => 'id',
+                        'orig' => 'order_id',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'param',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'id',
+                    ],
                   ],
                 ],
               ],
@@ -336,39 +351,46 @@ class AbdoStoreConfig
           'fields' => [
             [
               'name' => 'category',
-              'short' => 'Service category',
+              'title' => 'Category',
               'type' => '`$STRING`',
+              'short' => 'Service category',
             ],
             [
               'name' => 'description',
-              'short' => 'Service description',
+              'title' => 'Description',
               'type' => '`$STRING`',
+              'short' => 'Service description',
             ],
             [
               'name' => 'id',
-              'short' => 'Service ID',
+              'title' => 'Id',
               'type' => '`$INTEGER`',
+              'short' => 'Service ID',
             ],
             [
               'name' => 'max',
-              'short' => 'Maximum order quantity',
+              'title' => 'Max',
               'type' => '`$INTEGER`',
+              'short' => 'Maximum order quantity',
             ],
             [
               'name' => 'min',
-              'short' => 'Minimum order quantity',
+              'title' => 'Min',
               'type' => '`$INTEGER`',
+              'short' => 'Minimum order quantity',
             ],
             [
               'name' => 'name',
-              'short' => 'Service name',
+              'title' => 'Name',
               'type' => '`$STRING`',
+              'short' => 'Service name',
             ],
             [
-              'format' => 'float',
               'name' => 'price',
-              'short' => 'Service price',
+              'title' => 'Price',
               'type' => '`$NUMBER`',
+              'short' => 'Service price',
+              'format' => 'float',
             ],
           ],
           'id' => [
@@ -382,7 +404,6 @@ class AbdoStoreConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/api/services',
@@ -394,15 +415,17 @@ class AbdoStoreConfig
                       'lit' => 'services',
                     ],
                   ],
-                  'select' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.services`',
-                  ],
                   'parts' => [
                     'api',
                     'services',
                   ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.services`',
+                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],

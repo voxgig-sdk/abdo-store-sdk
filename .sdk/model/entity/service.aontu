@@ -1,0 +1,97 @@
+# Entity: service
+
+main: kit: entity: service: {
+
+  alias: field: {}
+
+  fields: {
+    category: {
+      h: "Category"
+      n: "category"
+      r: false
+      sh: "Service category"
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Service description"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Service ID"
+      t: "`$INTEGER`"
+    }
+    max: {
+      h: "Max"
+      n: "max"
+      r: false
+      sh: "Maximum order quantity"
+      t: "`$INTEGER`"
+    }
+    min: {
+      h: "Min"
+      n: "min"
+      r: false
+      sh: "Minimum order quantity"
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Service name"
+      t: "`$STRING`"
+    }
+    price: {
+      fo: "float"
+      h: "Price"
+      n: "price"
+      r: false
+      sh: "Service price"
+      t: "`$NUMBER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "service"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/services"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/services"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "services"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.services`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

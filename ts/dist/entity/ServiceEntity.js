@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServiceEntity = void 0;
 const AbdoStoreEntityBase_1 = require("../AbdoStoreEntityBase");
-// TODO: needs Entity superclass
 class ServiceEntity extends AbdoStoreEntityBase_1.AbdoStoreEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

@@ -19,7 +19,6 @@ import type {
   ServiceListMatch,
 } from '../AbdoStoreTypes'
 
-// TODO: needs Entity superclass
 class ServiceEntity extends AbdoStoreEntityBase<Service> {
 
   constructor(client: AbdoStoreSDK, entopts: any) {

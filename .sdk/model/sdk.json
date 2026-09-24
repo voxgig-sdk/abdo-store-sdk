@@ -24,35 +24,104 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "account": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "format": "float",
-              "name": "balance",
-              "req": false,
-              "short": "Current account balance",
-              "type": "`$NUMBER`"
+          "fields": {
+            "balance": {
+              "a": true,
+              "fo": "float",
+              "h": "Balance",
+              "n": "balance",
+              "r": false,
+              "sh": "Current account balance",
+              "t": "`$NUMBER`"
             },
-            {
-              "active": true,
-              "name": "currency",
-              "req": false,
-              "short": "Currency code",
-              "type": "`$STRING`"
+            "currency": {
+              "a": true,
+              "h": "Currency",
+              "n": "currency",
+              "r": false,
+              "sh": "Currency code",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "status",
-              "req": false,
-              "type": "`$STRING`"
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "account",
           "op": {
             "load": {
@@ -60,18 +129,19 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /api/balance",
-                    "json": "{\"operationId\":\"getBalance\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"balance\":{\"description\":\"Current account balance\",\"format\":\"float\",\"type\":\"number\"},\"currency\":{\"description\":\"Currency code\",\"example\":\"USD\",\"type\":\"string\"},\"status\":{\"example\":\"success\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with balance information\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing API key\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Contact support to obtain your API key.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/balance",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/balance",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -79,8 +149,7 @@
                       "lit": "balance"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -97,96 +166,106 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "format": "float",
-              "name": "charge",
-              "req": false,
-              "short": "Order charge",
-              "type": "`$NUMBER`"
+          "fields": {
+            "charge": {
+              "a": true,
+              "fo": "float",
+              "h": "Charge",
+              "n": "charge",
+              "r": false,
+              "sh": "Order charge",
+              "t": "`$NUMBER`"
             },
-            {
-              "active": true,
-              "name": "comments",
-              "req": false,
-              "short": "Additional comments or instructions (optional)",
-              "type": "`$STRING`"
+            "comments": {
+              "a": true,
+              "h": "Comments",
+              "n": "comments",
+              "r": false,
+              "sh": "Additional comments or instructions (optional)",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "link",
+            "link": {
+              "a": true,
+              "h": "Link",
+              "n": "link",
               "op": {
                 "create": {
                   "req": true,
                   "type": "`$STRING`"
                 }
               },
-              "req": false,
-              "short": "Target link",
-              "type": "`$STRING`"
+              "r": false,
+              "sh": "Target link",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "order_id",
-              "req": false,
-              "short": "Order ID",
-              "type": "`$INTEGER`"
+            "order_id": {
+              "a": true,
+              "h": "Order Id",
+              "n": "order_id",
+              "r": false,
+              "sh": "Order ID",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "quantity",
+            "quantity": {
+              "a": true,
+              "h": "Quantity",
+              "n": "quantity",
               "op": {
                 "create": {
                   "req": true,
                   "type": "`$INTEGER`"
                 }
               },
-              "req": false,
-              "short": "Order quantity",
-              "type": "`$INTEGER`"
+              "r": false,
+              "sh": "Order quantity",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "remains",
-              "req": false,
-              "short": "Remaining quantity",
-              "type": "`$INTEGER`"
+            "remains": {
+              "a": true,
+              "h": "Remains",
+              "n": "remains",
+              "r": false,
+              "sh": "Remaining quantity",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "service_id",
+            "service_id": {
+              "a": true,
+              "h": "Service Id",
+              "n": "service_id",
               "op": {
                 "create": {
                   "req": true,
                   "type": "`$INTEGER`"
                 }
               },
-              "req": false,
-              "short": "Service ID",
-              "type": "`$INTEGER`"
+              "r": false,
+              "sh": "Service ID",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "start_count",
-              "req": false,
-              "short": "Start count",
-              "type": "`$INTEGER`"
+            "start_count": {
+              "a": true,
+              "h": "Start Count",
+              "n": "start_count",
+              "r": false,
+              "sh": "Start count",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "status",
-              "req": false,
-              "short": "Order status",
-              "type": "`$STRING`"
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "sh": "Order status",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -198,18 +277,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /api/order",
-                    "json": "{\"operationId\":\"createOrder\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"comments\":{\"description\":\"Additional comments or instructions (optional)\",\"type\":\"string\"},\"link\":{\"description\":\"Link to the social media post or profile\",\"type\":\"string\"},\"quantity\":{\"description\":\"Quantity of the service to order\",\"type\":\"integer\"},\"service_id\":{\"description\":\"ID of the service to order\",\"type\":\"integer\"}},\"required\":[\"service_id\",\"link\",\"quantity\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"charge\":{\"description\":\"Amount charged for the order\",\"format\":\"float\",\"type\":\"number\"},\"order_id\":{\"description\":\"Unique order identifier\",\"type\":\"integer\"},\"status\":{\"example\":\"success\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Order successfully placed\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad request - Invalid parameters\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing API key\"},\"402\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Insufficient balance\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Contact support to obtain your API key.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/api/order",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/api/order",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -217,8 +297,7 @@
                       "lit": "order"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -230,34 +309,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/order/{order_id}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "order_id",
-                        "reqd": true,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "order_id",
+                        "r": true,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/order/{order_id}",
-                    "json": "{\"operationId\":\"getOrderStatus\",\"parameters\":[{\"description\":\"The order ID to retrieve\",\"in\":\"path\",\"name\":\"order_id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"order\":{\"properties\":{\"charge\":{\"description\":\"Order charge\",\"format\":\"float\",\"type\":\"number\"},\"link\":{\"description\":\"Target link\",\"type\":\"string\"},\"order_id\":{\"description\":\"Order ID\",\"type\":\"integer\"},\"quantity\":{\"description\":\"Order quantity\",\"type\":\"integer\"},\"remains\":{\"description\":\"Remaining quantity\",\"type\":\"integer\"},\"service_id\":{\"description\":\"Service ID\",\"type\":\"integer\"},\"start_count\":{\"description\":\"Start count\",\"type\":\"integer\"},\"status\":{\"description\":\"Order status\",\"enum\":[\"Pending\",\"In progress\",\"Completed\",\"Canceled\",\"Partial\"],\"type\":\"string\"}},\"type\":\"object\"},\"status\":{\"example\":\"success\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with order details\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing API key\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Order not found\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Contact support to obtain your API key.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/order/{order_id}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/order/{order_id}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "order_id": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -268,12 +351,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.order`"
                   }
@@ -290,58 +368,65 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "category",
-              "req": false,
-              "short": "Service category",
-              "type": "`$STRING`"
+          "fields": {
+            "category": {
+              "a": true,
+              "h": "Category",
+              "n": "category",
+              "r": false,
+              "sh": "Service category",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "short": "Service description",
-              "type": "`$STRING`"
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "sh": "Service description",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Service ID",
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Service ID",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "max",
-              "req": false,
-              "short": "Maximum order quantity",
-              "type": "`$INTEGER`"
+            "max": {
+              "a": true,
+              "h": "Max",
+              "n": "max",
+              "r": false,
+              "sh": "Maximum order quantity",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "min",
-              "req": false,
-              "short": "Minimum order quantity",
-              "type": "`$INTEGER`"
+            "min": {
+              "a": true,
+              "h": "Min",
+              "n": "min",
+              "r": false,
+              "sh": "Minimum order quantity",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Service name",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Service name",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "float",
-              "name": "price",
-              "req": false,
-              "short": "Service price",
-              "type": "`$NUMBER`"
+            "price": {
+              "a": true,
+              "fo": "float",
+              "h": "Price",
+              "n": "price",
+              "r": false,
+              "sh": "Service price",
+              "t": "`$NUMBER`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -353,18 +438,19 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /api/services",
-                    "json": "{\"operationId\":\"getServices\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"services\":{\"items\":{\"properties\":{\"category\":{\"description\":\"Service category\",\"type\":\"string\"},\"description\":{\"description\":\"Service description\",\"type\":\"string\"},\"id\":{\"description\":\"Service ID\",\"type\":\"integer\"},\"max\":{\"description\":\"Maximum order quantity\",\"type\":\"integer\"},\"min\":{\"description\":\"Minimum order quantity\",\"type\":\"integer\"},\"name\":{\"description\":\"Service name\",\"type\":\"string\"},\"price\":{\"description\":\"Service price\",\"format\":\"float\",\"type\":\"number\"}},\"type\":\"object\"},\"type\":\"array\"},\"status\":{\"example\":\"success\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with list of services\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing API key\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code for programmatic handling\",\"type\":\"string\"},\"message\":{\"description\":\"Error message describing what went wrong\",\"type\":\"string\"},\"status\":{\"example\":\"error\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Contact support to obtain your API key.\",\"in\":\"header\",\"name\":\"X-API-Key\",\"type\":\"apiKey\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/services",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/services",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -372,8 +458,7 @@
                       "lit": "services"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.services`"
                   }
@@ -802,17 +887,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "account_ref01",
                 "srcdatavar": "account_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -832,30 +917,30 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "order_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "order_ref01",
                 "srcdatavar": "order_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "order01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -875,13 +960,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {

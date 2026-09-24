@@ -1,0 +1,22 @@
+# BasicServiceFlow
+
+main: kit: flow: BasicServiceFlow:
+{
+  entity: "service",
+  kind: "basic",
+  name: "BasicServiceFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "service_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicServiceFlow"
+}

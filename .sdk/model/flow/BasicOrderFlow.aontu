@@ -1,0 +1,40 @@
+# BasicOrderFlow
+
+main: kit: flow: BasicOrderFlow:
+{
+  entity: "order",
+  kind: "basic",
+  name: "BasicOrderFlow",
+  step: [
+    {
+      i: {
+        ref: "order_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "order_ref01",
+        srcdatavar: "order_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "order01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-order_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicOrderFlow"
+}

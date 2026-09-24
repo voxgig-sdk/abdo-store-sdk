@@ -1,7 +1,7 @@
 // Typed models for the AbdoStore SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,9 +14,6 @@ import (
 
 // Account is the typed data model for the account entity.
 type Account struct {
-	Balance *float64 `json:"balance,omitempty"`
-	Currency *string `json:"currency,omitempty"`
-	Status *string `json:"status,omitempty"`
 }
 
 // AccountLoadMatch is the typed request payload for Account.LoadTyped.
@@ -28,16 +25,6 @@ type AccountLoadMatch struct {
 
 // Order is the typed data model for the order entity.
 type Order struct {
-	Charge *float64 `json:"charge,omitempty"`
-	Comments *string `json:"comments,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Link *string `json:"link,omitempty"`
-	OrderId *int `json:"order_id,omitempty"`
-	Quantity *int `json:"quantity,omitempty"`
-	Remains *int `json:"remains,omitempty"`
-	ServiceId *int `json:"service_id,omitempty"`
-	StartCount *int `json:"start_count,omitempty"`
-	Status *string `json:"status,omitempty"`
 }
 
 // OrderLoadMatch is the typed request payload for Order.LoadTyped.
@@ -61,13 +48,6 @@ type OrderCreateData struct {
 
 // Service is the typed data model for the service entity.
 type Service struct {
-	Category *string `json:"category,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Max *int `json:"max,omitempty"`
-	Min *int `json:"min,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Price *float64 `json:"price,omitempty"`
 }
 
 // ServiceListMatch is the typed request payload for Service.ListTyped.

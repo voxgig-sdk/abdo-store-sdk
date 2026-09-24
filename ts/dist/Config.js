@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -119,18 +112,21 @@ class Config {
         "account": {
             "fields": [
                 {
-                    "format": "float",
                     "name": "balance",
+                    "title": "Balance",
+                    "type": "`$NUMBER`",
                     "short": "Current account balance",
-                    "type": "`$NUMBER`"
+                    "format": "float"
                 },
                 {
                     "name": "currency",
-                    "short": "Currency code",
-                    "type": "`$STRING`"
+                    "title": "Currency",
+                    "type": "`$STRING`",
+                    "short": "Currency code"
                 },
                 {
                     "name": "status",
+                    "title": "Status",
                     "type": "`$STRING`"
                 }
             ],
@@ -141,7 +137,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/api/balance",
@@ -153,15 +148,17 @@ class Config {
                                     "lit": "balance"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "balance"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "api",
-                                "balance"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -173,72 +170,82 @@ class Config {
         "order": {
             "fields": [
                 {
-                    "format": "float",
                     "name": "charge",
+                    "title": "Charge",
+                    "type": "`$NUMBER`",
                     "short": "Order charge",
-                    "type": "`$NUMBER`"
+                    "format": "float"
                 },
                 {
                     "name": "comments",
-                    "short": "Additional comments or instructions (optional)",
-                    "type": "`$STRING`"
+                    "title": "Comments",
+                    "type": "`$STRING`",
+                    "short": "Additional comments or instructions (optional)"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "link",
+                    "title": "Link",
+                    "type": "`$STRING`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$STRING`"
                         }
                     },
-                    "short": "Target link",
-                    "type": "`$STRING`"
+                    "short": "Target link"
                 },
                 {
                     "name": "order_id",
-                    "short": "Order ID",
-                    "type": "`$INTEGER`"
+                    "title": "Order Id",
+                    "type": "`$INTEGER`",
+                    "short": "Order ID"
                 },
                 {
                     "name": "quantity",
+                    "title": "Quantity",
+                    "type": "`$INTEGER`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$INTEGER`"
                         }
                     },
-                    "short": "Order quantity",
-                    "type": "`$INTEGER`"
+                    "short": "Order quantity"
                 },
                 {
                     "name": "remains",
-                    "short": "Remaining quantity",
-                    "type": "`$INTEGER`"
+                    "title": "Remains",
+                    "type": "`$INTEGER`",
+                    "short": "Remaining quantity"
                 },
                 {
                     "name": "service_id",
+                    "title": "Service Id",
+                    "type": "`$INTEGER`",
                     "op": {
                         "create": {
                             "req": true,
                             "type": "`$INTEGER`"
                         }
                     },
-                    "short": "Service ID",
-                    "type": "`$INTEGER`"
+                    "short": "Service ID"
                 },
                 {
                     "name": "start_count",
-                    "short": "Start count",
-                    "type": "`$INTEGER`"
+                    "title": "Start Count",
+                    "type": "`$INTEGER`",
+                    "short": "Start count"
                 },
                 {
                     "name": "status",
-                    "short": "Order status",
-                    "type": "`$STRING`"
+                    "title": "Status",
+                    "type": "`$STRING`",
+                    "short": "Order status"
                 }
             ],
             "id": {
@@ -252,7 +259,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/api/order",
@@ -264,15 +270,17 @@ class Config {
                                     "lit": "order"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "order"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "api",
-                                "order"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -281,25 +289,9 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "order_id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/api/order/{order_id}",
-                            "rename": {
-                                "param": {
-                                    "order_id": "id"
-                                }
-                            },
                             "segments": [
                                 {
                                     "lit": "api"
@@ -311,20 +303,36 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
+                            "parts": [
+                                "api",
+                                "order",
+                                "{id}"
+                            ],
+                            "rename": {
+                                "param": {
+                                    "order_id": "id"
+                                }
                             },
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.order`"
                             },
-                            "parts": [
-                                "api",
-                                "order",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "order_id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -337,39 +345,46 @@ class Config {
             "fields": [
                 {
                     "name": "category",
-                    "short": "Service category",
-                    "type": "`$STRING`"
+                    "title": "Category",
+                    "type": "`$STRING`",
+                    "short": "Service category"
                 },
                 {
                     "name": "description",
-                    "short": "Service description",
-                    "type": "`$STRING`"
+                    "title": "Description",
+                    "type": "`$STRING`",
+                    "short": "Service description"
                 },
                 {
                     "name": "id",
-                    "short": "Service ID",
-                    "type": "`$INTEGER`"
+                    "title": "Id",
+                    "type": "`$INTEGER`",
+                    "short": "Service ID"
                 },
                 {
                     "name": "max",
-                    "short": "Maximum order quantity",
-                    "type": "`$INTEGER`"
+                    "title": "Max",
+                    "type": "`$INTEGER`",
+                    "short": "Maximum order quantity"
                 },
                 {
                     "name": "min",
-                    "short": "Minimum order quantity",
-                    "type": "`$INTEGER`"
+                    "title": "Min",
+                    "type": "`$INTEGER`",
+                    "short": "Minimum order quantity"
                 },
                 {
                     "name": "name",
-                    "short": "Service name",
-                    "type": "`$STRING`"
+                    "title": "Name",
+                    "type": "`$STRING`",
+                    "short": "Service name"
                 },
                 {
-                    "format": "float",
                     "name": "price",
+                    "title": "Price",
+                    "type": "`$NUMBER`",
                     "short": "Service price",
-                    "type": "`$NUMBER`"
+                    "format": "float"
                 }
             ],
             "id": {
@@ -383,7 +398,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/api/services",
@@ -395,15 +409,17 @@ class Config {
                                     "lit": "services"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "api",
+                                "services"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.services`"
                             },
-                            "parts": [
-                                "api",
-                                "services"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }

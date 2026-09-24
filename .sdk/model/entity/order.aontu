@@ -1,0 +1,185 @@
+# Entity: order
+
+main: kit: entity: order: {
+
+  alias: field: {}
+
+  fields: {
+    charge: {
+      fo: "float"
+      h: "Charge"
+      n: "charge"
+      r: false
+      sh: "Order charge"
+      t: "`$NUMBER`"
+    }
+    comments: {
+      h: "Comments"
+      n: "comments"
+      r: false
+      sh: "Additional comments or instructions (optional)"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    link: {
+      h: "Link"
+      n: "link"
+      op: {
+        create: {
+          req: true
+          type: "`$STRING`"
+        }
+      }
+      r: false
+      sh: "Target link"
+      t: "`$STRING`"
+    }
+    order_id: {
+      h: "Order Id"
+      n: "order_id"
+      r: false
+      sh: "Order ID"
+      t: "`$INTEGER`"
+    }
+    quantity: {
+      h: "Quantity"
+      n: "quantity"
+      op: {
+        create: {
+          req: true
+          type: "`$INTEGER`"
+        }
+      }
+      r: false
+      sh: "Order quantity"
+      t: "`$INTEGER`"
+    }
+    remains: {
+      h: "Remains"
+      n: "remains"
+      r: false
+      sh: "Remaining quantity"
+      t: "`$INTEGER`"
+    }
+    service_id: {
+      h: "Service Id"
+      n: "service_id"
+      op: {
+        create: {
+          req: true
+          type: "`$INTEGER`"
+        }
+      }
+      r: false
+      sh: "Service ID"
+      t: "`$INTEGER`"
+    }
+    start_count: {
+      h: "Start Count"
+      n: "start_count"
+      r: false
+      sh: "Start count"
+      t: "`$INTEGER`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      sh: "Order status"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "order"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/order"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/order"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "order"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/order/{order_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "order_id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/order/{order_id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          r: {
+            param: {
+              order_id: "id"
+            }
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "order"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.order`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
