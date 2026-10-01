@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 AbdoStoreUtility.registrar = ->(u) {
   u.clean = AbdoStoreUtilities::Clean
+  u.clean_add = AbdoStoreUtilities::CleanAdd
+  u.clean_explain = AbdoStoreUtilities::CleanExplain
   u.done = AbdoStoreUtilities::Done
   u.make_error = AbdoStoreUtilities::MakeError
   u.feature_add = AbdoStoreUtilities::FeatureAdd

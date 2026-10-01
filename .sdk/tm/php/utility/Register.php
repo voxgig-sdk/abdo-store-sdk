@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 AbdoStoreUtility::setRegistrar(function (AbdoStoreUtility $u): void {
     $u->clean = [AbdoStoreClean::class, 'call'];
+    $u->clean_add = [AbdoStoreClean::class, 'add'];
+    $u->clean_explain = [AbdoStoreDone::class, 'clean_explain'];
     $u->done = [AbdoStoreDone::class, 'call'];
     $u->make_error = [AbdoStoreMakeError::class, 'call'];
     $u->feature_add = [AbdoStoreFeatureAdd::class, 'call'];
