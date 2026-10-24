@@ -41,6 +41,10 @@ main: kit: entity: account: {
           }
           m: "GET"
           o: "/api/balance"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

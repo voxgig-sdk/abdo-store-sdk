@@ -21,6 +21,7 @@ export ABDO_STORE_APIKEY=sk_live_xxx
 # 4. Each command line is ONE boru expression, run against the API:
 ./abdo-store-cli load 1 account            # {id:1} shorthand
 ./abdo-store-cli load '{id:1}' account       # explicit match map
+./abdo-store-cli list service
 
 # 5. Override the API base URL for a single call
 ABDO_STORE_BASE=https://api.example.com ./abdo-store-cli load 1 account

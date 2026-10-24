@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/abdo-store-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/abdo-store-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -29,7 +29,7 @@ gem "voxgig-sdk-abdo-store-sdk", path: "./abdo-store-sdk/rb"
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
-loading a specific record.
+loading a specific record. The client sends the API key in the `X-API-Key` header.
 
 ### 1. Create a client
 
@@ -47,7 +47,7 @@ client = AbdoStoreSDK.new({
 begin
   # load returns the ENTITY — call data_get for the Account record (raises on error).
   account = client.Account.load()
-  puts account
+  puts account.data_get
 rescue => err
   warn "load failed: #{err}"
 end
@@ -128,10 +128,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = AbdoStoreSDK.test
 
-# Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-service = client.Service.list()
-puts service
+# list returns an Array of Service entities, one per mock record (raises on
+# error); data_get reads each record.
+services = client.Service.list()
+services.each { |item| puts item.data_get }
 ```
 
 ### Use a custom fetch function
@@ -219,9 +219,9 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity, and return it. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -231,9 +231,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `AbdoStoreError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`AbdoStoreError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -363,6 +364,9 @@ order = client.Order.load({ "id" => 1 })
 
 ```ruby
 order = client.Order.create({
+  "link" => "example_link", # String
+  "quantity" => 1, # Integer
+  "service_id" => 1, # Integer
 })
 ```
 
@@ -392,8 +396,9 @@ Create an instance: `service = client.Service`
 #### Example: List
 
 ```ruby
-# list returns an Array of Service records (raises on error).
+# list returns an Array of Service entities, one per record (raises on error).
 services = client.Service.list
+services.each { |item| puts item.data_get }
 ```
 
 ## Features

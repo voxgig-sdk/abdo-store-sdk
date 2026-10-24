@@ -98,46 +98,22 @@ OrderLoadMatch = Struct.new(
 
 # Request payload for Order#create.
 #
-# @!attribute [rw] charge
-#   @return [Float, nil]
-#
 # @!attribute [rw] comments
 #   @return [String, nil]
 #
-# @!attribute [rw] id
-#   @return [String, nil]
-#
 # @!attribute [rw] link
-#   @return [String, nil]
-#
-# @!attribute [rw] order_id
-#   @return [Integer, nil]
+#   @return [String]
 #
 # @!attribute [rw] quantity
-#   @return [Integer, nil]
-#
-# @!attribute [rw] remains
-#   @return [Integer, nil]
+#   @return [Integer]
 #
 # @!attribute [rw] service_id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] start_count
-#   @return [Integer, nil]
-#
-# @!attribute [rw] status
-#   @return [String, nil]
+#   @return [Integer]
 OrderCreateData = Struct.new(
-  :charge,
   :comments,
-  :id,
   :link,
-  :order_id,
   :quantity,
-  :remains,
   :service_id,
-  :start_count,
-  :status,
   keyword_init: true
 )
 

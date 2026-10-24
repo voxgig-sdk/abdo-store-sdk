@@ -35,16 +35,10 @@ export interface OrderLoadMatch {
 }
 
 export interface OrderCreateData {
-  charge?: number
   comments?: string
-  id?: string
-  link?: string
-  order_id?: number
-  quantity?: number
-  remains?: number
-  service_id?: number
-  start_count?: number
-  status?: string
+  link: string
+  quantity: number
+  service_id: number
 }
 
 export interface Service {

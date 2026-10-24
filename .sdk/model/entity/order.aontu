@@ -106,6 +106,12 @@ main: kit: entity: order: {
       name: "create"
       points: [
         {
+          bf: [
+            "comments"
+            "link"
+            "quantity"
+            "service_id"
+          ]
           co: {
             id: "POST /api/order"
             source: "openapi3"
@@ -113,6 +119,10 @@ main: kit: entity: order: {
           }
           m: "POST"
           o: "/api/order"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"
@@ -159,6 +169,10 @@ main: kit: entity: order: {
             param: {
               order_id: "id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

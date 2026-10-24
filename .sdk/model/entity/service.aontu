@@ -75,6 +75,10 @@ main: kit: entity: service: {
           }
           m: "GET"
           o: "/api/services"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

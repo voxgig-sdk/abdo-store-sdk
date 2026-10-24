@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { AbdoStoreSDK, BaseFeature, stdutil } from '../../..'
+import { AbdoStoreSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('AccountEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = AbdoStoreSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Account().load({"balance":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.ABDO_STORE_TEST_LIVE
@@ -51,7 +63,7 @@ describe('AccountEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"balance":{"a":true,"fo":"float","h":"Balance","n":"balance","r":false,"sh":"Current account balance","t":"`$NUMBER`","key$":"balance","index$":0},"currency":{"a":true,"h":"Currency","n":"currency","r":false,"sh":"Currency code","t":"`$STRING`","key$":"currency","index$":1},"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":2}},"name":"account","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/balance","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/api/balance","q":{},"r":{},"s":[{"lit":"api"},{"lit":"balance"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"account","name__orig":"account","Name":"Account","name_":"account","name-":"account","NAME":"ACCOUNT","index$":0}, {"active":true,"entity":"account","key$":"BasicAccountFlow","kind":"basic","name":"BasicAccountFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"account_ref01","srcdatavar":"account_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-account_ref01"}}],"index$":0}]}, 'Account', {"GET /api/balance":{"protocol":"http","parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"balance":{"a":true,"fo":"float","h":"Balance","n":"balance","r":false,"sh":"Current account balance","t":"`$NUMBER`","key$":"balance","index$":0},"currency":{"a":true,"h":"Currency","n":"currency","r":false,"sh":"Currency code","t":"`$STRING`","key$":"currency","index$":1},"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":2}},"name":"account","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/balance","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/api/balance","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"balance"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"account","name__orig":"account","Name":"Account","name_":"account","name-":"account","NAME":"ACCOUNT","index$":0}, {"active":true,"entity":"account","key$":"BasicAccountFlow","kind":"basic","name":"BasicAccountFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"account_ref01","srcdatavar":"account_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-account_ref01"}}],"index$":0}]}, 'Account', {"GET /api/balance":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('AccountEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

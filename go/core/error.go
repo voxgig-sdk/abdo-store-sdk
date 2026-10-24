@@ -12,6 +12,8 @@ type AbdoStoreError struct {
 	Ctx    *Context `json:"-"`
 	Result any
 	Spec   any
+	// The HTTP status, -1 when there was no response.
+	Status int
 }
 
 func NewAbdoStoreError(code string, msg string, ctx *Context) *AbdoStoreError {
@@ -21,7 +23,12 @@ func NewAbdoStoreError(code string, msg string, ctx *Context) *AbdoStoreError {
 		Code:               code,
 		Msg:                msg,
 		Ctx:                ctx,
+		Status:             -1,
 	}
+}
+
+func (e *AbdoStoreError) NotFound() bool {
+	return 404 == e.Status
 }
 
 func (e *AbdoStoreError) Error() string {
@@ -35,6 +42,7 @@ func (e *AbdoStoreError) Record() map[string]any {
 		"sdk":     e.Sdk,
 		"code":    e.Code,
 		"message": e.Msg,
+		"status":  e.Status,
 		"result":  e.Result,
 		"spec":    e.Spec,
 	}

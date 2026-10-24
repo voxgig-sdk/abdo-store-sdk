@@ -45,17 +45,14 @@ class OrderLoadMatch(TypedDict):
     id: int
 
 
-class OrderCreateData(TypedDict, total=False):
-    charge: float
-    comments: str
-    id: str
+class OrderCreateDataRequired(TypedDict):
     link: str
-    order_id: int
     quantity: int
-    remains: int
     service_id: int
-    start_count: int
-    status: str
+
+
+class OrderCreateData(OrderCreateDataRequired, total=False):
+    comments: str
 
 
 class Service(TypedDict, total=False):

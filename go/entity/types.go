@@ -34,16 +34,10 @@ type OrderLoadMatch struct {
 
 // OrderCreateData is the typed request payload for Order.CreateTyped.
 type OrderCreateData struct {
-	Charge *float64 `json:"charge,omitempty"`
 	Comments *string `json:"comments,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Link *string `json:"link,omitempty"`
-	OrderId *int `json:"order_id,omitempty"`
-	Quantity *int `json:"quantity,omitempty"`
-	Remains *int `json:"remains,omitempty"`
-	ServiceId *int `json:"service_id,omitempty"`
-	StartCount *int `json:"start_count,omitempty"`
-	Status *string `json:"status,omitempty"`
+	Link string `json:"link"`
+	Quantity int `json:"quantity"`
+	ServiceId int `json:"service_id"`
 }
 
 // Service is the typed data model for the service entity.

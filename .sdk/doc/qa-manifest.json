@@ -3,5 +3,28 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "API key for authentication. Contact support to obtain your API key.",
+      "Abdo Store API offers a range of social media marketing services, providing users with access to tools for enhancing their online presence. It supports services like account management, balance loading, and order placement, all aimed at improving social media engagement. The API is designed for ease of use with robust customer support available 24/7.",
+      "Additional comments or instructions (optional)",
+      "Amount charged for the order",
+      "Currency code",
+      "Current account balance",
+      "Maximum order quantity",
+      "Minimum order quantity",
+      "Order quantity",
+      "Order successfully placed",
+      "Production server",
+      "Service ID",
+      "Service category",
+      "Service description",
+      "Successful response with balance information",
+      "Successful response with list of services",
+      "Successful response with order details",
+      "Target link",
+      "Unique order identifier"
+    ]
+  }
 }

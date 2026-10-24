@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { AbdoStoreSDK, BaseFeature, stdutil } from '../../..'
+import { AbdoStoreSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('OrderEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = AbdoStoreSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Order().load({"id":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.ABDO_STORE_TEST_LIVE
@@ -51,7 +63,7 @@ describe('OrderEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"charge":{"a":true,"fo":"float","h":"Charge","n":"charge","r":false,"sh":"Order charge","t":"`$NUMBER`","key$":"charge","index$":0},"comments":{"a":true,"h":"Comments","n":"comments","r":false,"sh":"Additional comments or instructions (optional)","t":"`$STRING`","key$":"comments","index$":1},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":2},"link":{"a":true,"h":"Link","n":"link","op":{"create":{"req":true,"type":"`$STRING`"}},"r":false,"sh":"Target link","t":"`$STRING`","key$":"link","index$":3},"order_id":{"a":true,"h":"Order Id","n":"order_id","r":false,"sh":"Order ID","t":"`$INTEGER`","key$":"order_id","index$":4},"quantity":{"a":true,"h":"Quantity","n":"quantity","op":{"create":{"req":true,"type":"`$INTEGER`"}},"r":false,"sh":"Order quantity","t":"`$INTEGER`","key$":"quantity","index$":5},"remains":{"a":true,"h":"Remains","n":"remains","r":false,"sh":"Remaining quantity","t":"`$INTEGER`","key$":"remains","index$":6},"service_id":{"a":true,"h":"Service Id","n":"service_id","op":{"create":{"req":true,"type":"`$INTEGER`"}},"r":false,"sh":"Service ID","t":"`$INTEGER`","key$":"service_id","index$":7},"start_count":{"a":true,"h":"Start Count","n":"start_count","r":false,"sh":"Start count","t":"`$INTEGER`","key$":"start_count","index$":8},"status":{"a":true,"h":"Status","n":"status","r":false,"sh":"Order status","t":"`$STRING`","key$":"status","index$":9}},"id":{"field":"id","name":"id"},"name":"order","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /api/order","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/order","q":{},"r":{},"s":[{"lit":"api"},{"lit":"order"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/order/{order_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"order_id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/api/order/{order_id}","q":{"exist":["id"]},"r":{"param":{"order_id":"id"}},"s":[{"lit":"api"},{"lit":"order"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body.order`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"order","name__orig":"order","Name":"Order","name_":"order","name-":"order","NAME":"ORDER","index$":1}, {"active":true,"entity":"order","key$":"BasicOrderFlow","kind":"basic","name":"BasicOrderFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"order_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{"ref":"order_ref01","srcdatavar":"order_ref01_data","suffix":"_dt0"},"m":{"id":"order01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-order_ref01"}}],"index$":1}]}, 'Order', {"POST /api/order":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["service_id","link","quantity"],"properties":{"service_id":{"type":"integer","description":"ID of the service to order","key$":"service_id"},"link":{"type":"string","description":"Link to the social media post or profile","key$":"link"},"quantity":{"type":"integer","description":"Quantity of the service to order","key$":"quantity"},"comments":{"type":"string","description":"Additional comments or instructions (optional)","key$":"comments"}},"index$":1}}}},"parameters":[]},"GET /api/order/{order_id}":{"protocol":"http","parameters":[{"name":"order_id","in":"path","required":true,"description":"The order ID to retrieve","schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"charge":{"a":true,"fo":"float","h":"Charge","n":"charge","r":false,"sh":"Order charge","t":"`$NUMBER`","key$":"charge","index$":0},"comments":{"a":true,"h":"Comments","n":"comments","r":false,"sh":"Additional comments or instructions (optional)","t":"`$STRING`","key$":"comments","index$":1},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":2},"link":{"a":true,"h":"Link","n":"link","op":{"create":{"req":true,"type":"`$STRING`"}},"r":false,"sh":"Target link","t":"`$STRING`","key$":"link","index$":3},"order_id":{"a":true,"h":"Order Id","n":"order_id","r":false,"sh":"Order ID","t":"`$INTEGER`","key$":"order_id","index$":4},"quantity":{"a":true,"h":"Quantity","n":"quantity","op":{"create":{"req":true,"type":"`$INTEGER`"}},"r":false,"sh":"Order quantity","t":"`$INTEGER`","key$":"quantity","index$":5},"remains":{"a":true,"h":"Remains","n":"remains","r":false,"sh":"Remaining quantity","t":"`$INTEGER`","key$":"remains","index$":6},"service_id":{"a":true,"h":"Service Id","n":"service_id","op":{"create":{"req":true,"type":"`$INTEGER`"}},"r":false,"sh":"Service ID","t":"`$INTEGER`","key$":"service_id","index$":7},"start_count":{"a":true,"h":"Start Count","n":"start_count","r":false,"sh":"Start count","t":"`$INTEGER`","key$":"start_count","index$":8},"status":{"a":true,"h":"Status","n":"status","r":false,"sh":"Order status","t":"`$STRING`","key$":"status","index$":9}},"id":{"field":"id","name":"id"},"name":"order","op":{"create":{"input":"data","name":"create","points":[{"a":true,"bf":["comments","link","quantity","service_id"],"co":{"id":"POST /api/order","source":"openapi3","version":2},"g":{},"k":"http","m":"POST","o":"/api/order","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"order"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"create"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /api/order/{order_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"order_id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/api/order/{order_id}","q":{"exist":["id"]},"r":{"param":{"order_id":"id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"api"},{"lit":"order"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body.order`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"order","name__orig":"order","Name":"Order","name_":"order","name-":"order","NAME":"ORDER","index$":1}, {"active":true,"entity":"order","key$":"BasicOrderFlow","kind":"basic","name":"BasicOrderFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"order_ref01"},"m":{},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{"ref":"order_ref01","srcdatavar":"order_ref01_data","suffix":"_dt0"},"m":{"id":"order01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-order_ref01"}}],"index$":1}]}, 'Order', {"POST /api/order":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["service_id","link","quantity"],"properties":{"service_id":{"type":"integer","description":"ID of the service to order","key$":"service_id"},"link":{"type":"string","description":"Link to the social media post or profile","key$":"link"},"quantity":{"type":"integer","description":"Quantity of the service to order","key$":"quantity"},"comments":{"type":"string","description":"Additional comments or instructions (optional)","key$":"comments"}},"index$":1}}}},"parameters":[]},"GET /api/order/{order_id}":{"protocol":"http","parameters":[{"name":"order_id","in":"path","required":true,"description":"The order ID to retrieve","schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +91,12 @@ describe('OrderEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

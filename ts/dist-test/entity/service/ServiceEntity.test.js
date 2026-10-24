@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Service();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('service hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.AbdoStoreSDK.test(offline).Service().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.AbdoStoreSDK.test(offline).Service()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.AbdoStoreSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Service().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.AbdoStoreSDK.test().Service().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.AbdoStoreSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Service().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Service().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.AbdoStoreSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Service().list({ "category": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.ABDO_STORE_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "category": { "a": true, "h": "Category", "n": "category", "r": false, "sh": "Service category", "t": "`$STRING`", "key$": "category", "index$": 0 }, "description": { "a": true, "h": "Description", "n": "description", "r": false, "sh": "Service description", "t": "`$STRING`", "key$": "description", "index$": 1 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Service ID", "t": "`$INTEGER`", "key$": "id", "index$": 2 }, "max": { "a": true, "h": "Max", "n": "max", "r": false, "sh": "Maximum order quantity", "t": "`$INTEGER`", "key$": "max", "index$": 3 }, "min": { "a": true, "h": "Min", "n": "min", "r": false, "sh": "Minimum order quantity", "t": "`$INTEGER`", "key$": "min", "index$": 4 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Service name", "t": "`$STRING`", "key$": "name", "index$": 5 }, "price": { "a": true, "fo": "float", "h": "Price", "n": "price", "r": false, "sh": "Service price", "t": "`$NUMBER`", "key$": "price", "index$": 6 } }, "id": { "field": "id", "name": "id" }, "name": "service", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /api/services", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/api/services", "q": {}, "r": {}, "s": [{ "lit": "api" }, { "lit": "services" }], "t": { "req": "`reqdata`", "res": "`body.services`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "service", "name__orig": "service", "Name": "Service", "name_": "service", "name-": "service", "NAME": "SERVICE", "index$": 2 }, { "active": true, "entity": "service", "key$": "BasicServiceFlow", "kind": "basic", "name": "BasicServiceFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "service_ref01" } }], "index$": 0 }] }, 'Service', { "GET /api/services": { "protocol": "http", "parameters": [] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "category": { "a": true, "h": "Category", "n": "category", "r": false, "sh": "Service category", "t": "`$STRING`", "key$": "category", "index$": 0 }, "description": { "a": true, "h": "Description", "n": "description", "r": false, "sh": "Service description", "t": "`$STRING`", "key$": "description", "index$": 1 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Service ID", "t": "`$INTEGER`", "key$": "id", "index$": 2 }, "max": { "a": true, "h": "Max", "n": "max", "r": false, "sh": "Maximum order quantity", "t": "`$INTEGER`", "key$": "max", "index$": 3 }, "min": { "a": true, "h": "Min", "n": "min", "r": false, "sh": "Minimum order quantity", "t": "`$INTEGER`", "key$": "min", "index$": 4 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Service name", "t": "`$STRING`", "key$": "name", "index$": 5 }, "price": { "a": true, "fo": "float", "h": "Price", "n": "price", "r": false, "sh": "Service price", "t": "`$NUMBER`", "key$": "price", "index$": 6 } }, "id": { "field": "id", "name": "id" }, "name": "service", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /api/services", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/api/services", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "api" }, { "lit": "services" }], "t": { "req": "`reqdata`", "res": "`body.services`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "service", "name__orig": "service", "Name": "Service", "name_": "service", "name-": "service", "NAME": "SERVICE", "index$": 2 }, { "active": true, "entity": "service", "key$": "BasicServiceFlow", "kind": "basic", "name": "BasicServiceFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "service_ref01" } }], "index$": 0 }] }, 'Service', { "GET /api/services": { "protocol": "http", "parameters": [] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const service_ref01_list = (await service_ref01_ent.list(service_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

@@ -32,16 +32,10 @@
 ---@field id number
 
 ---@class OrderCreateData
----@field charge? number
 ---@field comments? string
----@field id? string
----@field link? string
----@field order_id? number
----@field quantity? number
----@field remains? number
----@field service_id? number
----@field start_count? number
----@field status? string
+---@field link string
+---@field quantity number
+---@field service_id number
 
 ---@class Service
 ---@field category? string
